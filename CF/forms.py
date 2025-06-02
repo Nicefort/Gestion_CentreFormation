@@ -8,8 +8,11 @@ from .models import (
 class RegionForm(forms.ModelForm):
     class Meta:
         model = Region
-        fields = ['nom']
-
+        fields = ['numero', 'nom']
+        widgets = {
+            'numero': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Numéro de la région'}),
+            'nom': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nom de la région'}),
+        }
 
 class PrefectureForm(forms.ModelForm):
     class Meta:

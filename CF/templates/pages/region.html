@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Focus - Bootstrap Admin Dashboard</title>
+    <title>Region</title>
     <!-- Favicon icon -->
     <link
       rel="icon"
@@ -48,11 +48,10 @@
             Nav header start
         ***********************************-->
       <div class="nav-header">
-        <a href="index.html" class="brand-logo">
-          <img class="logo-abbr" src="./images/logo.png" alt="" />
-          <img class="logo-compact" src="./images/logo-text.png" alt="" />
-          <img class="brand-title" src="./images/logo-text.png" alt="" />
-        </a>
+         <a href="{% url 'index' %}" class="brand-logo">
+                <img class="img-fluid w-40 rounded center" src="{% static 'images/acfpe.png' %}" alt="">
+               
+            </a>
 
         <div class="nav-control">
           <div class="hamburger">
@@ -214,11 +213,11 @@
         ***********************************-->
       <div class="quixnav">
         <div class="quixnav-scroll">
-          <ul class="metismenu" id="menu">
+                 <ul class="metismenu" id="menu">
             <li class="nav-label first">Main Menu</li>
             <li>
               <a href="{% url 'index' %}" aria-expanded="false"
-                ><i class="icon icon-globe-2"></i
+                ><i class="bi bi-house "></i
                 ><span class="nav-text">Acceuil</span></a
               >
             </li>
@@ -228,7 +227,7 @@
                 class="has-arrow"
                 href="javascript:void()"
                 aria-expanded="false"
-                ><i class="icon icon-app-store"></i
+                ><i class="mdi mdi-map-marker"></i
                 ><span class="nav-text">Localisation</span></a
               >
               <ul aria-expanded="false">
@@ -247,20 +246,18 @@
                 class="has-arrow"
                 href="javascript:void()"
                 aria-expanded="false"
-                ><i class="icon icon-app-store"></i
-                ><span class="nav-text">Localisation</span></a
-              >
+                ><i class="fa fa-wrench"></i
+                ><span class="nav-text">Activité</span></a>
               <ul aria-expanded="false">
-                <li><a href="{% url 'secteur' %}">Sectuer</a></li>
+                <li><a href="{% url 'secteur' %}">Secteur</a></li>
                 <li><a href="{% url 'publiccible' %}">Publics Cible</a></li>
               </ul>
             </li>
 
             <li>
               <a href="{% url 'centre_formation' %}" aria-expanded="false"
-                ><i class="icon icon-globe-2"></i
-                ><span class="nav-text">Centre Formation</span></a
-              >
+                ><i class="fa fa-graduation-cap"></i>
+                  <span class="nav-text">Centre Formation</span></a>
             </li>
           </ul>
         </div>
@@ -277,8 +274,8 @@
           <div class="row page-titles mx-0">
             <div class="col-sm-6 p-md-0">
               <div class="welcome-text">
-                <h4>Hi, welcome back!</h4>
-                <p class="mb-0">Your business dashboard template</p>
+                <h4>REGION</h4>
+                <p class="mb-0"></p>
               </div>
             </div>
             <div
@@ -293,7 +290,7 @@
                     class="btn btn-primary btn-event w-100"
                   >
                     <span class="align-middle"><i class="ti-plus"></i></span>
-                    Create New
+                    Ajouter
                   </a>
                 </li>
               </ol>
@@ -301,51 +298,12 @@
           </div>
           <!-- row -->
 
-          <div class="row">
-            <div class="col-lg-3">
-              <div class="card">
-                <div class="card-body">
-                  <h4 class="card-intro-title">Filtre</h4>
-
-                  <div class="">
-                    <div id="external-events" class="my-3">
-                      <p>Drag and drop your event or click in the calendar</p>
-                      <div class="external-event" data-class="bg-primary">
-                        <i class="fa fa-move"></i>New Theme Release
-                      </div>
-                      <div class="external-event" data-class="bg-success">
-                        <i class="fa fa-move"></i>My Event
-                      </div>
-                      <div class="external-event" data-class="bg-warning">
-                        <i class="fa fa-move"></i>Meet manager
-                      </div>
-                      <div class="external-event" data-class="bg-dark">
-                        <i class="fa fa-move"></i>Create New theme
-                      </div>
-                    </div>
-                    <!-- checkbox -->
-                    <div class="checkbox checkbox-event pt-3 pb-5">
-                      <input
-                        id="drop-remove"
-                        class="styled-checkbox"
-                        type="checkbox"
-                      />
-                      <label class="ml-2 mb-0" for="drop-remove"
-                        >Remove After Drop</label
-                      >
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-9">
-              <div class="card">
-                <div class="card-body">
+         
                   <div class="row">
                     <div class="col-12">
                       <div class="card">
                         <div class="card-header">
-                          <h4 class="card-title">Basic Datatable</h4>
+                          <h4 class="card-title">List des Regions</h4>
                         </div>
                         <div class="card-body">
                           <div class="table-responsive">
@@ -365,7 +323,8 @@
                                 {% for region in regions %}
                                 <tr>
                                   <td>{{ region.nom }}</td>
-                                  <td>Modifier , supprimer</td>
+                                  <td><a href="{% url 'region_detail' region.pk %}">deatail</a></td>
+                                  
                                 </tr>
                                 {% endfor %}
                               </tbody>
@@ -381,9 +340,9 @@
                       </div>
                     </div>
                   </div>
-                </div>
-              </div>
-            </div>
+            
+            
+         
             <!-- BEGIN MODAL -->
             <div class="modal fade none-border" id="event-modal">
               <div class="modal-dialog">
@@ -426,263 +385,69 @@
                     <h4 class="modal-title"><strong>Add a category</strong></h4>
                   </div>
                   <div class="modal-body">
-                    <!--<form action="#" id="step-form-horizontal" class="step-form-horizontal">
-                                    <div>
-                                        <h4>Personal Info</h4>
-                                        <section>
-                                            <div class="row">
-                                                <div class="col-lg-6 mb-4">
-                                                    <div class="form-group">
-                                                        <label class="text-label">First Name*</label>
-                                                        <input type="text" name="firstName" class="form-control" placeholder="Parsley" required>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6 mb-4">
-                                                    <div class="form-group">
-                                                        <label class="text-label">Last Name*</label>
-                                                        <input type="text" name="lastName" class="form-control" placeholder="Montana" required>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-12 mb-4">
-                                                    <div class="form-group">
-                                                        <label class="text-label">Email Address*</label>
-                                                        <div class="input-group">
-                                                            <input type="email" class="form-control" id="inputGroupPrepend2" aria-describedby="inputGroupPrepend2" placeholder="example@example.com.com" required>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-12 mb-4">
-                                                    <div class="form-group">
-                                                        <label class="text-label">Phone Number*</label>
-                                                        <div class="input-group">
-                                                            <input type="text" name="phoneNumber" class="form-control" placeholder="(+1)408-657-9007" required>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-12 mb-4">
-                                                    <div class="form-group">
-                                                        <label class="text-label">Where are you from*</label>
-                                                        <input type="text" name="place" class="form-control" required>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </section>
-                                        <h4>Company Info</h4>
-                                        <section>
-                                            <div class="row">
-                                                <div class="col-lg-12 mb-4">
-                                                    <div class="form-group">
-                                                        <label class="text-label">Company Name*</label>
-                                                        <input type="text" name="firstName" class="form-control" placeholder="Cellophane Square" required>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-12 mb-4">
-                                                    <div class="form-group">
-                                                        <label class="text-label">Company Email Address*</label>
-                                                        <div class="input-group">
-                                                            <input type="email" class="form-control" id="emial1" placeholder="example@example.com.com" required>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-12 mb-4">
-                                                    <div class="form-group">
-                                                        <label class="text-label">Company Phone Number*</label>
-                                                        <div class="input-group">
-                                                            <input type="text" name="phoneNumber" class="form-control" placeholder="(+1)408-657-9007" required>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-12 mb-4">
-                                                    <div class="form-group">
-                                                        <label class="text-label">Your position in Company*</label>
-                                                        <input type="text" name="place" class="form-control" required>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </section>
-                                        <h4>Business Hours</h4>
-                                        <section>
-                                            <div class="row">
-                                                <div class="col-4 col-sm-3 mb-4">
-                                                    <h4>Monday *</h4>
-                                                </div>
-                                                <div class="col-4 col-sm-3 mb-4">
-                                                    <div class="form-group">
-                                                        <input class="form-control" value="9.00" type="number" name="input1" id="input1">
-                                                    </div>
-                                                </div>
-                                                <div class="col-4 col-sm-3 mb-4">
-                                                    <div class="form-group">
-                                                        <input class="form-control" value="6.00" type="number" name="input2" id="input2">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-4 col-sm-3 mb-4">
-                                                    <h4>Tuesday *</h4>
-                                                </div>
-                                                <div class="col-4 col-sm-3 mb-4">
-                                                    <div class="form-group">
-                                                        <input class="form-control" value="9.00" type="number" name="input3" id="input3">
-                                                    </div>
-                                                </div>
-                                                <div class="col-4 col-sm-3 mb-4">
-                                                    <div class="form-group">
-                                                        <input class="form-control" value="6.00" type="number" name="input4" id="input4">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-4 col-sm-3 mb-4">
-                                                    <h4>Wednesday *</h4>
-                                                </div>
-                                                <div class="col-4 col-sm-3 mb-4">
-                                                    <div class="form-group">
-                                                        <input class="form-control" value="9.00" type="number" name="input5" id="input5">
-                                                    </div>
-                                                </div>
-                                                <div class="col-4 col-sm-3 mb-4">
-                                                    <div class="form-group">
-                                                        <input class="form-control" value="6.00" type="number" name="input6" id="input6">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-4 col-sm-3 mb-4">
-                                                    <h4>Thrusday *</h4>
-                                                </div>
-                                                <div class="col-4 col-sm-3 mb-4">
-                                                    <div class="form-group">
-                                                        <input class="form-control" value="9.00" type="number" name="input7" id="input7">
-                                                    </div>
-                                                </div>
-                                                <div class="col-4 col-sm-3 mb-4">
-                                                    <div class="form-group">
-                                                        <input class="form-control" value="6.00" type="number" name="input8" id="input8">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-4 col-sm-3 mb-4">
-                                                    <h4>Friday *</h4>
-                                                </div>
-                                                <div class="col-4 col-sm-3 mb-4">
-                                                    <div class="form-group">
-                                                        <input class="form-control" value="9.00" type="number" name="input9" id="input9">
-                                                    </div>
-                                                </div>
-                                                <div class="col-4 col-sm-3 mb-4">
-                                                    <div class="form-group">
-                                                        <input class="form-control" value="6.00" type="number" name="input10" id="input10">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </section>
-                                        <h4>Email Setup</h4>
-                                        <section>
-                                            <div class="row emial-setup">
-                                                <div class="col-sm-3 col-6">
-                                                    <div class="form-group">
-                                                        <label for="mailclient11" class="mailclinet mailclinet-gmail">
-                                                            <input type="radio" name="emailclient" id="mailclient11">
-                                                            <span class="mail-icon">
-                                                                <i class="mdi mdi-google-plus" aria-hidden="true"></i>
-                                                            </span>
-                                                            <span class="mail-text">I'm using Gmail</span>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-3 col-6">
-                                                    <div class="form-group">
-                                                        <label for="mailclient12" class="mailclinet mailclinet-office">
-                                                            <input type="radio" name="emailclient" id="mailclient12">
-                                                            <span class="mail-icon">
-                                                                <i class="mdi mdi-office" aria-hidden="true"></i>
-                                                            </span>
-                                                            <span class="mail-text">I'm using Office</span>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-3 col-6">
-                                                    <div class="form-group">
-                                                        <label for="mailclient13" class="mailclinet mailclinet-drive">
-                                                            <input type="radio" name="emailclient" id="mailclient13">
-                                                            <span class="mail-icon">
-                                                                <i class="mdi mdi-google-drive" aria-hidden="true"></i>
-                                                            </span>
-                                                            <span class="mail-text">I'm using Drive</span>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-3 col-6">
-                                                    <div class="form-group">
-                                                        <label for="mailclient14" class="mailclinet mailclinet-another">
-                                                            <input type="radio" name="emailclient" id="mailclient14">
-                                                            <span class="mail-icon">
-                                                                <i class="fa fa-question-circle-o"
-                                                                    aria-hidden="true"></i>
-                                                            </span>
-                                                            <span class="mail-text">Another Service</span>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col-12">
-                                                    <div class="skip-email text-center">
-                                                        <p>Or if want skip this step entirely and setup it later</p>
-                                                        <a href="javascript:void()">Skip step</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </section>
-                                    </div>
-                                 </form>-->
-                    <h2>Ajouter une Région</h2>
-
-                    <form method="post" enctype="multipart/form-data" id="regionForm">
+                 <!-- Formulaire pour saisie manuelle -->
+<h2>Ajouter une région</h2>
+<form method="POST">
   {% csrf_token %}
-
   {{ form.as_p }}
-
-  <!-- Champ fichier manuel (n'est pas géré par le form Django) -->
-  <p>
-    <label for="id_fichier">Fichier Excel :</label>
-    <input type="file" name="fichier" id="id_fichier">
-  </p>
-
-  <button type="submit" name="preview" value="1">Prévisualiser</button>
-  <button type="submit" name="import" value="1">Importer</button>
-  <button type="submit" name="save" value="1">Enregistrer</button>
-  <button type="button" onclick="resetForm()">Réinitialiser</button>
+  <button type="submit" name="save">Enregistrer</button>
+  {% if obj %}
+    <button type="submit" name="delete" onclick="return confirm('Supprimer cette région ?')">Supprimer</button>
+  {% endif %}
 </form>
 
-<div id="previewContainer">
+<hr>
+
+<h2>Importation de régions depuis CSV</h2>
+<form method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+  <p>
+    <label for="fichier">Choisir un fichier Excel :</label>
+    <input type="file" name="fichier" required>
+  </p>
+  <button type="submit" name="preview">Prévisualiser</button>
   {% if preview_data %}
-    <h3>Prévisualisation des données à importer</h3>
-    <table border="1">
-      <thead>
+    <button type="submit" name="import" onclick="return confirm('Confirmer l’importation de ces données ?')">Importer</button>
+  {% endif %}
+</form>
+
+{% if preview_data %}
+  <h3>Prévisualisation du fichier :</h3>
+  <table border="1">
+    <thead>
+      <tr>
+        {% for key in preview_data.0.keys %}
+          <th>{{ key }}</th>
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in preview_data %}
         <tr>
-          {% for key in preview_data.0.keys %}
-            <th>{{ key }}</th>
+          {% for value in row.values %}
+            <td>{{ value }}</td>
           {% endfor %}
         </tr>
-      </thead>
-      <tbody>
-        {% for row in preview_data %}
-          <tr>
-            {% for val in row.values %}
-              <td>{{ val }}</td>
-            {% endfor %}
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  {% endif %}
-</div>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endif %}
+
+<hr>
+
+<!--<h2>Liste des régions existantes</h2>
+<ul>
+  {% for region in regions %}
+    <li>
+      <a href="{% url 'region' %}?pk={{ region.pk }}">{{ region.nom }}</a>
+    </li>
+  {% empty %}
+    <li>Aucune région enregistrée.</li>
+  {% endfor %}
+</ul>-->
+
+
+
 
 
                   </div>
@@ -729,6 +494,15 @@
         Scripts
     ***********************************-->
 
+   {% if form.errors or request.POST.action == "preview" %}
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    $('#add-category').modal('show');
+  });
+</script>
+{% endif %}
+
+
     <script>
       function resetForm() {
         document.getElementById("regionForm").reset();
@@ -737,6 +511,18 @@
         document.getElementById("previewContainer").innerHTML = "";
       }
     </script>
+
+    <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const previewButton = document.querySelector('button[name="preview"]');
+    previewButton.addEventListener("click", function () {
+      document.querySelectorAll("[required]").forEach((el) => {
+        el.removeAttribute("required");
+      });
+    });
+  });
+</script>
+
 
     <!-- Required vendors -->
     <script src="{% static 'vendor/global/global.min.js'%}"></script>

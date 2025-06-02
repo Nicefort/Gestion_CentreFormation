@@ -5,19 +5,15 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Focus - Bootstrap Admin Dashboard</title>
+    <title>LISTES DES CENTRES DE FORMATION </title>
     <!-- Favicon icon -->
+     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/acfpe.png' %}">
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
     />
 
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="./images/favicon.png"
-    />
+    
     <link
       href="{% static 'vendor/datatables/css/jquery.dataTables.min.css'%}"
       rel="stylesheet"
@@ -64,12 +60,10 @@
             Nav header start
         ***********************************-->
       <div class="nav-header">
-        <a href="index.html" class="brand-logo">
-          <img class="logo-abbr" src="./images/logo.png" alt="" />
-          <img class="logo-compact" src="./images/logo-text.png" alt="" />
-          <img class="brand-title" src="./images/logo-text.png" alt="" />
-        </a>
-
+        <a href="{% url 'index' %}" class="brand-logo">
+                <img class="img-fluid w-40 rounded center" src="{% static 'images/acfpe.png' %}" alt="">
+               
+            </a>
         <div class="nav-control">
           <div class="hamburger">
             <span class="line"></span><span class="line"></span
@@ -234,7 +228,7 @@
             <li class="nav-label first">Main Menu</li>
             <li>
               <a href="{% url 'index' %}" aria-expanded="false"
-                ><i class="icon icon-globe-2"></i
+                ><i class="bi bi-house "></i
                 ><span class="nav-text">Acceuil</span></a
               >
             </li>
@@ -244,7 +238,7 @@
                 class="has-arrow"
                 href="javascript:void()"
                 aria-expanded="false"
-                ><i class="icon icon-app-store"></i
+                ><i class="mdi mdi-map-marker"></i
                 ><span class="nav-text">Localisation</span></a
               >
               <ul aria-expanded="false">
@@ -263,9 +257,8 @@
                 class="has-arrow"
                 href="javascript:void()"
                 aria-expanded="false"
-                ><i class="icon icon-app-store"></i
-                ><span class="nav-text">Activité</span></a
-              >
+                ><i class="fa fa-wrench"></i
+                ><span class="nav-text">Activité</span></a>
               <ul aria-expanded="false">
                 <li><a href="{% url 'secteur' %}">Secteur</a></li>
                 <li><a href="{% url 'publiccible' %}">Publics Cible</a></li>
@@ -274,9 +267,8 @@
 
             <li>
               <a href="{% url 'centre_formation' %}" aria-expanded="false"
-                ><i class="icon icon-globe-2"></i
-                ><span class="nav-text">Centre Formation</span></a
-              >
+                ><i class="fa fa-graduation-cap"></i>
+                  <span class="nav-text">Centre Formation</span></a>
             </li>
           </ul>
         </div>
@@ -293,8 +285,8 @@
           <div class="row page-titles mx-0">
             <div class="col-sm-6 p-md-0">
               <div class="welcome-text">
-                <h4>Hi, welcome back!</h4>
-                <p class="mb-0">Your business dashboard template</p>
+                <h4>Centre Formation</h4>
+                <p class="mb-0">Liste de tous les centres de formations</p>
               </div>
             </div>
             <div
@@ -309,7 +301,7 @@
                     class="btn btn-primary btn-event w-100"
                   >
                     <span class="align-middle"><i class="ti-plus"></i></span>
-                    Create New
+                    Ajouter
                   </a>
                 </li>
               </ol>
@@ -323,7 +315,7 @@
                 <div class="card-body">
                   <h4 class="card-intro-title">Filtre</h4>
 
-                  <div class="">
+                  <!--<div class="">
                     <div id="external-events" class="my-3">
                       <p>Drag and drop your event or click in the calendar</p>
                       <div class="external-event" data-class="bg-primary">
@@ -339,7 +331,7 @@
                         <i class="fa fa-move"></i>Create New theme
                       </div>
                     </div>
-                    <!-- checkbox -->
+                  
                     <div class="checkbox checkbox-event pt-3 pb-5">
                       <input
                         id="drop-remove"
@@ -347,8 +339,65 @@
                         type="checkbox"
                       />
                       <label class="ml-2 mb-0" for="drop-remove"
-                        >Remove After Drop</label
+                        >Remove After Drop</label>
+                       
+
+                    </div>
+                  </div>-->
+
+                  <div
+                    class="form-inline d-flex flex-wrap align-items-end gap-3 my-3"
+                  >
+                    <!-- Filtre par commune -->
+                    <div class="form-group">
+                      <label for="filtre-commune" class="mr-2"
+                        >Par commune :</label
                       >
+                      <select
+                        id="filtre-commune"
+                        class="form-control mr-3"
+                        style="width: 120px"
+                      >
+                        <option value="">Toutes</option>
+                        {% for commune in communes %}
+                        <option value="{{ commune.nom }}">
+                          {{ commune.nom }}
+                        </option>
+                        {% endfor %}
+                      </select>
+                    </div>
+
+                    <!-- Filtre par secteur -->
+                    <div class="form-group">
+                      <label for="filtre-secteur" class="mr-2"
+                        >Par secteur :</label
+                      >
+                      <select
+                        id="filtre-secteur"
+                        class="form-control mr-3"
+                        style="width: 120px"
+                      >
+                        <option value="">Tous</option>
+                        {% for secteur in secteurs %}
+                        <option value="{{ secteur.nom }}">
+                          {{ secteur.nom }}
+                        </option>
+                        {% endfor %}
+                      </select>
+                    </div>
+
+                    <!-- Filtre par capacité -->
+                    <div class="form-group">
+                      <label for="filtre-capacite" class="mr-2"
+                        >Capacité max :</label
+                      >
+                      <input
+                        type="number"
+                        id="filtre-capacite"
+                        class="form-control"
+                        placeholder="Ex: 100"
+                        style="width: 120px"
+                      />
                     </div>
                   </div>
                 </div>
@@ -361,7 +410,9 @@
                     <div class="col-12">
                       <div class="card">
                         <div class="card-header">
-                          <h4 class="card-title">Basic Datatable</h4>
+                          <h4 class="card-title">
+                            Liste des Centres de Formation
+                          </h4>
                         </div>
                         <div class="card-body">
                           <div class="table-responsive">
@@ -376,15 +427,19 @@
                                   <th>Sigle</th>
                                   <th>Adresse</th>
                                   <th>Capacité</th>
-                                  <th>telephone </th>
+                                  <th>telephone</th>
                                   <th>Commune</th>
                                 </tr>
                               </thead>
-                              
-                              <tbody>
-                              {% for centre in centres %}
-                                <tr>
-                                  <td>{{centre.intitule}}</td>
+
+                              <tbody id="tableau-centres">
+                                {% for centre in centres %}
+                                <tr
+                                  data-commune="{{ centre.commune.nom }}"
+                                  data-secteur="{{ centre.secteurs.all.0.nom|default:'' }}"
+                                  data-capacite="{{ centre.capacite_max }}"
+                                >
+                                  <td> <a href="{% url 'centre_detail' centre.pk %}">  {{centre.intitule}}</a></td>
                                   <td>{{centre.sigle}}</td>
                                   <td>{{centre.adresse}}</td>
                                   <td>{{centre.capacite_max}}</td>
@@ -395,11 +450,11 @@
                               </tbody>
                               <tfoot>
                                 <tr>
-                                 <th>Intitule</th>
+                                  <th>Intitule</th>
                                   <th>Sigle</th>
                                   <th>Adresse</th>
                                   <th>Capacité</th>
-                                  <th>telephone </th>
+                                  <th>telephone</th>
                                   <th>Commune</th>
                                 </tr>
                               </tfoot>
@@ -583,7 +638,8 @@
                                 >
                                   Téléphone
                                 </label>
-                                {{ form_centre.telephone }} {% if form_centre.telephone.errors %}
+                                {{ form_centre.telephone }} 
+                                {% if form_centre.telephone.errors %}
                                 <div class="text-danger mt-1">
                                   {% for error in form_centre.telephone.errors %}
                                   <small>{{ error }}</small><br />
@@ -729,6 +785,39 @@
     ***********************************-->
     <script>
       document.addEventListener("DOMContentLoaded", function () {
+        const filtreCommune = document.getElementById("filtre-commune");
+        const filtreSecteur = document.getElementById("filtre-secteur");
+        const filtreCapacite = document.getElementById("filtre-capacite");
+        const lignes = document.querySelectorAll("#tableau-centres tr");
+
+        function filtrer() {
+          const commune = filtreCommune.value.toLowerCase();
+          const secteur = filtreSecteur.value.toLowerCase();
+          const capacite = filtreCapacite.value;
+
+          lignes.forEach((ligne) => {
+            const ligneCommune = ligne.dataset.commune.toLowerCase();
+            const ligneSecteur = ligne.dataset.secteur.toLowerCase();
+            const ligneCapacite = parseInt(ligne.dataset.capacite || 0);
+
+            const matchCommune = !commune || ligneCommune === commune;
+            const matchSecteur = !secteur || ligneSecteur === secteur;
+            const matchCapacite =
+              !capacite || ligneCapacite <= parseInt(capacite);
+
+            ligne.style.display =
+              matchCommune && matchSecteur && matchCapacite ? "" : "none";
+          });
+        }
+
+        filtreCommune.addEventListener("change", filtrer);
+        filtreSecteur.addEventListener("change", filtrer);
+        filtreCapacite.addEventListener("input", filtrer);
+      });
+    </script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
         // Étapes du formulaire
         const sections = document.querySelectorAll("section");
 
@@ -784,53 +873,52 @@
       });
     </script>
 
-<script>
-$(document).ready(function() {
-    var form = $("#step-form-horizontal");
+    <script>
+      $(document).ready(function () {
+        var form = $("#step-form-horizontal");
 
-    form.validate({
-        errorClass: "text-danger",
-        errorElement: "small",
-        ignore: ":hidden", // important pour ignorer les champs masqués dans les autres étapes
-        rules: {
+        form.validate({
+          errorClass: "text-danger",
+          errorElement: "small",
+          ignore: ":hidden", // important pour ignorer les champs masqués dans les autres étapes
+          rules: {
             intitule: "required",
             telephone: "required",
             email: {
-                required: true,
-                email: true
-            }
-        },
-        messages: {
+              required: true,
+              email: true,
+            },
+          },
+          messages: {
             intitule: "Ce champ est obligatoire",
             telephone: "Un numéro de téléphone est requis",
             email: {
-                required: "Un email est requis",
-                email: "Veuillez entrer un email valide"
-            }
-        }
-    });
+              required: "Un email est requis",
+              email: "Veuillez entrer un email valide",
+            },
+          },
+        });
 
-    form.steps({
-        headerTag: "h4",
-        bodyTag: "section",
-        transitionEffect: "fade",
-        autoFocus: true,
-        onStepChanging: function(event, currentIndex, newIndex) {
+        form.steps({
+          headerTag: "h4",
+          bodyTag: "section",
+          transitionEffect: "fade",
+          autoFocus: true,
+          onStepChanging: function (event, currentIndex, newIndex) {
             // Important : ignorer les champs cachés
             form.validate().settings.ignore = ":hidden";
             return form.valid();
-        },
-        onFinishing: function(event, currentIndex) {
+          },
+          onFinishing: function (event, currentIndex) {
             form.validate().settings.ignore = ":hidden";
             return form.valid();
-        },
-        onFinished: function(event, currentIndex) {
+          },
+          onFinished: function (event, currentIndex) {
             form.submit();
-        }
-    });
-});
-</script>
-
+          },
+        });
+      });
+    </script>
 
     <!-- Required vendors -->
     <script src="{% static 'vendor/global/global.min.js'%}"></script>
@@ -852,10 +940,9 @@ $(document).ready(function() {
     <script src="{% static 'js/plugins-init/jquery.validate-init.js'%}"></script>
 
     <!-- Form step init -->
-   <script src="{% static 'js/plugins-init/jquery-steps-init.js'%}"></script>
+    <script src="{% static 'js/plugins-init/jquery-steps-init.js'%}"></script>
 
     <script src="{% static 'vendor/datatables/js/jquery.dataTables.min.js'%}"></script>
     <script src="{% static 'js/plugins-init/datatables.init.js'%}"></script>
-    
   </body>
 </html>

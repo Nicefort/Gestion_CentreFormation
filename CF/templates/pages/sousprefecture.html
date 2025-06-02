@@ -5,14 +5,9 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Focus - Bootstrap Admin Dashboard</title>
+    <title>SOUSPREFECTURE</title>
     <!-- Favicon icon -->
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="./images/favicon.png"
-    />
+   <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/acfpe.png' %}">
     <link
       href="{% static 'vendor/datatables/css/jquery.dataTables.min.css'%}"
       rel="stylesheet"
@@ -48,11 +43,10 @@
             Nav header start
         ***********************************-->
       <div class="nav-header">
-        <a href="index.html" class="brand-logo">
-          <img class="logo-abbr" src="./images/logo.png" alt="" />
-          <img class="logo-compact" src="./images/logo-text.png" alt="" />
-          <img class="brand-title" src="./images/logo-text.png" alt="" />
-        </a>
+          <a href="{% url 'index' %}" class="brand-logo">
+                <img class="img-fluid w-40 rounded center" src="{% static 'images/acfpe.png' %}" alt="">
+               
+            </a>
 
         <div class="nav-control">
           <div class="hamburger">
@@ -68,7 +62,7 @@
       <!--**********************************
             Header start
         ***********************************-->
-      <div class="header">
+       <div class="header">
         <div class="header-content">
           <nav class="navbar navbar-expand">
             <div class="collapse navbar-collapse justify-content-between">
@@ -214,11 +208,11 @@
         ***********************************-->
       <div class="quixnav">
         <div class="quixnav-scroll">
-          <ul class="metismenu" id="menu">
+         <ul class="metismenu" id="menu">
             <li class="nav-label first">Main Menu</li>
             <li>
               <a href="{% url 'index' %}" aria-expanded="false"
-                ><i class="icon icon-globe-2"></i
+                ><i class="bi bi-house "></i
                 ><span class="nav-text">Acceuil</span></a
               >
             </li>
@@ -228,7 +222,7 @@
                 class="has-arrow"
                 href="javascript:void()"
                 aria-expanded="false"
-                ><i class="icon icon-app-store"></i
+                ><i class="mdi mdi-map-marker"></i
                 ><span class="nav-text">Localisation</span></a
               >
               <ul aria-expanded="false">
@@ -247,20 +241,18 @@
                 class="has-arrow"
                 href="javascript:void()"
                 aria-expanded="false"
-                ><i class="icon icon-app-store"></i
-                ><span class="nav-text">Localisation</span></a
-              >
+                ><i class="fa fa-wrench"></i
+                ><span class="nav-text">Activité</span></a>
               <ul aria-expanded="false">
-                <li><a href="{% url 'secteur' %}">Sectuer</a></li>
+                <li><a href="{% url 'secteur' %}">Secteur</a></li>
                 <li><a href="{% url 'publiccible' %}">Publics Cible</a></li>
               </ul>
             </li>
 
             <li>
               <a href="{% url 'centre_formation' %}" aria-expanded="false"
-                ><i class="icon icon-globe-2"></i
-                ><span class="nav-text">Centre Formation</span></a
-              >
+                ><i class="fa fa-graduation-cap"></i>
+                  <span class="nav-text">Centre Formation</span></a>
             </li>
           </ul>
         </div>
@@ -277,8 +269,8 @@
           <div class="row page-titles mx-0">
             <div class="col-sm-6 p-md-0">
               <div class="welcome-text">
-                <h4>Hi, welcome back!</h4>
-                <p class="mb-0">Your business dashboard template</p>
+                <h4>SOUS PREFECTURE</h4>
+                <p class="mb-0"></p>
               </div>
             </div>
             <div
@@ -293,7 +285,7 @@
                     class="btn btn-primary btn-event w-100"
                   >
                     <span class="align-middle"><i class="ti-plus"></i></span>
-                    Create New
+                    Ajouter
                   </a>
                 </li>
               </ol>
@@ -339,13 +331,10 @@
               </div>
             </div>
             <div class="col-lg-9">
-              <div class="card">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-12">
+            
                       <div class="card">
                         <div class="card-header">
-                          <h4 class="card-title">Basic Datatable</h4>
+                          <h4 class="card-title">Liste des Sous Prefectures</h4>
                         </div>
                         <div class="card-body">
                           <div class="table-responsive">
@@ -366,7 +355,9 @@
                                 <tr>
                                   <td>{{sousprefecture.nom}}</td>
                                   <td>{{sousprefecture.prefecture}}</td>
-                                  <td>Suprimer, modifier</td>
+                                  <td>
+                                  <a href="{% url 'sousprefecture_detail' sousprefecture.pk %}">Voir</a>
+                                  </td>
                                 </tr>
                                 {% endfor %}
                               </tbody>
@@ -381,10 +372,7 @@
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                    
             </div>
             <!-- BEGIN MODAL -->
             <div class="modal fade none-border" id="event-modal">
@@ -428,267 +416,54 @@
                     <h4 class="modal-title"><strong>Add a category</strong></h4>
                   </div>
                   <div class="modal-body">
-                    <!--<form action="#" id="step-form-horizontal" class="step-form-horizontal">
-                                    <div>
-                                        <h4>Personal Info</h4>
-                                        <section>
-                                            <div class="row">
-                                                <div class="col-lg-6 mb-4">
-                                                    <div class="form-group">
-                                                        <label class="text-label">First Name*</label>
-                                                        <input type="text" name="firstName" class="form-control" placeholder="Parsley" required>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6 mb-4">
-                                                    <div class="form-group">
-                                                        <label class="text-label">Last Name*</label>
-                                                        <input type="text" name="lastName" class="form-control" placeholder="Montana" required>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-12 mb-4">
-                                                    <div class="form-group">
-                                                        <label class="text-label">Email Address*</label>
-                                                        <div class="input-group">
-                                                            <input type="email" class="form-control" id="inputGroupPrepend2" aria-describedby="inputGroupPrepend2" placeholder="example@example.com.com" required>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-12 mb-4">
-                                                    <div class="form-group">
-                                                        <label class="text-label">Phone Number*</label>
-                                                        <div class="input-group">
-                                                            <input type="text" name="phoneNumber" class="form-control" placeholder="(+1)408-657-9007" required>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-12 mb-4">
-                                                    <div class="form-group">
-                                                        <label class="text-label">Where are you from*</label>
-                                                        <input type="text" name="place" class="form-control" required>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </section>
-                                        <h4>Company Info</h4>
-                                        <section>
-                                            <div class="row">
-                                                <div class="col-lg-12 mb-4">
-                                                    <div class="form-group">
-                                                        <label class="text-label">Company Name*</label>
-                                                        <input type="text" name="firstName" class="form-control" placeholder="Cellophane Square" required>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-12 mb-4">
-                                                    <div class="form-group">
-                                                        <label class="text-label">Company Email Address*</label>
-                                                        <div class="input-group">
-                                                            <input type="email" class="form-control" id="emial1" placeholder="example@example.com.com" required>
+               
+                      <h2>Ajouter une Préfecture</h2>
+<form method="POST">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit" name="save">Enregistrer</button>
+  {% if obj %}
+    <button type="submit" name="delete" onclick="return confirm('Supprimer cette préfecture ?')">Supprimer</button>
+  {% endif %}
+</form>
 
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-12 mb-4">
-                                                    <div class="form-group">
-                                                        <label class="text-label">Company Phone Number*</label>
-                                                        <div class="input-group">
-                                                            <input type="text" name="phoneNumber" class="form-control" placeholder="(+1)408-657-9007" required>
+<hr>
 
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-12 mb-4">
-                                                    <div class="form-group">
-                                                        <label class="text-label">Your position in Company*</label>
-                                                        <input type="text" name="place" class="form-control" required>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </section>
-                                        <h4>Business Hours</h4>
-                                        <section>
-                                            <div class="row">
-                                                <div class="col-4 col-sm-3 mb-4">
-                                                    <h4>Monday *</h4>
-                                                </div>
-                                                <div class="col-4 col-sm-3 mb-4">
-                                                    <div class="form-group">
-                                                        <input class="form-control" value="9.00" type="number" name="input1" id="input1">
-                                                    </div>
-                                                </div>
-                                                <div class="col-4 col-sm-3 mb-4">
-                                                    <div class="form-group">
-                                                        <input class="form-control" value="6.00" type="number" name="input2" id="input2">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-4 col-sm-3 mb-4">
-                                                    <h4>Tuesday *</h4>
-                                                </div>
-                                                <div class="col-4 col-sm-3 mb-4">
-                                                    <div class="form-group">
-                                                        <input class="form-control" value="9.00" type="number" name="input3" id="input3">
-                                                    </div>
-                                                </div>
-                                                <div class="col-4 col-sm-3 mb-4">
-                                                    <div class="form-group">
-                                                        <input class="form-control" value="6.00" type="number" name="input4" id="input4">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-4 col-sm-3 mb-4">
-                                                    <h4>Wednesday *</h4>
-                                                </div>
-                                                <div class="col-4 col-sm-3 mb-4">
-                                                    <div class="form-group">
-                                                        <input class="form-control" value="9.00" type="number" name="input5" id="input5">
-                                                    </div>
-                                                </div>
-                                                <div class="col-4 col-sm-3 mb-4">
-                                                    <div class="form-group">
-                                                        <input class="form-control" value="6.00" type="number" name="input6" id="input6">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-4 col-sm-3 mb-4">
-                                                    <h4>Thrusday *</h4>
-                                                </div>
-                                                <div class="col-4 col-sm-3 mb-4">
-                                                    <div class="form-group">
-                                                        <input class="form-control" value="9.00" type="number" name="input7" id="input7">
-                                                    </div>
-                                                </div>
-                                                <div class="col-4 col-sm-3 mb-4">
-                                                    <div class="form-group">
-                                                        <input class="form-control" value="6.00" type="number" name="input8" id="input8">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-4 col-sm-3 mb-4">
-                                                    <h4>Friday *</h4>
-                                                </div>
-                                                <div class="col-4 col-sm-3 mb-4">
-                                                    <div class="form-group">
-                                                        <input class="form-control" value="9.00" type="number" name="input9" id="input9">
-                                                    </div>
-                                                </div>
-                                                <div class="col-4 col-sm-3 mb-4">
-                                                    <div class="form-group">
-                                                        <input class="form-control" value="6.00" type="number" name="input10" id="input10">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </section>
-                                        <h4>Email Setup</h4>
-                                        <section>
-                                            <div class="row emial-setup">
-                                                <div class="col-sm-3 col-6">
-                                                    <div class="form-group">
-                                                        <label for="mailclient11" class="mailclinet mailclinet-gmail">
-                                                            <input type="radio" name="emailclient" id="mailclient11">
-                                                            <span class="mail-icon">
-                                                                <i class="mdi mdi-google-plus" aria-hidden="true"></i>
-                                                            </span>
-                                                            <span class="mail-text">I'm using Gmail</span>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-3 col-6">
-                                                    <div class="form-group">
-                                                        <label for="mailclient12" class="mailclinet mailclinet-office">
-                                                            <input type="radio" name="emailclient" id="mailclient12">
-                                                            <span class="mail-icon">
-                                                                <i class="mdi mdi-office" aria-hidden="true"></i>
-                                                            </span>
-                                                            <span class="mail-text">I'm using Office</span>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-3 col-6">
-                                                    <div class="form-group">
-                                                        <label for="mailclient13" class="mailclinet mailclinet-drive">
-                                                            <input type="radio" name="emailclient" id="mailclient13">
-                                                            <span class="mail-icon">
-                                                                <i class="mdi mdi-google-drive" aria-hidden="true"></i>
-                                                            </span>
-                                                            <span class="mail-text">I'm using Drive</span>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-3 col-6">
-                                                    <div class="form-group">
-                                                        <label for="mailclient14" class="mailclinet mailclinet-another">
-                                                            <input type="radio" name="emailclient" id="mailclient14">
-                                                            <span class="mail-icon">
-                                                                <i class="fa fa-question-circle-o"
-                                                                    aria-hidden="true"></i>
-                                                            </span>
-                                                            <span class="mail-text">Another Service</span>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            </div>
+<h2>Importation de préfectures depuis un fichier CSV</h2>
+<form method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+  <p>
+    <label for="fichier">Choisir un fichier CSV :</label>
+    <input type="file" name="fichier" required>
+  </p>
+  <button type="submit" name="preview">Prévisualiser</button>
+  {% if df_preview %}
+    <button type="submit" name="import" onclick="return confirm('Confirmer l’importation de ces données ?')">Importer</button>
+  {% endif %}
+</form>
 
-                                            <div class="row">
-                                                <div class="col-12">
-                                                    <div class="skip-email text-center">
-                                                        <p>Or if want skip this step entirely and setup it later</p>
-                                                        <a href="javascript:void()">Skip step</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </section>
-                                    </div>
-                                 </form>-->
-                    <form
-                      method="post"
-                      enctype="multipart/form-data"
-                      id="regionForm"
-                    >
-                      {% csrf_token %} {{ form.as_p }}
+{% if df_preview %}
+  <h3>Prévisualisation du fichier :</h3>
+  <table border="1">
+    <thead>
+      <tr>
+        {% for key in df_preview.0.keys %}
+          <th>{{ key }}</th>
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in df_preview %}
+        <tr>
+          {% for value in row.values %}
+            <td>{{ value }}</td>
+          {% endfor %}
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endif %}
 
-                      <input
-                        type="file"
-                        name="fichier"
-                        id="fichierInput"
-                        required
-                      />
-
-                      <button type="submit" name="preview">
-                        Prévisualiser
-                      </button>
-                      <button type="submit" name="import">Importer</button>
-                      <button type="submit" name="save">Enregistrer</button>
-                      <button type="button" onclick="resetForm()">
-                        Réinitialiser
-                      </button>
-                    </form>
-
-                    <div id="previewContainer">
-                      {% if preview_data %}
-                      <h3>Prévisualisation des données à importer</h3>
-                      <table border="1">
-                        <thead>
-                          <tr>
-                            {% for key in preview_data.0.keys %}
-                            <th>{{ key }}</th>
-                            {% endfor %}
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {% for row in preview_data %}
-                          <tr>
-                            {% for val in row.values %}
-                            <td>{{ val }}</td>
-                            {% endfor %}
-                          </tr>
-                          {% endfor %}
-                        </tbody>
-                      </table>
-                      {% endif %}
                     </div>
                   </div>
                   <!--<div class="modal-footer">
