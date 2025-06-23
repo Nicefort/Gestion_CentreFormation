@@ -13,7 +13,23 @@
       href="{% static 'vendor/datatables/css/jquery.dataTables.min.css'%}"
       rel="stylesheet"
     />
+     <link
+      href="{% static 'vendor/jquery-steps/css/jquery.steps.css'%}"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'vendor/fullcalendar/css/fullcalendar.min.css'%}"
+      rel="stylesheet"
+    />
     <link href="{% static 'css/style.css'%}" rel="stylesheet">
+    <style>
+      .wizard > .content > .body {
+        max-height: 500px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding: 20px;
+      }
+    </style>
 
 </head>
 
@@ -241,8 +257,16 @@
                     </div>
                     <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0)">App</a></li>
-                            <li class="breadcrumb-item active"><a href="javascript:void(0)">Profile</a></li>
+                            <li class="breadcrumb-item"><a
+                    href="javascript:void()"
+                    data-toggle="modal"
+                    data-target="#add-category"
+                    class="btn btn-primary btn-event w-100"
+                  >
+                    <span class="align-middle"><i class="ti-plus"></i></span>
+                    Ajouter
+                  </a></li>
+                          
                         </ol>
                     </div>
                 </div>
@@ -258,12 +282,6 @@
                                             <div class="col">
                                                 <h3 class="m-b-0">{{nombre_centres}}</h3><span>Nombre de Centre de Formations</span>
                                             </div>
-                                            <div class="col">
-                                                <h3 class="m-b-0">140</h3><span>Place Stay</span>
-                                            </div>
-                                            <div class="col">
-                                                <h3 class="m-b-0">45</h3><span>Reviews</span>
-                                            </div>
                                         </div>
 
                                         
@@ -274,44 +292,49 @@
                             </div>
                         </div>
                         <div class="">
-                            
-<form id="filtre-form" method="get" class="mb-4">
-  <div class="row">
-    <!-- Préfectures -->
-    <div class="col-md-6">
-      <h5>Filtrer par préfecture</h5>
-      <button type="button" class="btn btn-sm btn-outline-secondary mb-2" onclick="toggleCheckboxes('pref-')">Tout cocher / décocher</button>
-      {% for pref in prefectures %}
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" name="prefectures" value="{{ pref.id }}"
-                 id="pref-{{ pref.id }}"
-                 {% if pref.id in prefecture_ids %}checked{% endif %}>
-          <label class="form-check-label" for="pref-{{ pref.id }}">
-            {{ pref.nom }}
-          </label>
-        </div>
-      {% endfor %}
-    </div>
-
-    <!-- Secteurs -->
-    <div class="col-md-6">
-      <h5>Filtrer par secteur</h5>
-      <button type="button" class="btn btn-sm btn-outline-secondary mb-2" onclick="toggleCheckboxes('sect-')">Tout cocher / décocher</button>
-      {% for secteur in secteurs %}
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" name="secteurs" value="{{ secteur.id }}"
-                 id="sect-{{ secteur.id }}"
-                 {% if secteur.id in secteur_ids %}checked{% endif %}>
-          <label class="form-check-label" for="sect-{{ secteur.id }}">
-            {{ secteur.nom }}
-          </label>
-        </div>
-      {% endfor %}
-    </div>
-  </div>
-
-  <button type="submit" class="btn btn-primary mt-3">Appliquer les filtres</button>
-</form>
+                          <div class="card">
+                            <div class="card-body">
+                              <h4 class="card-intro-title">Filtrer</h4>
+            
+                              <div
+                                class="form-inline d-flex flex-wrap align-items-end gap-3 my-3"
+                              >
+            
+                                <!-- Filtre par secteur -->
+                                <div class="form-group">
+                                  <label for="filtre-secteur" class="mr-2 mb-4 "
+                                    >Par secteur :</label
+                                  >
+                                  <select
+                                    id="filtre-secteur"
+                                    class="form-control mr-3 mb-4"
+                                    style="width: 200px"
+                                  >
+                                    <option value="">Tous</option>
+                                    {% for secteur in secteurs %}
+                                    <option value="{{ secteur.nom }}">
+                                      {{ secteur.nom }}
+                                    </option>
+                                    {% endfor %}
+                                  </select>
+                                </div>
+            
+                                <!-- Filtre par capacité -->
+                                <div class="form-group">
+                                  <label for="filtre-capacite" class="mr-2 "
+                                    >Capacité max :</label
+                                  >
+                                  <input
+                                    type="number"
+                                    id="filtre-capacite"
+                                    class="form-control"
+                                    placeholder="Ex: 100"
+                                    style="width: 120px"
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                          </div>
            
 
 
@@ -324,7 +347,7 @@
                                 <div class="profile-tab">
                                     <div class="custom-tab-1">
                                         <ul class="nav nav-tabs">
-                                            <li class="nav-item"><a href="#my-posts" data-toggle="tab" class="nav-link active show">Posts</a>
+                                            <li class="nav-item"><a href="#my-posts" data-toggle="tab" class="nav-link active show">Liste des centres</a>
                                             </li>
                                            
                                         </ul>
@@ -337,7 +360,9 @@
                               style="min-width: 845px"
                             >
                               <thead>
-                                <tr>
+                                <tr 
+                                  data-secteur="{{ centre.secteurs.all.0.nom|default:'' }}"
+                                  data-capacite="{{ centre.capacite_max }}">
                                   <th>Intitule</th>
                                   <th>Sigle</th>
                                   <th>Adresse</th>
@@ -355,7 +380,9 @@
                                   data-secteur="{{ centre.secteurs.all.0.nom|default:'' }}"
                                   data-capacite="{{ centre.capacite_max }}"
                                 >
-                                  <td>{{centre.intitule}}</td>
+                                  <td> <a
+                                    href="{% url 'centre_detail' centre.pk %}"
+                                  >{{centre.intitule}}</a></td>
                                   <td>{{centre.sigle}}</td>
                                   <td>{{centre.adresse}}</td>
                                   <td>{{centre.capacite_max}}</td>
@@ -383,7 +410,256 @@
                               </tfoot>
                             </table>
                           </div>
-                        </div>
+                        </div><div class="modal fade none-border" id="add-category">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">
+                      <strong>Ajout Centre Formation</strong>
+                    </h4>
+                  </div>
+                  <div class="modal-body">
+                    <form
+                      method="post"
+                      id="step-form-horizontal"
+                      class="step-form-horizontal"
+                      action="{% url 'commune_detail' pk=commune.pk %}"
+                    >
+                      {% csrf_token %}
+                      <div>
+                        <h4>Centre de Formation</h4>
+                        <section>
+                          <div class="row">
+                            <div class="col-lg-6 mb-4">
+                              <div class="form-group">
+                                <label
+                                  class="text-label"
+                                  for="{{ form_centre.secteurs.id_for_label }}"
+                                >
+                                  Secteurs
+                                </label>
+                                {{ form_centre.secteurs }} {% if form_centre.secteurs.errors %}
+                                <div class="text-danger mt-1">
+                                  {% for error in form_centre.secteurs.errors %}
+                                  <small>{{ error }}</small><br />
+                                  {% endfor %}
+                                </div>
+                                {% endif %}
+                              </div>
+                            </div>
+
+                            <div class="col-lg-6 mb-4">
+                              <div class="form-group">
+                                <label
+                                  class="text-label"
+                                  for="{{ form_centre.public_cibles.id_for_label }}"
+                                >
+                                  Publics cibles
+                                </label>
+                                {{ form_centre.public_cibles }} {% if form_centre.public_cibles.errors %}
+                                <div class="text-danger mt-1">
+                                  {% for error in form_centre.public_cibles.errors %}
+                                  <small>{{ error }}</small><br />
+                                  {% endfor %}
+                                </div>
+                                {% endif %}
+                              </div>
+                            </div>
+
+                            <div class="col-lg-12 mb-4">
+                              <div class="form-group">
+                                <label
+                                  class="text-label"
+                                  for="{{ form_centre.commune.id_for_label }}"
+                                >
+                                  Commune
+                                </label>
+                                {{ form_centre.commune }} {% if form_centre.commune.errors %}
+                                <div class="text-danger mt-1">
+                                  {% for error in form_centre.commune.errors %}
+                                  <small>{{ error }}</small><br />
+                                  {% endfor %}
+                                </div>
+                                {% endif %}
+                              </div>
+                            </div>
+
+                            <div class="col-lg-12 mb-4">
+                              <div class="form-group">
+                                <label
+                                  class="text-label"
+                                  for="{{ form_centre.intitule.id_for_label }}"
+                                >
+                                  Intitulé
+                                </label>
+                                {{ form_centre.intitule }} {% if form_centre.intitule.errors %}
+                                <div class="text-danger mt-1">
+                                  {% for error in form_centre.intitule.errors %}
+                                  <small>{{ error }}</small><br />
+                                  {% endfor %}
+                                </div>
+                                {% endif %}
+                              </div>
+                            </div>
+
+                            <div class="col-lg-12 mb-4">
+                              <div class="form-group">
+                                <label
+                                  class="text-label"
+                                  for="{{ form_centre.sigle.id_for_label }}"
+                                >
+                                  Sigle
+                                </label>
+                                {{ form_centre.sigle }} {% if form_centre.sigle.errors %}
+                                <div class="text-danger mt-1">
+                                  {% for error in form_centre.sigle.errors %}
+                                  <small>{{ error }}</small><br />
+                                  {% endfor %}
+                                </div>
+                                {% endif %}
+                              </div>
+                            </div>
+
+                            <div class="col-lg-12 mb-4">
+                              <div class="form-group">
+                                <label
+                                  class="text-label"
+                                  for="{{ form_centre.capacite_max.id_for_label }}"
+                                >
+                                  Capacité max d'accueil/jours
+                                </label>
+                                {{ form_centre.capacite_max }} {% if form_centre.capacite_max.errors %}
+                                <div class="text-danger mt-1">
+                                  {% for error in form_centre.capacite_max.errors %}
+                                  <small>{{ error }}</small><br />
+                                  {% endfor %}
+                                </div>
+                                {% endif %}
+                              </div>
+                            </div>
+
+                            <div class="col-lg-12 mb-4">
+                              <div class="form-group">
+                                <label
+                                  class="text-label"
+                                  for="{{ form_centre.telephone.id_for_label }}"
+                                >
+                                  Téléphone
+                                </label>
+                                {{ form_centre.telephone }} 
+                                {% if form_centre.telephone.errors %}
+                                <div class="text-danger mt-1">
+                                  {% for error in form_centre.telephone.errors %}
+                                  <small>{{ error }}</small><br />
+                                  {% endfor %}
+                                </div>
+                                {% endif %}
+                              </div>
+                            </div>
+
+                            <div class="col-lg-12 mb-4">
+                              <div class="form-group">
+                                <label
+                                  class="text-label"
+                                  for="{{ form_centre.email.id_for_label }}"
+                                >
+                                  Email
+                                </label>
+                                {{ form_centre.email }} {% if form_centre.email.errors %}
+                                <div class="text-danger mt-1">
+                                  {% for error in form_centre.email.errors %}
+                                  <small>{{ error }}</small><br />
+                                  {% endfor %}
+                                </div>
+                                {% endif %}
+                              </div>
+                            </div>
+
+                            <div class="col-lg-12 mb-4">
+                              <div class="form-group">
+                                <label
+                                  class="text-label"
+                                  for="{{ form_centre.adresse.id_for_label }}"
+                                >
+                                  Adresse
+                                </label>
+                                {{ form_centre.adresse }} {% if form_centre.adresse.errors %}
+                                <div class="text-danger mt-1">
+                                  {% for error in form_centre.adresse.errors %}
+                                  <small>{{ error }}</small><br />
+                                  {% endfor %}
+                                </div>
+                                {% endif %}
+                              </div>
+                            </div>
+                          </div>
+                        </section>
+
+                        <h4>Document administratif</h4>
+                        <section>
+                          <div class="row">
+                            {% for field in form_docs %}
+                            <div class="col-lg-12 mb-4">
+                              <div class="form-group">
+                                <label
+                                  for="{{ field.id_for_label }}"
+                                  class="text-label"
+                                >
+                                  {{ field.label }}
+                                </label>
+                                {{ field }} {% if field.errors %}
+                                <div class="text-danger mt-1">
+                                  {% for error in field.errors %}
+                                  <small>{{ error }}</small><br />
+                                  {% endfor %}
+                                </div>
+                                {% endif %}
+                              </div>
+                            </div>
+                            {% endfor %}
+                          </div>
+                        </section>
+
+                        <h4>Personne de Reference</h4>
+                        <section>
+                          <div class="row">
+                            {% for field in form_ref %}
+                            <div class="col-lg-12 mb-4">
+                              <div class="form-group">
+                                <label
+                                  for="{{ field.id_for_label }}"
+                                  class="text-label"
+                                >
+                                  {{ field.label }}
+                                </label>
+                                {{ field }} {% if field.errors %}
+                                <div class="text-danger mt-1">
+                                  {% for error in field.errors %}
+                                  <small>{{ error }}</small><br />
+                                  {% endfor %}
+                                </div>
+                                {% endif %}
+                              </div>
+                            </div>
+                            {% endfor %}
+                          </div>
+                        </section>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <!--<button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>-->
+                    <button
+                      type="button"
+                      class="btn btn-danger waves-effect waves-light save-category"
+                      data-bs-dismiss="modal"
+                    >
+                      Close
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
                                      
                                         </div>
                                     </div>
@@ -449,6 +725,14 @@ function toggleCheckboxes(prefix) {
     <script src="{% static 'vendor/datatables/js/jquery.dataTables.min.js'%}"></script>
     <script src="{% static 'js/plugins-init/datatables.init.js'%}"></script>
     
+
+    <script src="{% static 'vendor/jquery-steps/build/jquery.steps.min.js'%}"></script>
+    <script src="{% static 'vendor/jquery-validation/jquery.validate.min.js'%}"></script>
+    <!-- Form validate init -->
+    <script src="{% static 'js/plugins-init/jquery.validate-init.js'%}"></script>
+
+    <!-- Form step init -->
+    <script src="{% static 'js/plugins-init/jquery-steps-init.js'%}"></script>
 
 </body>
 

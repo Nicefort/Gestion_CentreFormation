@@ -323,7 +323,7 @@
                                 {% for region in regions %}
                                 <tr>
                                   <td>{{ region.nom }}</td>
-                                  <td><a href="{% url 'region_detail' region.pk %}">deatail</a></td>
+                                  <td><a href="{% url 'region_detail' region.pk %}">detail</a></td>
                                   
                                 </tr>
                                 {% endfor %}
@@ -343,7 +343,7 @@
             
             
          
-            <!-- BEGIN MODAL -->
+            <!-- BEGIN MODAL --
             <div class="modal fade none-border" id="event-modal">
               <div class="modal-dialog">
                 <div class="modal-content">
@@ -376,17 +376,17 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div>-->
             <!-- Modal Add Category -->
             <div class="modal fade none-border" id="add-category">
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h4 class="modal-title"><strong>Add a category</strong></h4>
+                    <h4 class="modal-title"><strong>Ajouter une Region</strong></h4>
                   </div>
                   <div class="modal-body">
                  <!-- Formulaire pour saisie manuelle -->
-<h2>Ajouter une région</h2>
+
 <form method="POST">
   {% csrf_token %}
   {{ form.as_p }}

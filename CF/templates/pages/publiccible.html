@@ -545,7 +545,7 @@
                                         </section>
                                     </div>
                                  </form>-->
-                    <h2>Ajouter une Prefecture</h2>
+                    <h2>Ajouter un public</h2>
 <form method="POST">
   {% csrf_token %}
   {{ form.as_p }}
@@ -557,7 +557,7 @@
 
 <hr>
 
-<h2>Importation de régions depuis CSV</h2>
+<h2>Importation de public cible depuis CSV</h2>
 <form method="POST" enctype="multipart/form-data">
   {% csrf_token %}
   <p>
