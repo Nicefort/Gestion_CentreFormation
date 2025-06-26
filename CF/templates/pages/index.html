@@ -132,8 +132,16 @@
         <div class="header-content">
           <nav class="navbar navbar-expand">
             <div class="collapse navbar-collapse justify-content-between">
+              <img
+                          class="d-block "
+                          src="{% static 'rca/5.png' %}"
+                          alt="First slide" 
+                          width="40%"
+                        />
+                      </div>
               <div class="header-left">
-                <div class="search_bar dropdown marquee">
+                 
+                <div class="dropdown marquee">
                   <span class="search_icon p-3 c-pointer" data-toggle="dropdown">
                     <h3>GESTION DES CENTRES DE FORMATION PROFESSIONNELLE ET TECHNIQUE</h3>
                   </span>
@@ -142,88 +150,15 @@
               
               
               <ul class="navbar-nav header-right">
+
                 <li class="nav-item dropdown notification_dropdown">
-                  <a
-                    class="nav-link"
-                    href="#"
-                    role="button"
-                    data-toggle="dropdown"
-                  >
-                    <i class="mdi mdi-bell"></i>
-                    <div class="pulse-css"></div>
-                  </a>
-                  <div class="dropdown-menu dropdown-menu-right">
-                    <ul class="list-unstyled">
-                      <li class="media dropdown-item">
-                        <span class="success"><i class="ti-user"></i></span>
-                        <div class="media-body">
-                          <a href="#">
-                            <p>
-                              <strong>Martin</strong> has added a
-                              <strong>customer</strong> Successfully
-                            </p>
-                          </a>
-                        </div>
-                        <span class="notify-time">3:20 am</span>
-                      </li>
-                      <li class="media dropdown-item">
-                        <span class="primary"
-                          ><i class="ti-shopping-cart"></i
-                        ></span>
-                        <div class="media-body">
-                          <a href="#">
-                            <p>
-                              <strong>Jennifer</strong> purchased Light
-                              Dashboard 2.0.
-                            </p>
-                          </a>
-                        </div>
-                        <span class="notify-time">3:20 am</span>
-                      </li>
-                      <li class="media dropdown-item">
-                        <span class="danger"><i class="ti-bookmark"></i></span>
-                        <div class="media-body">
-                          <a href="#">
-                            <p>
-                              <strong>Robin</strong> marked a
-                              <strong>ticket</strong> as unsolved.
-                            </p>
-                          </a>
-                        </div>
-                        <span class="notify-time">3:20 am</span>
-                      </li>
-                      <li class="media dropdown-item">
-                        <span class="primary"><i class="ti-heart"></i></span>
-                        <div class="media-body">
-                          <a href="#">
-                            <p>
-                              <strong>David</strong> purchased Light Dashboard
-                              1.0.
-                            </p>
-                          </a>
-                        </div>
-                        <span class="notify-time">3:20 am</span>
-                      </li>
-                      <li class="media dropdown-item">
-                        <span class="success"><i class="ti-image"></i></span>
-                        <div class="media-body">
-                          <a href="#">
-                            <p>
-                              <strong> James.</strong> has added a<strong
-                                >customer</strong
-                              >
-                              Successfully
-                            </p>
-                          </a>
-                        </div>
-                        <span class="notify-time">3:20 am</span>
-                      </li>
-                    </ul>
-                    <a class="all-notification" href="#"
-                      >See all notifications <i class="ti-arrow-right"></i
-                    ></a>
-                  </div>
+                  <img
+                            class="d-block w-100"
+                            src="{% static 'images/acfpe.png' %}"
+                            alt="First slide"
+                          />
                 </li>
+                
                 <li class="nav-item dropdown header-profile">
                   <a
                     class="nav-link"
@@ -234,17 +169,10 @@
                     <i class="mdi mdi-account"></i>
                   </a>
                   <div class="dropdown-menu dropdown-menu-right">
-                    <a href="./app-profile.html" class="dropdown-item">
-                      <i class="icon-user"></i>
-                      <span class="ml-2">Profile </span>
-                    </a>
-                    <a href="./email-inbox.html" class="dropdown-item">
-                      <i class="icon-envelope-open"></i>
-                      <span class="ml-2">Inbox </span>
-                    </a>
+                    
                     <a href="./page-login.html" class="dropdown-item">
                       <i class="icon-key"></i>
-                      <span class="ml-2">Logout </span>
+                      <span class="ml-2">Deconnexion </span>
                     </a>
                   </div>
                 </li>
@@ -324,10 +252,10 @@
         <!-- row -->
         <div class="container-fluid">
           <div class="row">
-            <div class="col-xl-2">
-              <!--<div class="my-4">
+            <!--<div class="col-xl-2">
+              <div class="my-4">
                            <h4 class="card-intro-title">Slides only</h4>
-                        </div>-->
+                        </div>
               <div class="card">
                 <div class="card-body p-4">
                   <div
@@ -378,8 +306,8 @@
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="col-xl-8">
+            </div>-->
+            <div class="col-xl-12">
               <!-- <div class="my-4">
                          <h4 class="card-intro-title">With Captions</h4>
                         </div>-->
@@ -391,14 +319,14 @@
                         <div class="carousel-item active">
                           <img
                             class="d-block w-100"
-                            src="{% static 'images/acfpe.png' %}"
+                            src="{% static 'images/ACFPE/9.jpg' %}"
                             alt="First slide"
+                             style="height: 475px; object-fit: cover;"
                           />
                           <div class="carousel-caption d-none d-md-block">
                             <h5>First slide label</h5>
                             <p>
-                              Nulla vitae elit libero, a pharetra augue mollis
-                              interdum.
+                              Agence Centrafricaine pour la formation professionnelle et l'emploi
                             </p>
                           </div>
                         </div>
@@ -407,6 +335,7 @@
                             class="d-block w-100"
                             src="{% static 'rca/3.jpg' %}"
                             alt="Second slide"
+                            style="height: 475px; object-fit: cover;"
                           />
                           <div class="carousel-caption d-none d-md-block">
                             <h5>Second slide label</h5>
@@ -422,7 +351,7 @@
                             src="{% static 'rca/2.jpg' %}"
                             alt="Third slide"
                             whidth="100%"
-                            style="height: 300px; object-fit: cover;"
+                            style="height: 475px; object-fit: cover;"
                           />
                           <div class="carousel-caption d-none d-md-block">
                             <h5>Third slide label</h5>
@@ -439,7 +368,7 @@
               <!--<div class="my-4">
                             <h4 class="card-intro-title">Slides only</h4>
                         </div>-->
-              <div class="card">
+              <!--<div class="card">
                 <div class="card-body p-4">
                   <div class="bootstrap-carousel">
                     <div class="carousel slide" data-ride="carousel">
@@ -456,7 +385,7 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div>-->
             </div>
           </div>
           <div class="row">
@@ -800,7 +729,7 @@
         <div class="copyright">
           <p>
             Copyright © Designed &amp; Developed by
-            <a href="#" target="_blank">Nicefort KETTEGUIA</a> 2025
+            <a href="#" target="_blank">Gilchrist KETTEGUIA</a> 2025
           </p>
         </div>
       </div>
@@ -815,7 +744,7 @@
       <!--**********************************
            Support ticket button end
         ***********************************-->
-    </div>
+   
     <!--**********************************
         Main wrapper end
     ***********************************-->

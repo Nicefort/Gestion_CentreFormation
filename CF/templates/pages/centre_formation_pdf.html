@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body { font-family: sans-serif; font-size: 12px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { border: 1px solid #000; padding: 5px; text-align: left; }
+    th { background-color: #f0f0f0; }
+  </style>
+</head>
+<body>
+  <h2>Liste des centres de formation</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Commune</th>
+        <th>Secteurs</th>
+        <th>Adresse</th>
+        <th>Téléphone</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for centre in centres %}
+        <tr>
+          <td>{{ centre.intitule }}</td>
+          <td>{{ centre.commune.nom }}</td>
+          <td>
+            {% for secteur in centre.secteurs.all %}
+              {{ secteur.nom }}{% if not forloop.last %}, {% endif %}
+            {% endfor %}
+          </td>
+          <td>{{ centre.adresse }}</td>
+          <td>{{ centre.telephone }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</body>
+</html>

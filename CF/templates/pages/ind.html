@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Tableau de bord - Centres de formation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    .chart-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      margin-bottom: 50px;
+    }
+    .chart-box {
+      flex: 1 1 45%;
+      min-width: 300px;
+    }
+    canvas {
+      max-width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Tableau de bord des centres de formation</h1>
+
+  <!-- ✅ Région -->
+  <h2>Centres par région</h2>
+  <div class="chart-container">
+    <div class="chart-box"><canvas id="chartRegionBar"></canvas></div>
+    <div class="chart-box"><canvas id="chartRegionPie"></canvas></div>
+  </div>
+
+  <!-- ✅ Préfecture -->
+  <h2>Centres par préfecture</h2>
+  <div class="chart-container">
+    <div class="chart-box"><canvas id="chartPrefectureBar"></canvas></div>
+    <div class="chart-box"><canvas id="chartPrefecturePie"></canvas></div>
+  </div>
+
+  <!-- ✅ Sous-préfecture -->
+  <h2>Centres par sous-préfecture</h2>
+  <div class="chart-container">
+    <div class="chart-box"><canvas id="chartSousPrefBar"></canvas></div>
+    <div class="chart-box"><canvas id="chartSousPrefPie"></canvas></div>
+  </div>
+
+  <!-- ✅ Commune -->
+  <h2>Centres par commune</h2>
+  <div class="chart-container">
+    <div class="chart-box"><canvas id="chartCommuneBar"></canvas></div>
+    <div class="chart-box"><canvas id="chartCommunePie"></canvas></div>
+  </div>
+
+  <!-- ✅ Données JSON -->
+  <script id="regionData" type="application/json">{{ region_data|safe }}</script>
+  <script id="prefectureData" type="application/json">{{ prefecture_data|safe }}</script>
+  <script id="sousPrefData" type="application/json">{{ sousprefecture_data|safe }}</script>
+  <script id="communeData" type="application/json">{{ commune_data|safe }}</script>
+
+  <!-- ✅ Script -->
+  <script>
+    function getLabels(data) {
+      return data.map(item => item.nom);
+    }
+
+    function getData(data) {
+      return data.map(item => item.total);
+    }
+
+    function randomColors(n) {
+      return Array.from({ length: n }, () => `hsl(${Math.random() * 360}, 70%, 60%)`);
+    }
+
+    function createChart(canvasId, type, labels, data, label) {
+      new Chart(document.getElementById(canvasId), {
+        type: type,
+        data: {
+          labels: labels,
+          datasets: [{
+            label: label,
+            data: data,
+            backgroundColor: type === 'pie' || type === 'doughnut' ? randomColors(data.length) : 'rgba(75, 192, 192, 0.6)',
+            borderColor: type === 'bar' ? 'rgba(75, 192, 192, 1)' : '#fff',
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: type === 'bar' ? 'top' : 'right'
+            }
+          },
+          scales: type === 'bar' ? {
+            y: {
+              beginAtZero: true,
+              ticks: { stepSize: 1 }
+            }
+          } : {}
+        }
+      });
+    }
+
+    // Chargement des données JSON
+    const regionData = JSON.parse(document.getElementById("regionData").textContent);
+    const prefData = JSON.parse(document.getElementById("prefectureData").textContent);
+    const sousPrefData = JSON.parse(document.getElementById("sousPrefData").textContent);
+    const communeData = JSON.parse(document.getElementById("communeData").textContent);
+
+    // ✅ Création des graphiques pour chaque niveau
+    createChart("chartRegionBar", "bar", getLabels(regionData), getData(regionData), "Régions");
+    createChart("chartRegionPie", "pie", getLabels(regionData), getData(regionData), "Régions");
+
+    createChart("chartPrefectureBar", "bar", getLabels(prefData), getData(prefData), "Préfectures");
+    createChart("chartPrefecturePie", "pie", getLabels(prefData), getData(prefData), "Préfectures");
+
+    createChart("chartSousPrefBar", "bar", getLabels(sousPrefData), getData(sousPrefData), "Sous-préfectures");
+    createChart("chartSousPrefPie", "pie", getLabels(sousPrefData), getData(sousPrefData), "Sous-préfectures");
+
+    createChart("chartCommuneBar", "bar", getLabels(communeData), getData(communeData), "Communes");
+    createChart("chartCommunePie", "pie", getLabels(communeData), getData(communeData), "Communes");
+  </script>
+</body>
+</html>

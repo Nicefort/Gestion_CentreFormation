@@ -286,7 +286,7 @@
           <div class="row page-titles mx-0">
             <div class="col-sm-6 p-md-0">
               <div class="welcome-text">
-                <h4>Nom: {{ centre.nom }}</h4>
+                <h4>Nom du centre: {{ centre.intitule }}</h4>
                 <p class="mb-0"></p>
               </div>
             </div>
@@ -629,6 +629,8 @@
               </div>
             </div>
           </div>
+        <div class="row">
+          <div class="col-lg-8">
           <div class="card mb-4">
             <div class="card-header bg-primary text-white">
               <h4 class="card-title mb-0">Informations générales du centre</h4>
@@ -702,6 +704,8 @@
               </table>
             </div>
           </div>
+        </div> 
+         <div class="col-lg-8">
           <div class="card mb-4">
             <div class="card-header bg-success text-white">
               <h4 class="card-title mb-0">Personne de référence</h4>
@@ -735,13 +739,14 @@
               {% endif %}
             </div>
           </div>
-
+          </div> 
+          <div class="col-lg-8">
           <div class="card mb-4">
             <div class="card-header bg-warning text-dark">
               <h4 class="card-title mb-0">Documents administratifs</h4>
             </div>
             <div class="card-body table-responsive">
-              {% if documents %}
+            {% if documents %}
               <table class="table table-bordered">
                 <thead class="table-light">
                   <tr>
@@ -829,10 +834,13 @@
                 </tbody>
               </table>
               {% else %}
-              <p class="text-muted">Aucun document disponible.</p>
+              <td>Aucun document disponible pour ce centre.</td>
+              <p class="">Aucun document disponible pour ce centre.</p>
               {% endif %}
             </div>
           </div>
+           </div> 
+        </div>
         </div>
       </div>
       <!--**********************************
@@ -846,7 +854,7 @@
         <div class="copyright">
           <p>
             Copyright © Designed &amp; Developed by
-            <a href="#" target="_blank">Quixkit</a> 2019
+            <a href="#" target="_blank">Gilchrist KETTEGUIA</a> 2025
           </p>
         </div>
       </div>

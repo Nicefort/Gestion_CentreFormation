@@ -1,27 +1,23 @@
 {% load static %}
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Focus - Bootstrap Admin Dashboard </title>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Focus - Bootstrap Admin Dashboard</title>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/acfpe.png' %}">
-      <link
-      href="{% static 'vendor/datatables/css/jquery.dataTables.min.css'%}"
-      rel="stylesheet"
-    />
-     <link
-      href="{% static 'vendor/jquery-steps/css/jquery.steps.css'%}"
-      rel="stylesheet"
-    />
-    <link
-      href="{% static 'vendor/fullcalendar/css/fullcalendar.min.css'%}"
-      rel="stylesheet"
-    />
-    <link href="{% static 'css/style.css'%}" rel="stylesheet">
+    <link rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="{% static 'images/acfpe.png' %}" />
+    <link href="{% static 'vendor/datatables/css/jquery.dataTables.min.css' %}"
+          rel="stylesheet" />
+    <link href="{% static 'vendor/jquery-steps/css/jquery.steps.css' %}"
+          rel="stylesheet" />
+    <link href="{% static 'vendor/fullcalendar/css/fullcalendar.min.css' %}"
+          rel="stylesheet" />
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" />
     <style>
       .wizard > .content > .body {
         max-height: 500px;
@@ -30,184 +26,190 @@
         padding: 20px;
       }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/docx/7.7.0/docx.umd.min.js"></script>
 
-</head>
-
-<body>
-
+  </head>
+  <body>
     <!--*******************
         Preloader start
     ********************-->
     <div id="preloader">
-        <div class="sk-three-bounce">
-            <div class="sk-child sk-bounce1"></div>
-            <div class="sk-child sk-bounce2"></div>
-            <div class="sk-child sk-bounce3"></div>
-        </div>
+      <div class="sk-three-bounce">
+        <div class="sk-child sk-bounce1"></div>
+        <div class="sk-child sk-bounce2"></div>
+        <div class="sk-child sk-bounce3"></div>
+      </div>
     </div>
     <!--*******************
         Preloader end
-    ********************-->
-
-
+********************-->
     <!--**********************************
         Main wrapper start
     ***********************************-->
     <div id="main-wrapper">
-
-        <!--**********************************
+      <!--**********************************
             Nav header start
         ***********************************-->
-        <div class="nav-header">
-            <a href="{% url 'index' %}" class="brand-logo">
-                <img class="img-fluid w-40 rounded center" src="{% static 'images/acfpe.png' %}" alt="">
-               
-            </a>
-
-            <div class="nav-control">
-                <div class="hamburger">
-                    <span class="line"></span><span class="line"></span><span class="line"></span>
-                </div>
-            </div>
+      <div class="nav-header">
+        <a href="{% url 'index' %}" class="brand-logo">
+          <img class="img-fluid w-40 rounded center"
+               src="{% static 'images/acfpe.png' %}"
+               alt="" />
+        </a>
+        <div class="nav-control">
+          <div class="hamburger">
+            <span class="line"></span><span class="line"></span><span class="line"></span>
+          </div>
         </div>
-        <!--**********************************
+      </div>
+      <!--**********************************
             Nav header end
-        ***********************************-->
-
-        <!--**********************************
+***********************************-->
+      <!--**********************************
             Header start
         ***********************************-->
-        <div class="header">
-            <div class="header-content">
-                <nav class="navbar navbar-expand">
-                    <div class="collapse navbar-collapse justify-content-between">
-                        <div class="header-left">
-                            <div class="search_bar dropdown">
-                                <span class="search_icon p-3 c-pointer" data-toggle="dropdown">
-                                    <i class="mdi mdi-magnify"></i>
-                                </span>
-                                <div class="dropdown-menu p-0 m-0">
-                                    <form>
-                                        <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-                                    </form>
-                                </div>
-                            </div>
+      <div class="header">
+        <div class="header-content">
+          <nav class="navbar navbar-expand">
+            <div class="collapse navbar-collapse justify-content-between">
+              <div class="header-left">
+                <div class="search_bar dropdown">
+                  <span class="search_icon p-3 c-pointer" data-toggle="dropdown">
+                    <i class="mdi mdi-magnify"></i>
+                  </span>
+                  <div class="dropdown-menu p-0 m-0">
+                    <form>
+                      <input class="form-control"
+                             type="search"
+                             placeholder="Search"
+                             aria-label="Search" />
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <ul class="navbar-nav header-right">
+                <li class="nav-item dropdown notification_dropdown">
+                  <a class="nav-link" href="#" role="button" data-toggle="dropdown">
+                    <i class="mdi mdi-bell"></i>
+                    <div class="pulse-css"></div>
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right">
+                    <ul class="list-unstyled">
+                      <li class="media dropdown-item">
+                        <span class="success"><i class="ti-user"></i></span>
+                        <div class="media-body">
+                          <a href="#">
+                            <p>
+                              <strong>Martin</strong> has added a
+                              <strong>customer</strong> Successfully
+                            </p>
+                          </a>
                         </div>
-
-                        <ul class="navbar-nav header-right">
-                            <li class="nav-item dropdown notification_dropdown">
-                                <a class="nav-link" href="#" role="button" data-toggle="dropdown">
-                                    <i class="mdi mdi-bell"></i>
-                                    <div class="pulse-css"></div>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <ul class="list-unstyled">
-                                        <li class="media dropdown-item">
-                                            <span class="success"><i class="ti-user"></i></span>
-                                            <div class="media-body">
-                                                <a href="#">
-                                                    <p><strong>Martin</strong> has added a <strong>customer</strong> Successfully
-                                                    </p>
-                                                </a>
-                                            </div>
-                                            <span class="notify-time">3:20 am</span>
-                                        </li>
-                                        <li class="media dropdown-item">
-                                            <span class="primary"><i class="ti-shopping-cart"></i></span>
-                                            <div class="media-body">
-                                                <a href="#">
-                                                    <p><strong>Jennifer</strong> purchased Light Dashboard 2.0.</p>
-                                                </a>
-                                            </div>
-                                            <span class="notify-time">3:20 am</span>
-                                        </li>
-                                        <li class="media dropdown-item">
-                                            <span class="danger"><i class="ti-bookmark"></i></span>
-                                            <div class="media-body">
-                                                <a href="#">
-                                                    <p><strong>Robin</strong> marked a <strong>ticket</strong> as unsolved.
-                                                    </p>
-                                                </a>
-                                            </div>
-                                            <span class="notify-time">3:20 am</span>
-                                        </li>
-                                        <li class="media dropdown-item">
-                                            <span class="primary"><i class="ti-heart"></i></span>
-                                            <div class="media-body">
-                                                <a href="#">
-                                                    <p><strong>David</strong> purchased Light Dashboard 1.0.</p>
-                                                </a>
-                                            </div>
-                                            <span class="notify-time">3:20 am</span>
-                                        </li>
-                                        <li class="media dropdown-item">
-                                            <span class="success"><i class="ti-image"></i></span>
-                                            <div class="media-body">
-                                                <a href="#">
-                                                    <p><strong> James.</strong> has added a<strong>customer</strong> Successfully
-                                                    </p>
-                                                </a>
-                                            </div>
-                                            <span class="notify-time">3:20 am</span>
-                                        </li>
-                                    </ul>
-                                    <a class="all-notification" href="#">See all notifications <i
-                                            class="ti-arrow-right"></i></a>
-                                </div>
-                            </li>
-                            <li class="nav-item dropdown header-profile">
-                                <a class="nav-link" href="#" role="button" data-toggle="dropdown">
-                                    <i class="mdi mdi-account"></i>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a href="./app-profile.html" class="dropdown-item">
-                                        <i class="icon-user"></i>
-                                        <span class="ml-2">Profile </span>
-                                    </a>
-                                    <a href="./email-inbox.html" class="dropdown-item">
-                                        <i class="icon-envelope-open"></i>
-                                        <span class="ml-2">Inbox </span>
-                                    </a>
-                                    <a href="./page-login.html" class="dropdown-item">
-                                        <i class="icon-key"></i>
-                                        <span class="ml-2">Logout </span>
-                                    </a>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
+                        <span class="notify-time">3:20 am</span>
+                      </li>
+                      <li class="media dropdown-item">
+                        <span class="primary"><i class="ti-shopping-cart"></i></span>
+                        <div class="media-body">
+                          <a href="#">
+                            <p>
+                              <strong>Jennifer</strong> purchased Light
+                              Dashboard 2.0.
+                            </p>
+                          </a>
+                        </div>
+                        <span class="notify-time">3:20 am</span>
+                      </li>
+                      <li class="media dropdown-item">
+                        <span class="danger"><i class="ti-bookmark"></i></span>
+                        <div class="media-body">
+                          <a href="#">
+                            <p>
+                              <strong>Robin</strong> marked a
+                              <strong>ticket</strong> as unsolved.
+                            </p>
+                          </a>
+                        </div>
+                        <span class="notify-time">3:20 am</span>
+                      </li>
+                      <li class="media dropdown-item">
+                        <span class="primary"><i class="ti-heart"></i></span>
+                        <div class="media-body">
+                          <a href="#">
+                            <p>
+                              <strong>David</strong> purchased Light Dashboard
+                              1.0.
+                            </p>
+                          </a>
+                        </div>
+                        <span class="notify-time">3:20 am</span>
+                      </li>
+                      <li class="media dropdown-item">
+                        <span class="success"><i class="ti-image"></i></span>
+                        <div class="media-body">
+                          <a href="#">
+                            <p>
+                              <strong>James.</strong> has added a<strong>customer</strong>
+                              Successfully
+                            </p>
+                          </a>
+                        </div>
+                        <span class="notify-time">3:20 am</span>
+                      </li>
+                    </ul>
+                    <a class="all-notification" href="#">See all notifications <i class="ti-arrow-right"></i></a>
+                  </div>
+                </li>
+                <li class="nav-item dropdown header-profile">
+                  <a class="nav-link" href="#" role="button" data-toggle="dropdown">
+                    <i class="mdi mdi-account"></i>
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right">
+                    <a href="./app-profile.html" class="dropdown-item">
+                      <i class="icon-user"></i>
+                      <span class="ml-2">Profile</span>
+                    </a>
+                    <a href="./email-inbox.html" class="dropdown-item">
+                      <i class="icon-envelope-open"></i>
+                      <span class="ml-2">Inbox</span>
+                    </a>
+                    <a href="./page-login.html" class="dropdown-item">
+                      <i class="icon-key"></i>
+                      <span class="ml-2">Logout</span>
+                    </a>
+                  </div>
+                </li>
+              </ul>
             </div>
+          </nav>
         </div>
-        <!--**********************************
+      </div>
+      <!--**********************************
             Header end ti-comment-alt
-        ***********************************-->
-
-        <!--**********************************
+***********************************-->
+      <!--**********************************
             Sidebar start
         ***********************************-->
-        <div class="quixnav">
-            <div class="quixnav-scroll">
-                <ul class="metismenu" id="menu">
+      <div class="quixnav">
+        <div class="quixnav-scroll">
+          <ul class="metismenu" id="menu">
             <li class="nav-label first">Main Menu</li>
             <li>
-              <a href="{% url 'index' %}" aria-expanded="false"
-                ><i class="bi bi-house "></i
-                ><span class="nav-text">Acceuil</span></a
-              >
+              <a href="{% url 'index' %}" aria-expanded="false"><i class="bi bi-house"></i><span class="nav-text">Acceuil</span></a>
             </li>
-
             <li>
-              <a
-                class="has-arrow"
-                href="javascript:void()"
-                aria-expanded="false"
-                ><i class="icon icon-globe"></i
-                ><span class="nav-text">Localisation</span></a
-              >
+              <a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="icon icon-globe"></i><span class="nav-text">Localisation</span></a>
               <ul aria-expanded="false">
-                <li><a href="{% url 'region' %}">Region</a></li>
-                <li><a href="{% url 'prefecture' %}">Prefecture</a></li>
+                <li>
+                  <a href="{% url 'region' %}">Region</a>
+                </li>
+                <li>
+                  <a href="{% url 'prefecture' %}">Prefecture</a>
+                </li>
                 <li>
                   <a href="{% url 'sous_prefecture' %}">Sous Prefecture</a>
                 </li>
@@ -217,523 +219,521 @@
               </ul>
             </li>
             <li>
-              <a
-                class="has-arrow"
-                href="javascript:void()"
-                aria-expanded="false"
-                ><i class="fa fa-wrench"></i
-                ><span class="nav-text">Activité</span></a>
+              <a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="fa fa-wrench"></i><span class="nav-text">Activité</span></a>
               <ul aria-expanded="false">
-                <li><a href="{% url 'secteur' %}">Secteur</a></li>
-                <li><a href="{% url 'publiccible' %}">Publics Cible</a></li>
+                <li>
+                  <a href="{% url 'secteur' %}">Secteur</a>
+                </li>
+                <li>
+                  <a href="{% url 'publiccible' %}">Publics Cible</a>
+                </li>
               </ul>
             </li>
-
             <li>
-              <a href="{% url 'centre_formation' %}" aria-expanded="false"
-                ><i class="fa fa-graduation-cap"></i>
-                  <span class="nav-text">Centre Formation</span></a>
-            </li>
-          </ul>
-        </div>
-            </div>
-
-
-        </div>
-        <!--**********************************
+            <a href="{% url 'centre_formation' %}" aria-expanded="false"><i class="fa fa-graduation-cap"></i>
+            <span class="nav-text">Centre Formation</span></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<!--**********************************
             Sidebar end
-        ***********************************-->
-
-        <!--**********************************
+***********************************-->
+<!--**********************************
             Content body start
         ***********************************-->
-        <div class="content-body">
-            <div class="container-fluid">
-                <div class="row page-titles mx-0">
-                    <div class="col-sm-6 p-md-0">
-                        <div class="welcome-text">
-                            <h4>Nom de la Commune :{{commune.nom}}</h4>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a
-                    href="javascript:void()"
-                    data-toggle="modal"
-                    data-target="#add-category"
-                    class="btn btn-primary btn-event w-100"
-                  >
-                    <span class="align-middle"><i class="ti-plus"></i></span>
-                    Ajouter
-                  </a></li>
-                          
-                        </ol>
-                    </div>
-                </div>
-                <!-- row -->
-                
+<div class="content-body">
+  <div class="container-fluid">
+    <div class="row page-titles mx-0">
+      <div class="col-sm-6 p-md-0">
+        <div class="welcome-text">
+          <h4>Nom de la Commune :{{ commune.nom }}</h4>
+        </div>
+      </div>
+      <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+        <ol class="breadcrumb d-flex align-items-center gap-3">
+          <li class="breadcrumb-item m-0">
+            <button id="export-pdf" class="btn btn-danger btn-sm">Exporter en PDF</button>
+          </li>
+          <li class="breadcrumb-item m-0">
+            <button id="export-word" class="btn btn-success btn-sm">Exporter en Word</button>
+          </li>
+          <li class="breadcrumb-item m-0">
+            <a href="javascript:void(0)"
+               data-toggle="modal"
+               data-target="#add-category"
+               class="btn btn-primary btn-sm">
+              <span class="align-middle"><i class="ti-plus"></i></span>
+              Ajouter
+            </a>
+          </li>
+        </ol>
+      </div>
+    </div>
+    <!-- row -->
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="profile-statistics">
+              <div class="text-center mt-4 border-bottom-1 pb-3">
                 <div class="row">
-                    <div class="col-lg-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="profile-statistics">
-                                    <div class="text-center mt-4 border-bottom-1 pb-3">
-                                        <div class="row">
-                                            <div class="col">
-                                                <h3 class="m-b-0">{{nombre_centres}}</h3><span>Nombre de Centre de Formations</span>
-                                            </div>
-                                        </div>
-
-                                        
-                                     
-                                    </div>
-                                </div>
-                              
-                            </div>
-                        </div>
-                        <div class="">
-                          <div class="card">
-                            <div class="card-body">
-                              <h4 class="card-intro-title">Filtrer</h4>
-            
-                              <div
-                                class="form-inline d-flex flex-wrap align-items-end gap-3 my-3"
-                              >
-            
-                                <!-- Filtre par secteur -->
-                                <div class="form-group">
-                                  <label for="filtre-secteur" class="mr-2 mb-4 "
-                                    >Par secteur :</label
-                                  >
-                                  <select
-                                    id="filtre-secteur"
-                                    class="form-control mr-3 mb-4"
-                                    style="width: 200px"
-                                  >
-                                    <option value="">Tous</option>
-                                    {% for secteur in secteurs %}
-                                    <option value="{{ secteur.nom }}">
-                                      {{ secteur.nom }}
-                                    </option>
-                                    {% endfor %}
-                                  </select>
-                                </div>
-            
-                                <!-- Filtre par capacité -->
-                                <div class="form-group">
-                                  <label for="filtre-capacite" class="mr-2 "
-                                    >Capacité max :</label
-                                  >
-                                  <input
-                                    type="number"
-                                    id="filtre-capacite"
-                                    class="form-control"
-                                    placeholder="Ex: 100"
-                                    style="width: 120px"
-                                  />
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-           
-
-
-            </div>
-                    </div>
-                    
-                    <div class="col-lg-8">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="profile-tab">
-                                    <div class="custom-tab-1">
-                                        <ul class="nav nav-tabs">
-                                            <li class="nav-item"><a href="#my-posts" data-toggle="tab" class="nav-link active show">Liste des centres</a>
-                                            </li>
-                                           
-                                        </ul>
-                                        <div class="tab-content">
-                                             <div class="card-body">
-                          <div class="table-responsive">
-                            <table
-                              id="example"
-                              class="display"
-                              style="min-width: 845px"
-                            >
-                              <thead>
-                                <tr 
-                                  data-secteur="{{ centre.secteurs.all.0.nom|default:'' }}"
-                                  data-capacite="{{ centre.capacite_max }}">
-                                  <th>Intitule</th>
-                                  <th>Sigle</th>
-                                  <th>Adresse</th>
-                                  <th>Capacité</th>
-                                  <th>telephone</th>
-                                  <th>Commune</th>
-                                  <th>Action</th>
-                                </tr>
-                              </thead>
-
-                              <tbody id="tableau-centres">
-                                {% for centre in centres %}
-                                <tr
-                                  data-commune="{{ centre.commune.nom }}"
-                                  data-secteur="{{ centre.secteurs.all.0.nom|default:'' }}"
-                                  data-capacite="{{ centre.capacite_max }}"
-                                >
-                                  <td> <a
-                                    href="{% url 'centre_detail' centre.pk %}"
-                                  >{{centre.intitule}}</a></td>
-                                  <td>{{centre.sigle}}</td>
-                                  <td>{{centre.adresse}}</td>
-                                  <td>{{centre.capacite_max}}</td>
-                                  <td>{{centre.telephone}}</td>
-                                  <td>{{centre.commune.nom}}</td>
-                                    <td> Action</td>
-
-                                </tr>
-                                {% empty %}
-        <tr>
-            <td colspan="7" >Aucun centre trouvé dans cette région.</td>
-        </tr>
-                                {% endfor %}
-                              </tbody>
-                              <tfoot>
-                                <tr>
-                                  <th>Intitule</th>
-                                  <th>Sigle</th>
-                                  <th>Adresse</th>
-                                  <th>Capacité</th>
-                                  <th>telephone</th>
-                                  <th>Commune</th>
-                                    <th>Action</th>
-                                </tr>
-                              </tfoot>
-                            </table>
-                          </div>
-                        </div><div class="modal fade none-border" id="add-category">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h4 class="modal-title">
-                      <strong>Ajout Centre Formation</strong>
-                    </h4>
-                  </div>
-                  <div class="modal-body">
-                    <form
-                      method="post"
-                      id="step-form-horizontal"
-                      class="step-form-horizontal"
-                      action="{% url 'commune_detail' pk=commune.pk %}"
-                    >
-                      {% csrf_token %}
-                      <div>
-                        <h4>Centre de Formation</h4>
-                        <section>
-                          <div class="row">
-                            <div class="col-lg-6 mb-4">
-                              <div class="form-group">
-                                <label
-                                  class="text-label"
-                                  for="{{ form_centre.secteurs.id_for_label }}"
-                                >
-                                  Secteurs
-                                </label>
-                                {{ form_centre.secteurs }} {% if form_centre.secteurs.errors %}
-                                <div class="text-danger mt-1">
-                                  {% for error in form_centre.secteurs.errors %}
-                                  <small>{{ error }}</small><br />
-                                  {% endfor %}
-                                </div>
-                                {% endif %}
-                              </div>
-                            </div>
-
-                            <div class="col-lg-6 mb-4">
-                              <div class="form-group">
-                                <label
-                                  class="text-label"
-                                  for="{{ form_centre.public_cibles.id_for_label }}"
-                                >
-                                  Publics cibles
-                                </label>
-                                {{ form_centre.public_cibles }} {% if form_centre.public_cibles.errors %}
-                                <div class="text-danger mt-1">
-                                  {% for error in form_centre.public_cibles.errors %}
-                                  <small>{{ error }}</small><br />
-                                  {% endfor %}
-                                </div>
-                                {% endif %}
-                              </div>
-                            </div>
-
-                            <div class="col-lg-12 mb-4">
-                              <div class="form-group">
-                                <label
-                                  class="text-label"
-                                  for="{{ form_centre.commune.id_for_label }}"
-                                >
-                                  Commune
-                                </label>
-                                {{ form_centre.commune }} {% if form_centre.commune.errors %}
-                                <div class="text-danger mt-1">
-                                  {% for error in form_centre.commune.errors %}
-                                  <small>{{ error }}</small><br />
-                                  {% endfor %}
-                                </div>
-                                {% endif %}
-                              </div>
-                            </div>
-
-                            <div class="col-lg-12 mb-4">
-                              <div class="form-group">
-                                <label
-                                  class="text-label"
-                                  for="{{ form_centre.intitule.id_for_label }}"
-                                >
-                                  Intitulé
-                                </label>
-                                {{ form_centre.intitule }} {% if form_centre.intitule.errors %}
-                                <div class="text-danger mt-1">
-                                  {% for error in form_centre.intitule.errors %}
-                                  <small>{{ error }}</small><br />
-                                  {% endfor %}
-                                </div>
-                                {% endif %}
-                              </div>
-                            </div>
-
-                            <div class="col-lg-12 mb-4">
-                              <div class="form-group">
-                                <label
-                                  class="text-label"
-                                  for="{{ form_centre.sigle.id_for_label }}"
-                                >
-                                  Sigle
-                                </label>
-                                {{ form_centre.sigle }} {% if form_centre.sigle.errors %}
-                                <div class="text-danger mt-1">
-                                  {% for error in form_centre.sigle.errors %}
-                                  <small>{{ error }}</small><br />
-                                  {% endfor %}
-                                </div>
-                                {% endif %}
-                              </div>
-                            </div>
-
-                            <div class="col-lg-12 mb-4">
-                              <div class="form-group">
-                                <label
-                                  class="text-label"
-                                  for="{{ form_centre.capacite_max.id_for_label }}"
-                                >
-                                  Capacité max d'accueil/jours
-                                </label>
-                                {{ form_centre.capacite_max }} {% if form_centre.capacite_max.errors %}
-                                <div class="text-danger mt-1">
-                                  {% for error in form_centre.capacite_max.errors %}
-                                  <small>{{ error }}</small><br />
-                                  {% endfor %}
-                                </div>
-                                {% endif %}
-                              </div>
-                            </div>
-
-                            <div class="col-lg-12 mb-4">
-                              <div class="form-group">
-                                <label
-                                  class="text-label"
-                                  for="{{ form_centre.telephone.id_for_label }}"
-                                >
-                                  Téléphone
-                                </label>
-                                {{ form_centre.telephone }} 
-                                {% if form_centre.telephone.errors %}
-                                <div class="text-danger mt-1">
-                                  {% for error in form_centre.telephone.errors %}
-                                  <small>{{ error }}</small><br />
-                                  {% endfor %}
-                                </div>
-                                {% endif %}
-                              </div>
-                            </div>
-
-                            <div class="col-lg-12 mb-4">
-                              <div class="form-group">
-                                <label
-                                  class="text-label"
-                                  for="{{ form_centre.email.id_for_label }}"
-                                >
-                                  Email
-                                </label>
-                                {{ form_centre.email }} {% if form_centre.email.errors %}
-                                <div class="text-danger mt-1">
-                                  {% for error in form_centre.email.errors %}
-                                  <small>{{ error }}</small><br />
-                                  {% endfor %}
-                                </div>
-                                {% endif %}
-                              </div>
-                            </div>
-
-                            <div class="col-lg-12 mb-4">
-                              <div class="form-group">
-                                <label
-                                  class="text-label"
-                                  for="{{ form_centre.adresse.id_for_label }}"
-                                >
-                                  Adresse
-                                </label>
-                                {{ form_centre.adresse }} {% if form_centre.adresse.errors %}
-                                <div class="text-danger mt-1">
-                                  {% for error in form_centre.adresse.errors %}
-                                  <small>{{ error }}</small><br />
-                                  {% endfor %}
-                                </div>
-                                {% endif %}
-                              </div>
-                            </div>
-                          </div>
-                        </section>
-
-                        <h4>Document administratif</h4>
-                        <section>
-                          <div class="row">
-                            {% for field in form_docs %}
-                            <div class="col-lg-12 mb-4">
-                              <div class="form-group">
-                                <label
-                                  for="{{ field.id_for_label }}"
-                                  class="text-label"
-                                >
-                                  {{ field.label }}
-                                </label>
-                                {{ field }} {% if field.errors %}
-                                <div class="text-danger mt-1">
-                                  {% for error in field.errors %}
-                                  <small>{{ error }}</small><br />
-                                  {% endfor %}
-                                </div>
-                                {% endif %}
-                              </div>
-                            </div>
-                            {% endfor %}
-                          </div>
-                        </section>
-
-                        <h4>Personne de Reference</h4>
-                        <section>
-                          <div class="row">
-                            {% for field in form_ref %}
-                            <div class="col-lg-12 mb-4">
-                              <div class="form-group">
-                                <label
-                                  for="{{ field.id_for_label }}"
-                                  class="text-label"
-                                >
-                                  {{ field.label }}
-                                </label>
-                                {{ field }} {% if field.errors %}
-                                <div class="text-danger mt-1">
-                                  {% for error in field.errors %}
-                                  <small>{{ error }}</small><br />
-                                  {% endfor %}
-                                </div>
-                                {% endif %}
-                              </div>
-                            </div>
-                            {% endfor %}
-                          </div>
-                        </section>
-                      </div>
-                    </form>
-                  </div>
-                  <div class="modal-footer">
-                    <!--<button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>-->
-                    <button
-                      type="button"
-                      class="btn btn-danger waves-effect waves-light save-category"
-                      data-bs-dismiss="modal"
-                    >
-                      Close
-                    </button>
+                  <div class="col">
+                    <h3 class="m-b-0">{{ nombre_centres }}</h3>
+                    <span>Nombre de Centre de Formations</span>
                   </div>
                 </div>
               </div>
             </div>
-                                     
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
-        <!--**********************************
+        <div class="">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-intro-title">Filtrer</h4>
+              <div class="d-flex flex-column gap-3">
+                <!-- Filtre par secteur -->
+                <div class="form-group">
+                  <label for="filtre-secteur" class="mb-2">Par secteur :</label>
+                  <select id="filtre-secteur" multiple>
+                    {% for secteur in secteurs %}<option value="{{ secteur.nom }}">{{ secteur.nom }}</option>{% endfor %}
+                  </select>
+                </div>
+                <!-- Filtre par capacité -->
+                <div class="form-group">
+                  <label for="filtre-capacite" class="mb-2">Capacité max :</label>
+                  <input type="number"
+                         id="filtre-capacite"
+                         class="form-control"
+                         placeholder="Ex: 100"
+                         style="width: 200px" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8">
+        <div class="card">
+          <div class="card-body">
+            <div class="profile-tab">
+              <div class="custom-tab-1">
+                <ul class="nav nav-tabs">
+                  <li class="nav-item">
+                    <a href="#my-posts" data-toggle="tab" class="nav-link active show">Liste des centres</a>
+                  </li>
+                </ul>
+                <div class="tab-content">
+                  <div class="card-body">
+                    <div class="table-responsive">
+                      <table id="example" class="display" style="min-width: 845px">
+                        <thead>
+                          <tr data-secteur="{{ centre.secteur.nom }}"
+                              data-capacite="{{ centre.capacite }}">
+                            <th>Intitule</th>
+                            <th>Sigle</th>
+                            <th>Adresse</th>
+                            <th>Capacité</th>
+                            <th>telephone</th>
+                            <th>Commune</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody id="tableau-centres">
+                          {% for centre in centres %}
+                            <tr data-commune="{{ centre.commune.nom }}"
+                                data-secteur="{{ centre.secteurs.all.0.nom|default:'' }}"
+                                data-capacite="{{ centre.capacite_max }}">
+                              <td>
+                                <a href="{% url 'centre_detail' centre.pk %}">{{ centre.intitule }}</a>
+                              </td>
+                              <td>{{ centre.sigle }}</td>
+                              <td>{{ centre.adresse }}</td>
+                              <td>{{ centre.capacite_max }}</td>
+                              <td>{{ centre.telephone }}</td>
+                              <td>{{ centre.commune.nom }}</td>
+                              <td>Action</td>
+                            </tr>
+                          {% empty %}
+                            <tr>
+                              <td colspan="7" class="align center">Aucun centre trouvé dans cette région.</td>
+                            </tr>
+                          {% endfor %}
+                        </tbody>
+                        <tfoot>
+                          <tr>
+                            <th>Intitule</th>
+                            <th>Sigle</th>
+                            <th>Adresse</th>
+                            <th>Capacité</th>
+                            <th>telephone</th>
+                            <th>Commune</th>
+                            <th>Action</th>
+                          </tr>
+                        </tfoot>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="modal fade none-border" id="add-category">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h4 class="modal-title">
+                            <strong>Ajout une commune</strong>
+                          </h4>
+                        </div>
+                        <div class="modal-body">
+                          <form method="post"
+                                id="step-form-horizontal"
+                                class="step-form-horizontal"
+                                action="{% url 'commune_detail' pk=commune.pk %}">
+                            {% csrf_token %}
+                            <div>
+                              <h4>Centre de Formation</h4>
+                              <section>
+                                <div class="row">
+                                  <div class="col-lg-6 mb-4">
+                                    <div class="form-group">
+                                      <label class="text-label" for="{{ form_centre.secteurs.id_for_label }}">Secteurs</label>
+                                      {{ form_centre.secteurs }}
+                                      {% if form_centre.secteurs.errors %}
+                                        <div class="text-danger mt-1">
+                                          {% for error in form_centre.secteurs.errors %}
+                                            <small>{{ error }}</small>
+                                            <br />
+                                          {% endfor %}
+                                        </div>
+                                      {% endif %}
+                                    </div>
+                                  </div>
+                                  <div class="col-lg-6 mb-4">
+                                    <div class="form-group">
+                                      <label class="text-label" for="{{ form_centre.public_cibles.id_for_label }}">Publics cibles</label>
+                                      {{ form_centre.public_cibles }}
+                                      {% if form_centre.public_cibles.errors %}
+                                        <div class="text-danger mt-1">
+                                          {% for error in form_centre.public_cibles.errors %}
+                                            <small>{{ error }}</small>
+                                            <br />
+                                          {% endfor %}
+                                        </div>
+                                      {% endif %}
+                                    </div>
+                                  </div>
+                                  <div class="col-lg-12 mb-4">
+                                    <div class="form-group">
+                                      <label class="text-label" for="{{ form_centre.commune.id_for_label }}">Commune</label>
+                                      {{ form_centre.commune }}
+                                      {% if form_centre.commune.errors %}
+                                        <div class="text-danger mt-1">
+                                          {% for error in form_centre.commune.errors %}
+                                            <small>{{ error }}</small>
+                                            <br />
+                                          {% endfor %}
+                                        </div>
+                                      {% endif %}
+                                    </div>
+                                  </div>
+                                  <div class="col-lg-12 mb-4">
+                                    <div class="form-group">
+                                      <label class="text-label" for="{{ form_centre.intitule.id_for_label }}">Intitulé</label>
+                                      {{ form_centre.intitule }}
+                                      {% if form_centre.intitule.errors %}
+                                        <div class="text-danger mt-1">
+                                          {% for error in form_centre.intitule.errors %}
+                                            <small>{{ error }}</small>
+                                            <br />
+                                          {% endfor %}
+                                        </div>
+                                      {% endif %}
+                                    </div>
+                                  </div>
+                                  <div class="col-lg-12 mb-4">
+                                    <div class="form-group">
+                                      <label class="text-label" for="{{ form_centre.sigle.id_for_label }}">Sigle</label>
+                                      {{ form_centre.sigle }}
+                                      {% if form_centre.sigle.errors %}
+                                        <div class="text-danger mt-1">
+                                          {% for error in form_centre.sigle.errors %}
+                                            <small>{{ error }}</small>
+                                            <br />
+                                          {% endfor %}
+                                        </div>
+                                      {% endif %}
+                                    </div>
+                                  </div>
+                                  <div class="col-lg-12 mb-4">
+                                    <div class="form-group">
+                                      <label class="text-label" for="{{ form_centre.capacite_max.id_for_label }}">Capacité max d'accueil/jours</label>
+                                      {{ form_centre.capacite_max }}
+                                      {% if form_centre.capacite_max.errors %}
+                                        <div class="text-danger mt-1">
+                                          {% for error in form_centre.capacite_max.errors %}
+                                            <small>{{ error }}</small>
+                                            <br />
+                                          {% endfor %}
+                                        </div>
+                                      {% endif %}
+                                    </div>
+                                  </div>
+                                  <div class="col-lg-12 mb-4">
+                                    <div class="form-group">
+                                      <label class="text-label" for="{{ form_centre.telephone.id_for_label }}">Téléphone</label>
+                                      {{ form_centre.telephone }}
+                                      {% if form_centre.telephone.errors %}
+                                        <div class="text-danger mt-1">
+                                          {% for error in form_centre.telephone.errors %}
+                                            <small>{{ error }}</small>
+                                            <br />
+                                          {% endfor %}
+                                        </div>
+                                      {% endif %}
+                                    </div>
+                                  </div>
+                                  <div class="col-lg-12 mb-4">
+                                    <div class="form-group">
+                                      <label class="text-label" for="{{ form_centre.email.id_for_label }}">Email</label>
+                                      {{ form_centre.email }}
+                                      {% if form_centre.email.errors %}
+                                        <div class="text-danger mt-1">
+                                          {% for error in  form_centre.email.errors %}
+                                            <small>{{ error }}</small>
+                                            <br />
+                                          {% endfor %}
+                                        </div>
+                                      {% endif %}
+                                    </div>
+                                  </div>
+                                  <div class="col-lg-12 mb-4">
+                                    <div class="form-group">
+                                      <label class="text-label" for="{{ form_centre.adresse.id_for_label }}">Adresse</label>
+                                      {{ form_centre.adresse }}
+                                      {% if form_centre.adresse.errors %}
+                                        <div class="text-danger mt-1">
+                                          {% for error in form_centre.adresse.errors %}
+                                            <small>{{ error }}</small>
+                                            <br />
+                                          {% endfor %}
+                                        </div>
+                                      {% endif %}
+                                    </div>
+                                  </div>
+                                </div>
+                              </section>
+                              <h4>Document administratif</h4>
+                              <section>
+                                <div class="row">
+                                  {% for field in form_docs %}
+                                    <div class="col-lg-12 mb-4">
+                                      <div class="form-group">
+                                        <label for="{{ field.id_for_label }}" class="text-label">{{ field.label }}</label>
+                                        {{ field }}
+                                        {% if field.errors %}
+                                          <div class="text-danger mt-1">
+                                            {% for error in field.errors %}
+                                              <small>{{ error }}</small>
+                                              <br />
+                                            {% endfor %}
+                                          </div>
+                                        {% endif %}
+                                      </div>
+                                    </div>
+                                  {% endfor %}
+                                </div>
+                              </section>
+                              <h4>Personne de Reference</h4>
+                              <section>
+                                <div class="row">
+                                  {% for field in form_ref %}
+                                    <div class="col-lg-12 mb-4">
+                                      <div class="form-group">
+                                        <label for="{{ field.id_for_label }}" class="text-label">{{ field.label }}</label>
+                                        {{ field }}
+                                        {% if field.errors %}
+                                          <div class="text-danger mt-1">
+                                            {% for error in field.errors %}
+                                              <small>{{ error }}</small>
+                                              <br />
+                                            {% endfor %}
+                                          </div>
+                                        {% endif %}
+                                      </div>
+                                    </div>
+                                  {% endfor %}
+                                </div>
+                              </section>
+                            </div>
+                          </form>
+                        </div>
+                        <div class="modal-footer">
+                          <!--<button type="button"
+        class="btn btn-default waves-effect"
+        data-dismiss="modal">Close</button>-->
+                          <button type="button"
+                                  class="btn btn-danger waves-effect waves-light save-category"
+                                  data-bs-dismiss="modal">Close</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--**********************************
             Content body end
-        ***********************************-->
-
-
-        <!--**********************************
+***********************************-->
+<!--**********************************
             Footer start
         ***********************************-->
-        <div class="footer">
-            <div class="copyright">
-                <p>Copyright © Designed &amp; Developed by <a href="#" target="_blank">Quixkit</a> 2019</p>
-            </div>
-        </div>
-        <!--**********************************
+<div class="footer">
+  <div class="copyright">
+    <p>
+      Copyright © Designed &amp; Developed by
+      <a href="#" target="_blank">Gilchrist KETTEGUIA</a> 2025
+    </p>
+  </div>
+</div>
+<!--**********************************
             Footer end
-        ***********************************-->
-
-        <!--**********************************
+***********************************-->
+<!--**********************************
            Support ticket button start
-        ***********************************-->
-
-        <!--**********************************
+***********************************-->
+<!--**********************************
            Support ticket button end
-        ***********************************-->
-
-        
-    </div>
-    <!--**********************************
+***********************************-->
+<!--**********************************
         Main wrapper end
-    ***********************************-->
-
-    <!--**********************************
+***********************************-->
+<!--**********************************
         Scripts
     ***********************************-->
-    <!-- Required vendors -->
+<!-- CDN nécessaires -->
+
+<!-- Assurez-vous d’avoir les bons scripts dans le HTML -->
 
 
 <script>
-function toggleCheckboxes(prefix) {
-  const checkboxes = document.querySelectorAll(`input[id^="${prefix}"]`);
-  const allChecked = Array.from(checkboxes).every(cb => cb.checked);
-  checkboxes.forEach(cb => cb.checked = !allChecked);
-}
+  // ✅ Récupérer les données injectées par Django
+  //const allCentres = {{ centres|json_script:"centres-data" }};
+  const allCentres = JSON.parse(document.getElementById("centres-data").textContent);
+
+  // 📄 Export PDF complet (tous les centres même non affichés)
+  document.getElementById("export-pdf").addEventListener("click", function () {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    // En-têtes
+    const headers = [["Nom", "Commune", "Capacité", "Secteur"]];
+
+    // Données
+    const rows = allCentres.map(c => [c.nom, c.commune, c.capacite, c.secteur]);
+
+    doc.autoTable({
+      head: headers,
+      body: rows,
+      startY: 20,
+      theme: "grid",
+      headStyles: { fillColor: [52, 58, 64] }
+    });
+
+    doc.save("tous_les_centres.pdf");
+  });
+
+  // 📄 Export Word complet
+  document.getElementById("export-word").addEventListener("click", async function () {
+    const {
+      Document, Packer, Paragraph, Table, TableRow, TableCell, TextRun
+    } = window.docx;
+
+    const headerCells = ["Nom", "Commune", "Capacité", "Secteur"].map(h =>
+      new TableCell({
+        children: [new Paragraph({ children: [new TextRun({ text: h, bold: true })] })],
+      })
+    );
+
+    const dataRows = allCentres.map(c =>
+      new TableRow({
+        children: [
+          new TableCell({ children: [new Paragraph(c.nom)] }),
+          new TableCell({ children: [new Paragraph(c.commune)] }),
+          new TableCell({ children: [new Paragraph(String(c.capacite))] }),
+          new TableCell({ children: [new Paragraph(c.secteur)] }),
+        ]
+      })
+    );
+
+    const doc = new Document({
+      sections: [
+        {
+          children: [
+            new Paragraph({ text: "Liste complète des centres", heading: "Heading1" }),
+            new Table({ rows: [new TableRow({ children: headerCells }), ...dataRows] })
+          ]
+        }
+      ]
+    });
+
+    const blob = await Packer.toBlob(doc);
+    saveAs(blob, "tous_les_centres.docx");
+  });
 </script>
 
+<!-- Inclure Choices.js -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Initialisation de Choices.js
+    const secteurSelect = document.getElementById("filtre-secteur");
+    const choicesSecteur = new Choices(secteurSelect, {
+      removeItemButton: true,
+      searchEnabled: true,
+      placeholderValue: "Choisir un ou plusieurs secteurs",
+      shouldSort: false,
+    });
 
+    // Ajout de l'écouteur pour déclencher un filtre
+    const capaciteInput = document.getElementById("filtre-capacite");
 
+    // Quand un filtre change
+    secteurSelect.addEventListener("change", appliquerFiltre);
+    capaciteInput.addEventListener("input", appliquerFiltre);
 
-    <script src="{% static 'vendor/global/global.min.js'%}"></script>
-    <script src="{% static 'js/quixnav-init.js'%}"></script>
-    <script src="{% static 'js/custom.min.js'%}"></script>
+    function appliquerFiltre() {
+      const secteurs = choicesSecteur.getValue(true); // Liste des secteurs sélectionnés
+      const capacite = capaciteInput.value;
 
-    <script src="{% static 'vendor/datatables/js/jquery.dataTables.min.js'%}"></script>
-    <script src="{% static 'js/plugins-init/datatables.init.js'%}"></script>
-    
+      console.log("Secteurs sélectionnés :", secteurs);
+      console.log("Capacité max :", capacite);
 
-    <script src="{% static 'vendor/jquery-steps/build/jquery.steps.min.js'%}"></script>
-    <script src="{% static 'vendor/jquery-validation/jquery.validate.min.js'%}"></script>
-    <!-- Form validate init -->
-    <script src="{% static 'js/plugins-init/jquery.validate-init.js'%}"></script>
-
-    <!-- Form step init -->
-    <script src="{% static 'js/plugins-init/jquery-steps-init.js'%}"></script>
-
+      // 👉 ici, tu peux envoyer une requête AJAX ou filtrer dynamiquement
+      // Exemple : fetch('/api/?secteurs=...&capacite=...')
+    }
+  });
+</script>
+<script>
+      function toggleCheckboxes(prefix) {
+        const checkboxes = document.querySelectorAll(`input[id^="${prefix}"]`);
+        const allChecked = Array.from(checkboxes).every((cb) => cb.checked);
+        checkboxes.forEach((cb) => (cb.checked = !allChecked));
+      }
+</script>
+<script src="{% static 'vendor/global/global.min.js'%}"></script>
+<script src="{% static 'js/quixnav-init.js'%}"></script>
+<script src="{% static 'js/custom.min.js'%}"></script>
+<script src="{% static 'vendor/datatables/js/jquery.dataTables.min.js'%}"></script>
+<script src="{% static 'js/plugins-init/datatables.init.js'%}"></script>
+<script src="{% static 'vendor/jquery-steps/build/jquery.steps.min.js'%}"></script>
+<script src="{% static 'vendor/jquery-validation/jquery.validate.min.js'%}"></script>
+<!-- Form validate init -->
+<script src="{% static 'js/plugins-init/jquery.validate-init.js'%}"></script>
+<!-- Form step init -->
+<script src="{% static 'js/plugins-init/jquery-steps-init.js'%}"></script>
 </body>
-
 </html>

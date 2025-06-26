@@ -1,314 +1,373 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Focus - Bootstrap Admin Dashboard</title>
+    <!-- Favicon icon -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="{% static 'images/acfpe.png' %}"
+    />
+    <link
+      href="{% static 'vendor/datatables/css/jquery.dataTables.min.css'%}"
+      rel="stylesheet"
+    />
+    <link href="{% static 'css/style.css'%}" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+  </head>
 
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Focus - Bootstrap Admin Dashboard </title>
-  <!-- Favicon icon -->
-  <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/acfpe.png' %}">
-  <link href="{% static 'vendor/datatables/css/jquery.dataTables.min.css'%}" rel="stylesheet" />
-  <link href="{% static 'css/style.css'%}" rel="stylesheet">
-
-</head>
-
-<body>
-
-  <!--*******************
+  <body>
+    <!--*******************
         Preloader start
     ********************-->
-  <div id="preloader">
-    <div class="sk-three-bounce">
-      <div class="sk-child sk-bounce1"></div>
-      <div class="sk-child sk-bounce2"></div>
-      <div class="sk-child sk-bounce3"></div>
+    <div id="preloader">
+      <div class="sk-three-bounce">
+        <div class="sk-child sk-bounce1"></div>
+        <div class="sk-child sk-bounce2"></div>
+        <div class="sk-child sk-bounce3"></div>
+      </div>
     </div>
-  </div>
-  <!--*******************
+    <!--*******************
         Preloader end
     ********************-->
 
-
-  <!--**********************************
+    <!--**********************************
         Main wrapper start
     ***********************************-->
-  <div id="main-wrapper">
-
-    <!--**********************************
+    <div id="main-wrapper">
+      <!--**********************************
             Nav header start
         ***********************************-->
-    <div class="nav-header">
-      <a href="{% url 'index' %}" class="brand-logo">
-        <img class="img-fluid w-40 rounded center" src="{% static 'images/acfpe.png' %}" alt="">
+      <div class="nav-header">
+        <a href="{% url 'index' %}" class="brand-logo">
+          <img
+            class="img-fluid w-40 rounded center"
+            src="{% static 'images/acfpe.png' %}"
+            alt=""
+          />
+        </a>
 
-      </a>
-
-      <div class="nav-control">
-        <div class="hamburger">
-          <span class="line"></span><span class="line"></span><span class="line"></span>
+        <div class="nav-control">
+          <div class="hamburger">
+            <span class="line"></span><span class="line"></span
+            ><span class="line"></span>
+          </div>
         </div>
       </div>
-    </div>
-    <!--**********************************
+      <!--**********************************
             Nav header end
         ***********************************-->
 
-    <!--**********************************
+      <!--**********************************
             Header start
         ***********************************-->
-    <div class="header">
-      <div class="header-content">
-        <nav class="navbar navbar-expand">
-          <div class="collapse navbar-collapse justify-content-between">
-            <div class="header-left">
-              <div class="search_bar dropdown">
-                <span class="search_icon p-3 c-pointer" data-toggle="dropdown">
-                  <i class="mdi mdi-magnify"></i>
-                </span>
-                <div class="dropdown-menu p-0 m-0">
-                  <form>
-                    <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-                  </form>
+      <div class="header">
+        <div class="header-content">
+          <nav class="navbar navbar-expand">
+            <div class="collapse navbar-collapse justify-content-between">
+              <div class="header-left">
+                <div class="search_bar dropdown">
+                  <span
+                    class="search_icon p-3 c-pointer"
+                    data-toggle="dropdown"
+                  >
+                    <i class="mdi mdi-magnify"></i>
+                  </span>
+                  <div class="dropdown-menu p-0 m-0">
+                    <form>
+                      <input
+                        class="form-control"
+                        type="search"
+                        placeholder="Search"
+                        aria-label="Search"
+                      />
+                    </form>
+                  </div>
                 </div>
               </div>
+
+              <ul class="navbar-nav header-right">
+                <li class="nav-item dropdown header-profile">
+                  <a
+                    class="nav-link"
+                    href="#"
+                    role="button"
+                    data-toggle="dropdown"
+                  >
+                    <i class="mdi mdi-account"></i>
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right">
+                    <a href="./page-login.html" class="dropdown-item">
+                      <i class="icon-key"></i>
+                      <span class="ml-2">Logout </span>
+                    </a>
+                  </div>
+                </li>
+              </ul>
             </div>
-
-            <ul class="navbar-nav header-right">
-
-              <li class="nav-item dropdown header-profile">
-                <a class="nav-link" href="#" role="button" data-toggle="dropdown">
-                  <i class="mdi mdi-account"></i>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right">
-
-                  </a>
-                  <a href="./page-login.html" class="dropdown-item">
-                    <i class="icon-key"></i>
-                    <span class="ml-2">Logout </span>
-                  </a>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </nav>
+          </nav>
+        </div>
       </div>
-    </div>
-    <!--**********************************
+      <!--**********************************
             Header end ti-comment-alt
         ***********************************-->
 
-    <!--**********************************
+      <!--**********************************
             Sidebar start
         ***********************************-->
-    <div class="quixnav">
-      <div class="quixnav-scroll">
-        <ul class="metismenu" id="menu">
-          <li class="nav-label first">Main Menu</li>
-          <li>
-            <a href="{% url 'index' %}" aria-expanded="false"><i class="bi bi-house "></i><span
-                class="nav-text">Acceuil</span></a>
-          </li>
+      <div class="quixnav">
+        <div class="quixnav-scroll">
+          <ul class="metismenu" id="menu">
+            <li class="nav-label first">Main Menu</li>
+            <li>
+              <a href="{% url 'index' %}" aria-expanded="false"
+                ><i class="bi bi-house"></i
+                ><span class="nav-text">Acceuil</span></a
+              >
+            </li>
 
-          <li>
-            <a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-map-marker"></i><span
-                class="nav-text">Localisation</span></a>
-            <ul aria-expanded="false">
-              <li><a href="{% url 'region' %}">Region</a></li>
-              <li><a href="{% url 'prefecture' %}">Prefecture</a></li>
-              <li>
-                <a href="{% url 'sous_prefecture' %}">Sous Prefecture</a>
-              </li>
-              <li>
-                <a href="{% url 'commune' %}">Commune / Arondissement</a>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="fa fa-wrench"></i><span
-                class="nav-text">Activité</span></a>
-            <ul aria-expanded="false">
-              <li><a href="{% url 'secteur' %}">Secteur</a></li>
-              <li><a href="{% url 'publiccible' %}">Publics Cible</a></li>
-            </ul>
-          </li>
+            <li>
+              <a
+                class="has-arrow"
+                href="javascript:void()"
+                aria-expanded="false"
+                ><i class="mdi mdi-map-marker"></i
+                ><span class="nav-text">Localisation</span></a
+              >
+              <ul aria-expanded="false">
+                <li><a href="{% url 'region' %}">Region</a></li>
+                <li><a href="{% url 'prefecture' %}">Prefecture</a></li>
+                <li>
+                  <a href="{% url 'sous_prefecture' %}">Sous Prefecture</a>
+                </li>
+                <li>
+                  <a href="{% url 'commune' %}">Commune / Arondissement</a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a
+                class="has-arrow"
+                href="javascript:void()"
+                aria-expanded="false"
+                ><i class="fa fa-wrench"></i
+                ><span class="nav-text">Activité</span></a
+              >
+              <ul aria-expanded="false">
+                <li><a href="{% url 'secteur' %}">Secteur</a></li>
+                <li><a href="{% url 'publiccible' %}">Publics Cible</a></li>
+              </ul>
+            </li>
 
-          <li>
-            <a href="{% url 'centre_formation' %}" aria-expanded="false"><i class="fa fa-graduation-cap"></i>
-              <span class="nav-text">Centre Formation</span></a>
-          </li>
-        </ul>
+            <li>
+              <a href="{% url 'centre_formation' %}" aria-expanded="false"
+                ><i class="fa fa-graduation-cap"></i>
+                <span class="nav-text">Centre Formation</span></a
+              >
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
-
-
-  </div>
-  <!--**********************************
+    <!--**********************************
             Sidebar end
         ***********************************-->
 
-  <!--**********************************
+    <!--**********************************
             Content body start
         ***********************************-->
-  <div class="content-body">
-    <div class="container-fluid">
-      <div class="row page-titles mx-0">
-        <div class="col-sm-6 p-md-0">
-          <div class="welcome-text">
-            <h4>Nom de la Souprefecture :{{sous_prefecture.nom}}</h4>
-          </div>
-        </div>
-        <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="javascript:void(0)">App</a></li>
-            <li class="breadcrumb-item active"><a href="javascript:void(0)">Profile</a></li>
-          </ol>
-        </div>
-      </div>
-      <!-- row -->
-
-      <div class="row">
-        <div class="col-lg-4">
-          <div class="card">
-            <div class="card-body">
-              <div class="profile-statistics">
-                <div class="text-center mt-4 border-bottom-1 pb-3">
-                  <div class="row">
-
-                    <div class="col">
-                      <span>Nombre de Centre de Formations</span>
-                      <h3 class="m-b-0">{{nombre_centres}}</h3>
-                    </div>
-                    <div class="col">
-                      <span>Nombre commune</span>
-                      <h3 class="m-b-0">{{nombre_communes}}</h3>
-                    </div>
-                
-                  </div>
-
-
-
-                </div>
-              </div>
-
+    <div class="content-body">
+      <div class="container-fluid">
+        <div class="row page-titles mx-0">
+          <div class="col-sm-6 p-md-0">
+            <div class="welcome-text">
+              <h4>Nom de la Souprefecture :{{sous_prefecture.nom}}</h4>
             </div>
           </div>
-          <div class="">
+          <div
+            class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex"
+          >
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item">
+                <a href="javascript:void(0)">App</a>
+              </li>
+              <li class="breadcrumb-item active">
+                <a href="javascript:void(0)">Profile</a>
+              </li>
+            </ol>
+          </div>
+        </div>
+        <!-- row -->
 
-
+        <div class="row">
+          <div class="col-lg-4">
             <div class="card">
               <div class="card-body">
-                <h4 class="card-intro-title">Filtrer</h4>
-
-                <div class="form-inline d-flex flex-wrap align-items-end gap-3 my-3">
-                  <!-- Filtre par commune -->
-                  <div class="form-group mb-3">
-                    <label for="filtre-commune" class="mr-2">Par commune :</label>
-                    <select id="filtre-commune" class="form-control mr-3" style="width: 200px">
-                      <option value="">Toutes</option>
-                      {% for commune in communes %}
-                      <option value="{{ commune.nom }}">
-                        {{ commune.nom }}
-                      </option>
-                      {% endfor %}
-                    </select>
-                  </div>
-
-                  <!-- Filtre par secteur -->
-                  <div class="form-group mb-3">
-                    <label for="filtre-secteur" class="mr-2">Par secteur :</label>
-                    <select id="filtre-secteur" class="form-control mr-3" style="width: 200px">
-                      <option value="">Tous</option>
-                      {% for secteur in secteurs %}
-                      <option value="{{ secteur.nom }}">
-                        {{ secteur.nom }}
-                      </option>
-                      {% endfor %}
-                    </select>
-                  </div>
-
-                  <!-- Filtre par capacité -->
-                  <div class="form-group">
-                    <label for="filtre-capacite" class="mr-2">Capacité max :</label>
-                    <input type="number" id="filtre-capacite" class="form-control" placeholder="Ex: 100"
-                      style="width: 120px" />
+                <div class="profile-statistics">
+                  <div class="text-center mt-4 border-bottom-1 pb-3">
+                    <div class="row">
+                      <div class="col">
+                        <span>Nombre de Centre de Formations</span>
+                        <h3 class="m-b-0">{{nombre_centres}}</h3>
+                      </div>
+                      <div class="col">
+                        <span>Nombre commune</span>
+                        <h3 class="m-b-0">{{nombre_communes}}</h3>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-
-
-
-
-
-          </div>
-        </div>
-
-        <div class="col-lg-8">
-          <div class="card">
-            <div class="card-body">
-              <div class="profile-tab">
-                <div class="custom-tab-1">
-                  <ul class="nav nav-tabs">
-                    <li class="nav-item"><a href="#my-posts" data-toggle="tab" class="nav-link active show">Liste des
-                        centres</a>
-                    </li>
-
-                  </ul>
-                  <div class="tab-content">
-                    <div class="card-body">
-                      <div class="table-responsive">
-                        <table id="example" class="display" style="min-width: 845px">
-                          <thead>
-                            <tr>
-                              <th>Intitule</th>
-                              <th>Sigle</th>
-                              <th>Adresse</th>
-                              <th>Capacité</th>
-                              <th>telephone</th>
-                              <th>Commune</th>
-                              <th>Action</th>
-                            </tr>
-                          </thead>
-
-                          <tbody id="tableau-centres">
-                            {% for centre in centres %}
-                            <tr data-commune="{{ centre.commune.nom }}"
-                              data-secteur="{{ centre.secteurs.all.0.nom|default:'' }}"
-                              data-capacite="{{ centre.capacite_max }}">
-                              <td> <a
-                                href="{% url 'centre_detail' centre.pk %}"
-                              >{{centre.intitule}} </a></td>
-                              <td>{{centre.sigle}}</td>
-                              <td>{{centre.adresse}}</td>
-                              <td>{{centre.capacite_max}}</td>
-                              <td>{{centre.telephone}}</td>
-                              <td>{{centre.commune.nom}}</td>
-                              <td> Action</td>
-
-                            </tr>
-                            {% empty %}
-                            <tr>
-                              <td colspan="7">Aucun centre trouvé dans cette région.</td>
-                            </tr>
-                            {% endfor %}
-                          </tbody>
-                          <tfoot>
-                            <tr>
-                              <th>Intitule</th>
-                              <th>Sigle</th>
-                              <th>Adresse</th>
-                              <th>Capacité</th>
-                              <th>telephone</th>
-                              <th>Commune</th>
-                              <th>Action</th>
-                            </tr>
-                          </tfoot>
-                        </table>
-                      </div>
+            <div class="">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-intro-title">Filtrer</h4>
+                  <div
+                    class="d-flex flex-column gap-3"
+                  >
+                    <!-- Commune -->
+                    <div class="form-group mb-3">
+                      <label for="filtre-commune" class="mr-2">Commune :</label>
+                      <select
+                        id="filtre-commune"
+                        class="form-control filtre-select"
+                        style="width: 200px"
+                      >
+                        {% for commune in communes %}
+                        <option value="{{ commune.id }}">
+                          {{ commune.nom }}
+                        </option>
+                        {% endfor %}
+                      </select>
                     </div>
 
+                    <!-- Secteur -->
+                    <div class="form-group mb-3">
+                      <label for="filtre-secteur" class="mr-2">Secteur :</label>
+                      <select
+                        id="filtre-secteur"
+                        class="form-control filtre-select"
+                        style="width: 200px"
+                        multiple
+                      >
+                        {% for secteur in secteurs %}
+                        <option value="{{ secteur.id }}">
+                          {{ secteur.nom }}
+                        </option>
+                        {% endfor %}
+                      </select>
+                    </div>
+
+                    <!-- Capacité -->
+                    <div class="form-group">
+                      <label for="filtre-capacite" class="mr-2"
+                        >Capacité max :</label
+                      >
+                      <input
+                        type="number"
+                        id="filtre-capacite"
+                        class="form-control"
+                        placeholder="Ex: 100"
+                        style="width: 120px"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-8">
+            <div class="card">
+              <div class="card-body">
+                <div class="profile-tab">
+                  <div class="custom-tab-1">
+                    <ul class="nav nav-tabs">
+                      <li class="nav-item">
+                        <a
+                          href="#my-posts"
+                          data-toggle="tab"
+                          class="nav-link active show"
+                          >Liste des centres</a
+                        >
+                      </li>
+                    </ul>
+                    <div class="tab-content">
+                      <div class="card-body">
+                        <div class="table-responsive">
+                          <table
+                            id="example"
+                            class="display"
+                            style="min-width: 845px"
+                          >
+                            <thead>
+                              <tr
+                                data-commune="{{ centre.commune.id }}"
+                                data-secteurs="{% for s in centre.secteurs.all %}{{ s.id }} {% endfor %}"
+                                data-capacite="{{ centre.capacite_max }}"
+                              >
+                                <th>Intitule</th>
+                                <th>Sigle</th>
+                                <th>Adresse</th>
+                                <th>Capacité</th>
+                                <th>telephone</th>
+                                <th>Commune</th>
+                                <th>Action</th>
+                              </tr>
+                            </thead>
+
+                            <tbody id="tableau-centres">
+                              {% for centre in centres %}
+                              <tr
+                                data-commune="{{ centre.commune.nom }}"
+                                data-secteur="{{ centre.secteurs.all.0.nom|default:'' }}"
+                                data-capacite="{{ centre.capacite_max }}"
+                              >
+                                <td>
+                                  <a href="{% url 'centre_detail' centre.pk %}"
+                                    >{{centre.intitule}}
+                                  </a>
+                                </td>
+                                <td>{{centre.sigle}}</td>
+                                <td>{{centre.adresse}}</td>
+                                <td>{{centre.capacite_max}}</td>
+                                <td>{{centre.telephone}}</td>
+                                <td>{{centre.commune.nom}}</td>
+                                <td>Action</td>
+                              </tr>
+                              {% empty %}
+                              <tr>
+                                <td colspan="7">
+                                  Aucun centre trouvé dans cette région.
+                                </td>
+                              </tr>
+                              {% endfor %}
+                            </tbody>
+                            <tfoot>
+                              <tr>
+                                <th>Intitule</th>
+                                <th>Sigle</th>
+                                <th>Adresse</th>
+                                <th>Capacité</th>
+                                <th>telephone</th>
+                                <th>Commune</th>
+                                <th>Action</th>
+                              </tr>
+                            </tfoot>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -317,63 +376,114 @@
         </div>
       </div>
     </div>
-  </div>
-  <!--**********************************
+    <!--**********************************
             Content body end
         ***********************************-->
 
-
-  <!--**********************************
+    <!--**********************************
             Footer start
         ***********************************-->
-  <div class="footer">
-    <div class="copyright">
-      <p>Copyright © Designed &amp; Developed by <a href="#" target="_blank">Quixkit</a> 2019</p>
-    </div>
-  </div>
-  <!--**********************************
+    <div class="footer">
+        <div class="copyright">
+          <p>
+            Copyright © Designed &amp; Developed by
+            <a href="#" target="_blank">Gilchrist KETTEGUIA</a> 2025
+          </p>
+        </div>
+      </div>
+    <!--**********************************
             Footer end
         ***********************************-->
 
-  <!--**********************************
+    <!--**********************************
            Support ticket button start
         ***********************************-->
 
-  <!--**********************************
+    <!--**********************************
            Support ticket button end
         ***********************************-->
 
-
-  </div>
-  <!--**********************************
+    <!--**********************************
         Main wrapper end
     ***********************************-->
 
-  <!--**********************************
+    <!--**********************************
         Scripts
     ***********************************-->
-  <!-- Required vendors -->
+    <!-- Required vendors -->
 
+    <script>
+      // Initialisation de Choices.js
+      const selects = document.querySelectorAll(".filtre-select");
+      selects.forEach(
+        (select) =>
+          new Choices(select, { removeItemButton: true, searchEnabled: true })
+      );
 
-  <script>
-    function toggleCheckboxes(prefix) {
-      const checkboxes = document.querySelectorAll(`input[id^="${prefix}"]`);
-      const allChecked = Array.from(checkboxes).every(cb => cb.checked);
-      checkboxes.forEach(cb => cb.checked = !allChecked);
-    }
-  </script>
+      // Fonction de filtrage
+      function filtrerTableau() {
+        const commune = document.getElementById("filtre-commune").value;
+        const secteurs = Array.from(
+          document.getElementById("filtre-secteur").selectedOptions
+        ).map((o) => o.value.trim());
+        const capacite = document.getElementById("filtre-capacite").value;
 
+        const lignes = document.querySelectorAll("table tbody tr");
 
+        lignes.forEach((tr) => {
+          const communeId = tr.getAttribute("data-commune");
+          const secteursTr = tr.getAttribute("data-secteurs").trim().split(" ");
+          const capaciteTr = parseInt(tr.getAttribute("data-capacite")) || 0;
 
+          let visible = true;
 
-  <script src="{% static 'vendor/global/global.min.js'%}"></script>
-  <script src="{% static 'js/quixnav-init.js'%}"></script>
-  <script src="{% static 'js/custom.min.js'%}"></script>
+          // Filtre commune
+          if (commune && commune !== communeId) {
+            visible = false;
+          }
 
-  <script src="{% static 'vendor/datatables/js/jquery.dataTables.min.js'%}"></script>
-  <script src="{% static 'js/plugins-init/datatables.init.js'%}"></script>
+          // Filtre secteurs (au moins un secteur doit correspondre)
+          if (
+            secteurs.length > 0 &&
+            !secteurs.some((s) => secteursTr.includes(s))
+          ) {
+            visible = false;
+          }
 
+          // Filtre capacité
+          if (capacite && capaciteTr > parseInt(capacite)) {
+            visible = false;
+          }
 
-</body>
+          tr.style.display = visible ? "" : "none";
+        });
+      }
 
+      // Événements
+      document
+        .getElementById("filtre-commune")
+        .addEventListener("change", filtrerTableau);
+      document
+        .getElementById("filtre-secteur")
+        .addEventListener("change", filtrerTableau);
+      document
+        .getElementById("filtre-capacite")
+        .addEventListener("input", filtrerTableau);
+    </script>
+
+    <script>
+      function toggleCheckboxes(prefix) {
+        const checkboxes = document.querySelectorAll(`input[id^="${prefix}"]`);
+        const allChecked = Array.from(checkboxes).every((cb) => cb.checked);
+        checkboxes.forEach((cb) => (cb.checked = !allChecked));
+      }
+    </script>
+
+    <script src="{% static 'vendor/global/global.min.js'%}"></script>
+    <script src="{% static 'js/quixnav-init.js'%}"></script>
+    <script src="{% static 'js/custom.min.js'%}"></script>
+
+    <script src="{% static 'vendor/datatables/js/jquery.dataTables.min.js'%}"></script>
+    <script src="{% static 'js/plugins-init/datatables.init.js'%}"></script>
+  </body>
 </html>

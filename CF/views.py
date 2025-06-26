@@ -589,7 +589,6 @@ def commune_view(request, pk=None):
 def commune_detail(request, pk):
     commune = get_object_or_404(Commune, pk=pk)
 
-
     secteur_ids = list(map(int, request.GET.getlist("secteurs")))
     centres = CentreFormation.objects.filter(commune=commune)
     if secteur_ids:
@@ -641,7 +640,6 @@ def commune_detail(request, pk):
             "form_centre": form_centre,
             "form_docs": form_docs,
             "form_ref": form_ref,
-      
         },
     )
 
@@ -791,25 +789,43 @@ def publiccible_view(request, pk=None):
 
 
 def centre_formation_view(request):
-    # Filtres
-    commune_id = request.GET.get("commune")
-    secteur_id = request.GET.get("secteur")
 
     centres = CentreFormation.objects.all()
-    if commune_id:
-        centres = centres.filter(commune_id=commune_id)
-    if secteur_id:
-        centres = centres.filter(secteurs__id=secteur_id)
 
-    document = DocumentAdministratif.objects.all()
-    communes = Commune.objects.all()
-    secteurs = Secteur.objects.all()
+    # Export PDF
+    if request.GET.get("export") == "pdf":
+        html = render_to_string("pages/centre_formation_pdf.html", {"centres": centres})
+        pdf = pdfkit.from_string(html, False)
+        response = HttpResponse(pdf, content_type="application/pdf")
+        response["Content-Disposition"] = 'attachment; filename="centres_formation.pdf"'
+        return response
 
+    # Export Word
+    if request.GET.get("export") == "word":
+        doc = Document()
+        doc.add_heading("Liste des Centres de Formation", 0)
+        for centre in centres:
+            doc.add_heading(centre.intitule, level=1)
+            doc.add_paragraph(f"Commune : {centre.commune.nom}")
+            secteurs_text = ", ".join(s.nom for s in centre.secteurs.all())
+            doc.add_paragraph(f"Secteurs : {secteurs_text}")
+            doc.add_paragraph(f"Adresse : {centre.adresse}")
+            doc.add_paragraph(f"Téléphone : {centre.telephone}")
+            doc.add_paragraph("")
+        response = HttpResponse(
+            content_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+        )
+        response["Content-Disposition"] = (
+            'attachment; filename="centres_formation.docx"'
+        )
+        doc.save(response)
+        return response
+
+    # Formulaires
     form_centre = CentreFormationForm(request.POST or None)
     form_docs = DocumentAdministratifForm(request.POST or None, request.FILES or None)
     form_ref = PersonneReferenceForm(request.POST or None)
 
-    # Soumission des formulaires
     if request.method == "POST" and "submit_forms" in request.POST:
         if form_centre.is_valid() and form_docs.is_valid() and form_ref.is_valid():
             centre = form_centre.save()
@@ -824,38 +840,7 @@ def centre_formation_view(request):
             )
             return redirect("centre_formation")
 
-    # Export PDF
-    if request.GET.get("export") == "pdf":
-        html = render_to_string("pages/centre_formation_pdf.html", {"centres": centres})
-        pdf = pdfkit.from_string(html, False)
-        response = HttpResponse(pdf, content_type="application/pdf")
-        response["Content-Disposition"] = 'attachment; filename="centres_formation.pdf"'
-        return response
-
-    # Export Word
-    if request.GET.get("export") == "word":
-        doc = Document()
-        doc.add_heading("Liste des Centres de Formation", 0)
-
-        for centre in centres:
-            doc.add_heading(centre.intitule, level=1)
-            doc.add_paragraph(f"Commune : {centre.commune.nom}")
-            secteurs_text = ", ".join(s.nom for s in centre.secteurs.all())
-            doc.add_paragraph(f"Secteurs : {secteurs_text}")
-            doc.add_paragraph(f"Adresse : {centre.adresse}")
-            doc.add_paragraph(f"Téléphone : {centre.telephone}")
-            doc.add_paragraph("")
-
-        response = HttpResponse(
-            content_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-        )
-        response["Content-Disposition"] = (
-            'attachment; filename="centres_formation.docx"'
-        )
-        doc.save(response)
-        return response
-
-    # Affichage normal
+    # Contexte du template
     return render(
         request,
         "pages/cf.html",
@@ -864,9 +849,13 @@ def centre_formation_view(request):
             "form_docs": form_docs,
             "form_ref": form_ref,
             "centres": centres,
-            "document": document,
-            "communes": communes,
-            "secteurs": secteurs,
+            "document": DocumentAdministratif.objects.all(),
+            # Données de filtrage (utiles pour JS côté client)
+            "regions": Region.objects.all(),
+            "prefectures": Prefecture.objects.all(),
+            "sousprefectures": SousPrefecture.objects.all(),
+            "communes": Commune.objects.all(),
+            "secteurs": Secteur.objects.all(),
         },
     )
 

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Détails du Centre - PDF</title>
+    <style>
+        body { font-family: Arial, sans-serif; font-size: 13px; color: #333; }
+        h1, h2 { color: #003366; }
+        table { width: 100%; border-collapse: collapse; margin: 10px 0; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th { background-color: #f0f0f0; }
+        ul { padding-left: 20px; }
+    </style>
+</head>
+<body>
+
+    <h1>Détails du Centre de Formation</h1>
+
+    <table>
+        <tr><th>Intitulé</th><td>{{ centre.intitule }}</td></tr>
+        <tr><th>Sigle</th><td>{{ centre.sigle }}</td></tr>
+        <tr><th>Adresse</th><td>{{ centre.adresse }}</td></tr>
+        <tr><th>Téléphone</th><td>{{ centre.telephone }}</td></tr>
+        <tr><th>Email</th><td>{{ centre.email }}</td></tr>
+        <tr><th>Capacité maximale</th><td>{{ centre.capacite_max }}</td></tr>
+        <tr><th>Liste des activités</th><td>{{ centre.liste_activites }}</td></tr>
+        <tr><th>Activités populaires</th><td>{{ centre.activites_populaires }}</td></tr>
+        <tr>
+            <th>Secteurs</th>
+            <td>
+                {% for secteur in secteurs %}
+                    {{ secteur.nom }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <th>Publics Cibles</th>
+            <td>
+                {% for p in publics_cibles %}
+                    {{ p.nom }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            </td>
+        </tr>
+    </table>
+
+    <h2>Localisation Administrative</h2>
+    <table>
+        <tr><th>Commune</th><td>{{ commune.nom }}</td></tr>
+        <tr><th>Sous-préfecture</th><td>{{ sous_prefecture.nom }}</td></tr>
+        <tr><th>Préfecture</th><td>{{ prefecture.nom }}</td></tr>
+        <tr><th>Région</th><td>{{ region.nom }}</td></tr>
+    </table>
+
+    <h2>Documents Administratifs</h2>
+    <table>
+        <tr><th>Contrat de bail</th><td>{% if documents.contrat_bail %}Oui{% else %}Non{% endif %}</td></tr>
+        <tr><th>Titre foncier</th><td>{% if documents.titre_foncier %}Oui{% else %}Non{% endif %}</td></tr>
+        <tr><th>CNSS</th><td>{% if documents.immatriculation_cnss %}Oui{% else %}Non{% endif %}</td></tr>
+        <tr><th>ACFPE</th><td>{% if documents.immatriculation_acfpe %}Oui{% else %}Non{% endif %}</td></tr>
+        <tr><th>Acquittement fiscal</th><td>{% if documents.acquittement_fiscal %}Oui{% else %}Non{% endif %}</td></tr>
+        <tr><th>Agrément valide</th><td>{% if documents.agrement_valide %}Oui{% else %}Non{% endif %}</td></tr>
+        <tr><th>Autre document</th><td>{% if documents.autre_document %}Oui{% else %}Non{% endif %}</td></tr>
+    </table>
+
+    <h2>Personne de Référence</h2>
+    <table>
+        <tr><th>Nom</th><td>{{ personne_reference.nom }}</td></tr>
+        <tr><th>Prénom</th><td>{{ personne_reference.prenom }}</td></tr>
+        <tr><th>Téléphone</th><td>{{ personne_reference.telephone }}</td></tr>
+        <tr><th>Email</th><td>{{ personne_reference.email|default:"-" }}</td></tr>
+        <tr><th>Fonction</th><td>{{ personne_reference.fonction_libre }}</td></tr>
+    </table>
+
+</body>
+</html>
