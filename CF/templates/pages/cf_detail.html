@@ -286,7 +286,7 @@
           <div class="row page-titles mx-0">
             <div class="col-sm-6 p-md-0">
               <div class="welcome-text">
-                <h4>Nom du centre: {{ centre.intitule }}</h4>
+                <h4>DENOMINATION DU CENTRE: {{ centre.intitule }}</h4>
                 <p class="mb-0"></p>
               </div>
             </div>
@@ -513,7 +513,7 @@
                                 class="text-label"
                                 for="{{ form_centre.adresse.id_for_label }}"
                               >
-                                Adresse
+                                Quartier
                               </label>
                               {{ form_centre.adresse }} 
                               {% if form_centre.adresse.errors %}
@@ -633,11 +633,11 @@
           <div class="col-lg-8">
           <div class="card mb-4">
             <div class="card-header bg-primary text-white">
-              <h4 class="card-title mb-0">Informations générales du centre</h4>
+              <h4 class="card-title mb-0 text-white">FICHE D'INFORMATIONS DU CENTRE</h4>
             </div>
             <div class="card-body table-responsive">
-              <table class="table table-bordered table-striped">
-                <tbody>
+              <table class="table table-bordered table-striped text-black">
+                <tbody class="text-black" style="color: black;">
                   <tr>
                     <th>Intitulé</th>
                     <td>{{ centre.intitule }}</td>
@@ -647,7 +647,7 @@
                     <td>{{ centre.sigle }}</td>
                   </tr>
                   <tr>
-                    <th>Adresse</th>
+                    <th>Quartier</th>
                     <td>{{ centre.adresse }}</td>
                   </tr>
                   <tr>

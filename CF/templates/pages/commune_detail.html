@@ -26,12 +26,14 @@
         padding: 20px;
       }
     </style>
+    <link href="{% static 'dependances/choices.min.css' %}" rel="stylesheet"/>
+     <script src="{% static 'dependances/choices.min.js' %}"></script>
     <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/docx/7.7.0/docx.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/docx/7.7.0/docx.umd.min.js"></script>
 
   </head>
   <body>
@@ -621,70 +623,80 @@
 
 
 <script>
-  // ✅ Récupérer les données injectées par Django
-  //const allCentres = {{ centres|json_script:"centres-data" }};
-  const allCentres = JSON.parse(document.getElementById("centres-data").textContent);
-
-  // 📄 Export PDF complet (tous les centres même non affichés)
-  document.getElementById("export-pdf").addEventListener("click", function () {
+  // 📄 Export PDF
+  document.getElementById("export-pdf").addEventListener("click", async function () {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
 
-    // En-têtes
-    const headers = [["Nom", "Commune", "Capacité", "Secteur"]];
+    // Filtrer lignes visibles
+    const table = document.getElementById("example");
+    const visibleRows = Array.from(table.querySelectorAll("tbody tr"))
+      .filter(row => row.offsetParent !== null);
 
-    // Données
-    const rows = allCentres.map(c => [c.nom, c.commune, c.capacite, c.secteur]);
+    // Créer une table temporaire avec uniquement les lignes visibles
+    const tempTable = document.createElement("table");
+    tempTable.innerHTML = table.querySelector("thead").outerHTML;
+
+    const tbody = document.createElement("tbody");
+    visibleRows.forEach(row => tbody.appendChild(row.cloneNode(true)));
+    tempTable.appendChild(tbody);
 
     doc.autoTable({
-      head: headers,
-      body: rows,
+      html: tempTable,
       startY: 20,
       theme: "grid",
-      headStyles: { fillColor: [52, 58, 64] }
+      headStyles: { fillColor: [52, 58, 64] }, // Bootstrap dark
     });
 
-    doc.save("tous_les_centres.pdf");
+    doc.save("centres_filtrés.pdf");
   });
 
-  // 📄 Export Word complet
+  // 📄 Export Word
   document.getElementById("export-word").addEventListener("click", async function () {
     const {
       Document, Packer, Paragraph, Table, TableRow, TableCell, TextRun
     } = window.docx;
 
-    const headerCells = ["Nom", "Commune", "Capacité", "Secteur"].map(h =>
+    const table = document.getElementById("example");
+
+    // En-tête
+    const headerCells = Array.from(table.querySelectorAll("thead th")).map(th =>
       new TableCell({
-        children: [new Paragraph({ children: [new TextRun({ text: h, bold: true })] })],
+        children: [new Paragraph({ children: [new TextRun(th.innerText)] })],
       })
     );
 
-    const dataRows = allCentres.map(c =>
-      new TableRow({
-        children: [
-          new TableCell({ children: [new Paragraph(c.nom)] }),
-          new TableCell({ children: [new Paragraph(c.commune)] }),
-          new TableCell({ children: [new Paragraph(String(c.capacite))] }),
-          new TableCell({ children: [new Paragraph(c.secteur)] }),
-        ]
-      })
-    );
+    // Lignes visibles
+    const visibleRows = Array.from(table.querySelectorAll("tbody tr"))
+      .filter(row => row.offsetParent !== null);
+
+    const dataRows = visibleRows.map(row => {
+      const cells = Array.from(row.querySelectorAll("td")).map(td =>
+        new TableCell({
+          children: [new Paragraph(td.innerText)],
+        })
+      );
+      return new TableRow({ children: cells });
+    });
 
     const doc = new Document({
       sections: [
         {
           children: [
-            new Paragraph({ text: "Liste complète des centres", heading: "Heading1" }),
-            new Table({ rows: [new TableRow({ children: headerCells }), ...dataRows] })
+            new Paragraph({ text: "Liste des centres filtrés", heading: "Heading1" }),
+            new Table({
+              rows: [new TableRow({ children: headerCells }), ...dataRows]
+            })
           ]
         }
       ]
     });
 
     const blob = await Packer.toBlob(doc);
-    saveAs(blob, "tous_les_centres.docx");
+    saveAs(blob, "centres_filtrés.docx");
   });
 </script>
+
 
 <!-- Inclure Choices.js -->
 <script>

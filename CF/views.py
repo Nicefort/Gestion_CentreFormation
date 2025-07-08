@@ -9,7 +9,6 @@ from django.template.loader import get_template
 from xhtml2pdf import pisa
 from django.db.models import Count
 import json
-from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import HttpResponse
 from django.template.loader import render_to_string
@@ -787,9 +786,7 @@ def publiccible_view(request, pk=None):
         },
     )
 
-
 def centre_formation_view(request):
-
     centres = CentreFormation.objects.all()
 
     # Export PDF
@@ -815,42 +812,60 @@ def centre_formation_view(request):
         response = HttpResponse(
             content_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
         )
-        response["Content-Disposition"] = (
-            'attachment; filename="centres_formation.docx"'
-        )
+        response["Content-Disposition"] = 'attachment; filename="centres_formation.docx"'
         doc.save(response)
         return response
 
     # Formulaires
     form_centre = CentreFormationForm(request.POST or None)
+    form_domaine = DomaineActiviteCapaciteForm(request.POST or None)
+    form_formateur = FormateurForm(request.POST or None)
     form_docs = DocumentAdministratifForm(request.POST or None, request.FILES or None)
     form_ref = PersonneReferenceForm(request.POST or None)
 
     if request.method == "POST" and "submit_forms" in request.POST:
-        if form_centre.is_valid() and form_docs.is_valid() and form_ref.is_valid():
+        if (
+            form_centre.is_valid()
+            and form_domaine.is_valid()
+            and form_formateur.is_valid()
+            and form_docs.is_valid()
+            and form_ref.is_valid()
+        ):
             centre = form_centre.save()
+
+            domaine = form_domaine.save(commit=False)
+            domaine.centre = centre
+            domaine.save()
+            form_domaine.save_m2m()
+
+            formateur = form_formateur.save(commit=False)
+            formateur.centre = centre
+            formateur.save()
+
             doc = form_docs.save(commit=False)
             doc.centre = centre
             doc.save()
+
             ref = form_ref.save(commit=False)
             ref.centre = centre
             ref.save()
-            messages.success(
-                request, "Les informations ont été enregistrées avec succès !"
-            )
-            return redirect("centre_formation")
 
-    # Contexte du template
+            messages.success(request, "Les informations ont été enregistrées avec succès !")
+            return redirect("centre_formation")
+        else:
+            messages.error(request, "Erreur dans les formulaires. Veuillez corriger les champs.")
+
     return render(
         request,
         "pages/cf.html",
         {
             "form_centre": form_centre,
+            "form_domaineActiviteCapacite": form_domaine,
+            "form_formateur": form_formateur,
             "form_docs": form_docs,
             "form_ref": form_ref,
             "centres": centres,
             "document": DocumentAdministratif.objects.all(),
-            # Données de filtrage (utiles pour JS côté client)
             "regions": Region.objects.all(),
             "prefectures": Prefecture.objects.all(),
             "sousprefectures": SousPrefecture.objects.all(),
@@ -865,6 +880,7 @@ def centre_detail(request, pk):
     centre = get_object_or_404(
         CentreFormation.objects.select_related(
             "commune__sous_prefecture__prefecture__region",
+            "domaine_activite_capacite",
             "document_administratif",
             "personne_reference",
         ).prefetch_related("secteurs", "public_cibles"),
@@ -914,11 +930,14 @@ def centre_detail(request, pk):
             return redirect("centre_formation")
 
         form_centre = CentreFormationForm(request.POST, instance=centre)
+        form_domaineActiviteCapacite = DomaineActiviteCapaciteForm(request.POST, instance=centre)
         form_docs = DocumentAdministratifForm(request.POST, request.FILES, instance=doc)
         form_ref = PersonneReferenceForm(request.POST, instance=ref)
 
         if form_centre.is_valid() and form_docs.is_valid() and form_ref.is_valid():
             form_centre.save()
+            form_domaineActiviteCapacite.instance.centre= centre
+            form_domaineActiviteCapacite.save()
             form_docs.instance.centre = centre
             form_docs.save()
             form_ref.instance.centre = centre
@@ -927,6 +946,7 @@ def centre_detail(request, pk):
             return redirect("centre_detail", pk=centre.pk)
     else:
         form_centre = CentreFormationForm(instance=centre)
+        form_domaineActiviteCapacite = DomaineActiviteCapaciteForm(instance=centre)
         form_docs = DocumentAdministratifForm(instance=doc)
         form_ref = PersonneReferenceForm(instance=ref)
 
@@ -936,6 +956,7 @@ def centre_detail(request, pk):
         {
             "centre": centre,
             "form_centre": form_centre,
+            "form_domaineActiviteCapacite": form_domaineActiviteCapacite,
             "form_docs": form_docs,
             "form_ref": form_ref,
             "commune": centre.commune,
@@ -980,7 +1001,7 @@ def index(request):
     total_centre = CentreFormation.objects.count()
 
     # ➕ Centres unisectoriels et multisectoriels
-    centres = CentreFormation.objects.annotate(nb_secteurs=Count("secteurs"))
+    centres = DomaineActiviteCapacite.objects.annotate(nb_secteurs=Count("secteurs"))
     total_centres_uni = centres.filter(nb_secteurs=1).count()
     total_centres_multi = centres.filter(nb_secteurs__gt=1).count()
 

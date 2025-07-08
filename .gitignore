@@ -1,0 +1,68 @@
+# 📁 Python
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.so
+
+# 📁 Virtual environment
+venv/
+env/
+ENV/
+.venv/
+.env/
+*.env
+
+# 🛠️ IDEs & éditeurs
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# 📂 Django/Migrations
+**/migrations/
+!*/migrations/__init__.py  # Garde le fichier d'init si nécessaire
+
+# 🗄️ Bases de données locales
+*.sqlite3
+db.sqlite3
+
+# 📦 Fichiers temporaires ou caches
+*.log
+*.pot
+*.py[cod]
+*.db
+*.mo
+*.swp
+.DS_Store
+Thumbs.db
+*.bak
+*.tmp
+
+# 📄 Fichiers de configuration sensibles
+*.secret
+*.key
+*.pem
+*.crt
+
+# ⚙️ Fichiers de déploiement auto-générés
+staticfiles/
+static/
+media/
+node_modules/
+dist/
+build/
+
+# 📊 Coverage et tests
+htmlcov/
+.coverage
+.tox/
+.nox/
+.coverage.*
+.cache
+.pytest_cache/
+
+# 📂 Exclure fichiers Excel, Word, exportations temporaires (optionnel)
+*.xlsx
+*.docx
+*.pdf
