@@ -172,7 +172,7 @@ class DomaineActiviteCapacite(models.Model):
     centre = models.OneToOneField(
         CentreFormation,
         on_delete=models.CASCADE,
-        related_name="domaine_activité_capacité"
+        related_name="domaine_activite_capacite"
     )
     annee_experience = models.PositiveIntegerField(default=0)
     secteurs = models.ManyToManyField(Secteur, related_name="centres")
@@ -230,7 +230,7 @@ class Formateur(models.Model):
         ('5-10', '5 à 10 ans'),
         ('10+', 'Plus de 10 ans'),
     ]
-    annees_experience_formateur = models.JSONField(default=list, blank=True)
+    experience_formateur = models.JSONField(default=list, blank=True)
 
     def __str__(self):
         return f"Formateur du centre {self.centre}"

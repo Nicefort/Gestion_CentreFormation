@@ -145,34 +145,45 @@ NIVEAU_CHOICES = [
 ]
 
 class FormateurForm(forms.ModelForm):
-    niveau_formateur = forms.MultipleChoiceField(
-        choices=[(n, n) for n in NIVEAU_CHOICES],
+    niveaux_formateur = forms.MultipleChoiceField(
+        choices=Formateur.NIVEAU_CHOICES,
         widget=forms.CheckboxSelectMultiple,
-        required=False,
-        label="Niveau des formateurs"
+        label="Niveaux du formateur",
+        required=True
     )
 
     experience_formateur = forms.MultipleChoiceField(
-        choices=[(e, e) for e in EXPERIENCE_CHOICES],
+        choices=Formateur.EXPERIENCE_CHOICES,
         widget=forms.CheckboxSelectMultiple,
-        required=False,
-        label="Années d'expérience"
+        label="Expérience du formateur",
+        required=True  # Laisse True si tu veux que ce champ soit obligatoire
     )
 
     class Meta:
         model = Formateur
         fields = [
-       
-            'nombre_formateur_permanant',
-            'nombre_formateur_nonpermanant',
-            'niveau_formateur',
+            'niveaux_formateur',
             'experience_formateur',
+            'nombre_formateur_permanant',
+            'nombre_formateur_nonpermanant'
         ]
 
-    def clean_niveau_formateur(self):
-        data = self.cleaned_data['niveau_formateur']
-        return data or []
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if self.instance and self.instance.pk:
+            self.fields['niveaux_formateur'].initial = self.instance.niveaux_formateur
+            self.fields['experience_formateur'].initial = self.instance.experience_formateur
 
     def clean_experience_formateur(self):
-        data = self.cleaned_data['experience_formateur']
-        return data or []
+        data = self.cleaned_data.get('experience_formateur')
+        if not data:
+            raise forms.ValidationError("Veuillez sélectionner au moins une option.")
+        return data
+
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+        instance.niveaux_formateur = self.cleaned_data['niveaux_formateur']
+        instance.experience_formateur = self.cleaned_data['experience_formateur']
+        if commit:
+            instance.save()
+        return instance

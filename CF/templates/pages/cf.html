@@ -537,7 +537,7 @@
                         </div>
                         <div class="col-lg-6 mb-4">
                           <div class="form-group">
-                            <label class="text-label" for="{{ form_centre.secteurs.id_for_label }}">Categorie</label>
+                            <label class="text-label" for="{{ form_centre.categorie.id_for_label }}">Categorie</label>
                             {{ form_centre.categorie }}
                             {% if form_centre.categorie.errors %}
                               <div class="text-danger mt-1">
@@ -597,6 +597,14 @@
                     <h4>Etat Physique du centre</h4>
                     <section>
                       <div class="row">
+                       
+                        <div class="col-lg-6 mb-4">
+                          <div class="form-group">
+                            <label for="{{ form_domaineActiviteCapacite.annee_experience.id_for_label }}">annee_experience</label>
+                            {{ form_domaineActiviteCapacite.annee_experience }}
+                          </div>
+                        </div>
+
                         <div class="col-lg-12 mb-4">
                           <div class="form-group">
                             <label for="{{ form_domaineActiviteCapacite.secteurs.id_for_label }}">Secteurs</label>
@@ -667,7 +675,7 @@
                     <section>
                       <div class="row">
                     
-                      
+                        <!-- Nombre formateurs permanents -->
                         <div class="col-lg-6 mb-4">
                           <div class="form-group">
                             <label class="text-label" for="{{ form_formateur.nombre_formateur_permanant.id_for_label }}">Nombre de formateurs permanents</label>
@@ -681,7 +689,8 @@
                             {% endif %}
                           </div>
                         </div>
-                      
+                    
+                        <!-- Nombre formateurs non permanents -->
                         <div class="col-lg-6 mb-4">
                           <div class="form-group">
                             <label class="text-label" for="{{ form_formateur.nombre_formateur_nonpermanant.id_for_label }}">Nombre de formateurs non permanents</label>
@@ -695,24 +704,26 @@
                             {% endif %}
                           </div>
                         </div>
-                      
-                        <div class="col-lg-12 mb-4">
+                    
+                        <!-- Niveaux du formateur -->
+                        <div class="col-lg-6 mb-4">
                           <div class="form-group">
-                            <label class="text-label">Niveau des formateurs</label>
-                            {{ form_formateur.niveau_formateur }}
-                            {% if form_formateur.niveau_formateur.errors %}
+                            <label class="text-label" for="{{ form_formateur.niveaux_formateur.id_for_label }}">Niveau Formateur</label>
+                            {{ form_formateur.niveaux_formateur }}
+                            {% if form_formateur.niveaux_formateur.errors %}
                               <div class="text-danger mt-1">
-                                {% for error in form_formateur.niveau_formateur.errors %}
+                                {% for error in form_formateur.niveaux_formateur.errors %}
                                   <small>{{ error }}</small><br>
                                 {% endfor %}
                               </div>
                             {% endif %}
                           </div>
                         </div>
-                      
-                        <div class="col-lg-12 mb-4">
+                    
+                        <!-- Expérience du formateur -->
+                        <div class="col-lg-6 mb-4">
                           <div class="form-group">
-                            <label class="text-label">Années d'expérience</label>
+                            <label class="text-label" for="{{ form_formateur.experience_formateur.id_for_label }}">Expérience Formateur</label>
                             {{ form_formateur.experience_formateur }}
                             {% if form_formateur.experience_formateur.errors %}
                               <div class="text-danger mt-1">
@@ -723,9 +734,10 @@
                             {% endif %}
                           </div>
                         </div>
+                    
                       </div>
-                      
                     </section>
+                    
                     <h4>Document administratif</h4>
                     <section>
                       <div class="row">

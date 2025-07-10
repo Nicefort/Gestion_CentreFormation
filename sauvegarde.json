@@ -1,0 +1,2892 @@
+[
+{
+  "model": "CF.region",
+  "pk": 1,
+  "fields": {
+    "numero": 1,
+    "nom": "PLATEAUX"
+  }
+},
+{
+  "model": "CF.region",
+  "pk": 2,
+  "fields": {
+    "numero": 2,
+    "nom": "EQUATEUR"
+  }
+},
+{
+  "model": "CF.region",
+  "pk": 3,
+  "fields": {
+    "numero": 3,
+    "nom": "YADE"
+  }
+},
+{
+  "model": "CF.region",
+  "pk": 4,
+  "fields": {
+    "numero": 4,
+    "nom": "KAGAS"
+  }
+},
+{
+  "model": "CF.region",
+  "pk": 5,
+  "fields": {
+    "numero": 5,
+    "nom": "FERTIT"
+  }
+},
+{
+  "model": "CF.region",
+  "pk": 6,
+  "fields": {
+    "numero": 6,
+    "nom": "HAUT-OUBANGUI"
+  }
+},
+{
+  "model": "CF.region",
+  "pk": 7,
+  "fields": {
+    "numero": 7,
+    "nom": "BAS-OUBANGUI"
+  }
+},
+{
+  "model": "CF.prefecture",
+  "pk": 1,
+  "fields": {
+    "nom": "BANGUI",
+    "region": 7
+  }
+},
+{
+  "model": "CF.prefecture",
+  "pk": 2,
+  "fields": {
+    "nom": "BASSE-KOTTO",
+    "region": 6
+  }
+},
+{
+  "model": "CF.prefecture",
+  "pk": 3,
+  "fields": {
+    "nom": "MBOMOU",
+    "region": 6
+  }
+},
+{
+  "model": "CF.prefecture",
+  "pk": 4,
+  "fields": {
+    "nom": "HAUT- MBOMOU",
+    "region": 6
+  }
+},
+{
+  "model": "CF.prefecture",
+  "pk": 5,
+  "fields": {
+    "nom": "BAMINGUI-BANGORAN",
+    "region": 5
+  }
+},
+{
+  "model": "CF.prefecture",
+  "pk": 6,
+  "fields": {
+    "nom": "HAUTE-KOTTO",
+    "region": 5
+  }
+},
+{
+  "model": "CF.prefecture",
+  "pk": 7,
+  "fields": {
+    "nom": "VAKAGA",
+    "region": 5
+  }
+},
+{
+  "model": "CF.prefecture",
+  "pk": 8,
+  "fields": {
+    "nom": "KEMO",
+    "region": 4
+  }
+},
+{
+  "model": "CF.prefecture",
+  "pk": 9,
+  "fields": {
+    "nom": "NANA-GRIBIZI",
+    "region": 4
+  }
+},
+{
+  "model": "CF.prefecture",
+  "pk": 10,
+  "fields": {
+    "nom": "OUAKA",
+    "region": 4
+  }
+},
+{
+  "model": "CF.prefecture",
+  "pk": 11,
+  "fields": {
+    "nom": "OUHAM-PENDE",
+    "region": 3
+  }
+},
+{
+  "model": "CF.prefecture",
+  "pk": 12,
+  "fields": {
+    "nom": "LIM-PENDE",
+    "region": 3
+  }
+},
+{
+  "model": "CF.prefecture",
+  "pk": 13,
+  "fields": {
+    "nom": "OUHAM",
+    "region": 3
+  }
+},
+{
+  "model": "CF.prefecture",
+  "pk": 14,
+  "fields": {
+    "nom": "OUHAM-FAFA",
+    "region": 3
+  }
+},
+{
+  "model": "CF.prefecture",
+  "pk": 15,
+  "fields": {
+    "nom": "SANGHA-MBAERE",
+    "region": 2
+  }
+},
+{
+  "model": "CF.prefecture",
+  "pk": 16,
+  "fields": {
+    "nom": "MAMBERE-KADEÏ",
+    "region": 2
+  }
+},
+{
+  "model": "CF.prefecture",
+  "pk": 17,
+  "fields": {
+    "nom": "MAMBERE",
+    "region": 2
+  }
+},
+{
+  "model": "CF.prefecture",
+  "pk": 18,
+  "fields": {
+    "nom": "NANA-MAMBERE",
+    "region": 2
+  }
+},
+{
+  "model": "CF.prefecture",
+  "pk": 19,
+  "fields": {
+    "nom": "OMBELLA-M'POKO",
+    "region": 1
+  }
+},
+{
+  "model": "CF.prefecture",
+  "pk": 20,
+  "fields": {
+    "nom": "LOBAYE",
+    "region": 1
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 1,
+  "fields": {
+    "nom": "BANGUI-FLEUVE",
+    "prefecture": 1
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 2,
+  "fields": {
+    "nom": "BANGUI-RAPIDE",
+    "prefecture": 1
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 3,
+  "fields": {
+    "nom": "BANGUI-KAGAS",
+    "prefecture": 1
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 4,
+  "fields": {
+    "nom": "BANGUI-CENTRE",
+    "prefecture": 1
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 5,
+  "fields": {
+    "nom": "MOBAYE",
+    "prefecture": 2
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 6,
+  "fields": {
+    "nom": "ZANGBA",
+    "prefecture": 2
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 7,
+  "fields": {
+    "nom": "KEMBE",
+    "prefecture": 2
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 8,
+  "fields": {
+    "nom": "SATEMA",
+    "prefecture": 2
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 9,
+  "fields": {
+    "nom": "ALINDAO",
+    "prefecture": 2
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 10,
+  "fields": {
+    "nom": "MINGALA",
+    "prefecture": 2
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 11,
+  "fields": {
+    "nom": "BANGASSOU",
+    "prefecture": 3
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 12,
+  "fields": {
+    "nom": "RAFAÏ",
+    "prefecture": 3
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 13,
+  "fields": {
+    "nom": "OUANGO",
+    "prefecture": 3
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 14,
+  "fields": {
+    "nom": "BAKOUMA",
+    "prefecture": 3
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 15,
+  "fields": {
+    "nom": "GAMBO",
+    "prefecture": 3
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 16,
+  "fields": {
+    "nom": "OBO",
+    "prefecture": 4
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 17,
+  "fields": {
+    "nom": "MBOKI",
+    "prefecture": 4
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 18,
+  "fields": {
+    "nom": "ZEMIO",
+    "prefecture": 4
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 19,
+  "fields": {
+    "nom": "DJEMAH",
+    "prefecture": 4
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 20,
+  "fields": {
+    "nom": "BAMBOUTI",
+    "prefecture": 4
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 21,
+  "fields": {
+    "nom": "NDELE",
+    "prefecture": 5
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 22,
+  "fields": {
+    "nom": "BAMINGUI",
+    "prefecture": 5
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 23,
+  "fields": {
+    "nom": "BRIA",
+    "prefecture": 6
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 24,
+  "fields": {
+    "nom": "YALINGA",
+    "prefecture": 6
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 25,
+  "fields": {
+    "nom": "OUADDA",
+    "prefecture": 6
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 26,
+  "fields": {
+    "nom": "OUANDJA-KOTTO",
+    "prefecture": 6
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 27,
+  "fields": {
+    "nom": "BIRAO",
+    "prefecture": 7
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 28,
+  "fields": {
+    "nom": "OUANDJA",
+    "prefecture": 7
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 29,
+  "fields": {
+    "nom": "OUANDA-DJALLE",
+    "prefecture": 7
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 30,
+  "fields": {
+    "nom": "AMDAFOCK",
+    "prefecture": 7
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 31,
+  "fields": {
+    "nom": "SIBUT",
+    "prefecture": 8
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 32,
+  "fields": {
+    "nom": "DEKOA",
+    "prefecture": 8
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 33,
+  "fields": {
+    "nom": "NDJOUKOU",
+    "prefecture": 8
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 34,
+  "fields": {
+    "nom": "MALA",
+    "prefecture": 8
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 35,
+  "fields": {
+    "nom": "KAGA-BANDORO",
+    "prefecture": 9
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 36,
+  "fields": {
+    "nom": "NANA-OUTA",
+    "prefecture": 9
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 37,
+  "fields": {
+    "nom": "MBRES",
+    "prefecture": 9
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 38,
+  "fields": {
+    "nom": "BAMBARI",
+    "prefecture": 10
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 39,
+  "fields": {
+    "nom": "GRIMARI",
+    "prefecture": 10
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 40,
+  "fields": {
+    "nom": "IPPY",
+    "prefecture": 10
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 41,
+  "fields": {
+    "nom": "BAKALA",
+    "prefecture": 10
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 42,
+  "fields": {
+    "nom": "KOUANGO",
+    "prefecture": 10
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 43,
+  "fields": {
+    "nom": "BOZOUM",
+    "prefecture": 11
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 44,
+  "fields": {
+    "nom": "BOCARANGA",
+    "prefecture": 11
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 45,
+  "fields": {
+    "nom": "KOUI",
+    "prefecture": 11
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 46,
+  "fields": {
+    "nom": "BOSSEMPTELE",
+    "prefecture": 11
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 47,
+  "fields": {
+    "nom": "NGAOUNDAYE",
+    "prefecture": 12
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 48,
+  "fields": {
+    "nom": "NDIM",
+    "prefecture": 12
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 49,
+  "fields": {
+    "nom": "KODI",
+    "prefecture": 12
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 50,
+  "fields": {
+    "nom": "TALEY",
+    "prefecture": 12
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 51,
+  "fields": {
+    "nom": "PAOUA",
+    "prefecture": 12
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 52,
+  "fields": {
+    "nom": "BOSSANGOA",
+    "prefecture": 13
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 53,
+  "fields": {
+    "nom": "NANA-BAKASSA",
+    "prefecture": 13
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 54,
+  "fields": {
+    "nom": "MARKOUNDA",
+    "prefecture": 13
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 55,
+  "fields": {
+    "nom": "NANGA-BOGUILA",
+    "prefecture": 13
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 56,
+  "fields": {
+    "nom": "BATANGAFO",
+    "prefecture": 14
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 57,
+  "fields": {
+    "nom": "BOUCA",
+    "prefecture": 14
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 58,
+  "fields": {
+    "nom": "SIDO",
+    "prefecture": 14
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 59,
+  "fields": {
+    "nom": "KABO",
+    "prefecture": 14
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 60,
+  "fields": {
+    "nom": "NOLA",
+    "prefecture": 15
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 61,
+  "fields": {
+    "nom": "SALO",
+    "prefecture": 15
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 62,
+  "fields": {
+    "nom": "BAYANGA",
+    "prefecture": 15
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 63,
+  "fields": {
+    "nom": "BAMBIO",
+    "prefecture": 15
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 64,
+  "fields": {
+    "nom": "BERBERATI",
+    "prefecture": 16
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 65,
+  "fields": {
+    "nom": "DEDE-MOKOUBA",
+    "prefecture": 16
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 66,
+  "fields": {
+    "nom": "SOSSO-NAKOMBO",
+    "prefecture": 16
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 67,
+  "fields": {
+    "nom": "GAMBOULA",
+    "prefecture": 16
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 68,
+  "fields": {
+    "nom": "CARNOT",
+    "prefecture": 17
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 69,
+  "fields": {
+    "nom": "GADZI",
+    "prefecture": 17
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 70,
+  "fields": {
+    "nom": "AMADA-GAZA",
+    "prefecture": 17
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 71,
+  "fields": {
+    "nom": "SENKPA-MBAERE",
+    "prefecture": 17
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 72,
+  "fields": {
+    "nom": "BOUAR",
+    "prefecture": 18
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 73,
+  "fields": {
+    "nom": "BAORO",
+    "prefecture": 18
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 74,
+  "fields": {
+    "nom": "BABOUA",
+    "prefecture": 18
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 75,
+  "fields": {
+    "nom": "ABBA",
+    "prefecture": 18
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 76,
+  "fields": {
+    "nom": "BOALI",
+    "prefecture": 19
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 77,
+  "fields": {
+    "nom": "BOGANGOLO",
+    "prefecture": 19
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 78,
+  "fields": {
+    "nom": "BOSSEMBELE",
+    "prefecture": 19
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 79,
+  "fields": {
+    "nom": "YALOKE",
+    "prefecture": 19
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 80,
+  "fields": {
+    "nom": "DAMARA",
+    "prefecture": 19
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 81,
+  "fields": {
+    "nom": "M'BAÏKI",
+    "prefecture": 20
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 82,
+  "fields": {
+    "nom": "MONGOUMBA",
+    "prefecture": 20
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 83,
+  "fields": {
+    "nom": "BODA",
+    "prefecture": 20
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 84,
+  "fields": {
+    "nom": "BOGANDA",
+    "prefecture": 20
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 85,
+  "fields": {
+    "nom": "MOBOMA",
+    "prefecture": 20
+  }
+},
+{
+  "model": "CF.sousprefecture",
+  "pk": 86,
+  "fields": {
+    "nom": "BOGANANGONE",
+    "prefecture": 20
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 1,
+  "fields": {
+    "nom": "BIMBO",
+    "sous_prefecture": 1
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 2,
+  "fields": {
+    "nom": "1er Arrondissement de BIMBO",
+    "sous_prefecture": 1
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 3,
+  "fields": {
+    "nom": "2ème Arrondissement de BIMBO",
+    "sous_prefecture": 1
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 4,
+  "fields": {
+    "nom": "2ème Arrondissement",
+    "sous_prefecture": 1
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 5,
+  "fields": {
+    "nom": "6ème Arrondissement de BANGUI",
+    "sous_prefecture": 1
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 6,
+  "fields": {
+    "nom": "1er Arrondissement de BANGUI",
+    "sous_prefecture": 2
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 7,
+  "fields": {
+    "nom": "7ème Arrondissement de BANGUI",
+    "sous_prefecture": 2
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 8,
+  "fields": {
+    "nom": "9ème Arrondissement de BANGUI",
+    "sous_prefecture": 2
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 9,
+  "fields": {
+    "nom": "8ème Arrondissement de BANGUI",
+    "sous_prefecture": 3
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 10,
+  "fields": {
+    "nom": "4ème Arrondissement de BANGUI",
+    "sous_prefecture": 3
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 11,
+  "fields": {
+    "nom": "Bégoua",
+    "sous_prefecture": 3
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 12,
+  "fields": {
+    "nom": "1er Arrondissement de Bégoua",
+    "sous_prefecture": 3
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 13,
+  "fields": {
+    "nom": "2ème Arrondissement de Bégoua",
+    "sous_prefecture": 3
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 14,
+  "fields": {
+    "nom": "3ème Arrondissement de BANGUI",
+    "sous_prefecture": 4
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 15,
+  "fields": {
+    "nom": "5èmeArrondissement de BANGUI",
+    "sous_prefecture": 4
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 16,
+  "fields": {
+    "nom": "MOBAYE",
+    "sous_prefecture": 5
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 17,
+  "fields": {
+    "nom": "MBELIMA",
+    "sous_prefecture": 5
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 18,
+  "fields": {
+    "nom": "OUAMBE",
+    "sous_prefecture": 6
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 19,
+  "fields": {
+    "nom": "YABONGO",
+    "sous_prefecture": 6
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 20,
+  "fields": {
+    "nom": "KEMBE",
+    "sous_prefecture": 7
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 21,
+  "fields": {
+    "nom": "MBOUI",
+    "sous_prefecture": 7
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 22,
+  "fields": {
+    "nom": "EWOU",
+    "sous_prefecture": 8
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 23,
+  "fields": {
+    "nom": "KOTTO-OUBANGUI",
+    "sous_prefecture": 8
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 24,
+  "fields": {
+    "nom": "ALINDAO",
+    "sous_prefecture": 9
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 25,
+  "fields": {
+    "nom": "BAKOU",
+    "sous_prefecture": 9
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 26,
+  "fields": {
+    "nom": "GUILIGUI",
+    "sous_prefecture": 9
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 27,
+  "fields": {
+    "nom": "YAMBELE",
+    "sous_prefecture": 9
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 28,
+  "fields": {
+    "nom": "BANGUI-KETTE",
+    "sous_prefecture": 9
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 29,
+  "fields": {
+    "nom": "SIRIKI",
+    "sous_prefecture": 10
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 30,
+  "fields": {
+    "nom": "SELIBA",
+    "sous_prefecture": 10
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 31,
+  "fields": {
+    "nom": "KOTTO",
+    "sous_prefecture": 10
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 32,
+  "fields": {
+    "nom": "BANGASSOU",
+    "sous_prefecture": 11
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 33,
+  "fields": {
+    "nom": "1er Arrondissement de BANGASSOU",
+    "sous_prefecture": 11
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 34,
+  "fields": {
+    "nom": "2ème Arrondissement de BANGASSOU",
+    "sous_prefecture": 11
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 35,
+  "fields": {
+    "nom": "3ème Arrondissement de BANGASSOU",
+    "sous_prefecture": 11
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 36,
+  "fields": {
+    "nom": "SAYO-NIAKARI",
+    "sous_prefecture": 11
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 37,
+  "fields": {
+    "nom": "VOUGBA-BALIFONDO",
+    "sous_prefecture": 11
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 38,
+  "fields": {
+    "nom": "ZANGANDOU-MADABAZOUMA",
+    "sous_prefecture": 11
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 39,
+  "fields": {
+    "nom": "RAFAÏ",
+    "sous_prefecture": 12
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 40,
+  "fields": {
+    "nom": "OUARRA",
+    "sous_prefecture": 12
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 41,
+  "fields": {
+    "nom": "OUANGO",
+    "sous_prefecture": 13
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 42,
+  "fields": {
+    "nom": "NGBANDINGA",
+    "sous_prefecture": 13
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 43,
+  "fields": {
+    "nom": "BAKOUMA",
+    "sous_prefecture": 14
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 44,
+  "fields": {
+    "nom": "GAMBO",
+    "sous_prefecture": 15
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 45,
+  "fields": {
+    "nom": "NGANDOU",
+    "sous_prefecture": 15
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 46,
+  "fields": {
+    "nom": "POMBOLO",
+    "sous_prefecture": 15
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 47,
+  "fields": {
+    "nom": "OBO",
+    "sous_prefecture": 16
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 48,
+  "fields": {
+    "nom": "MBOKI",
+    "sous_prefecture": 17
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 49,
+  "fields": {
+    "nom": "ZEMIO",
+    "sous_prefecture": 18
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 50,
+  "fields": {
+    "nom": "DJEMAH",
+    "sous_prefecture": 19
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 51,
+  "fields": {
+    "nom": "LILI",
+    "sous_prefecture": 20
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 52,
+  "fields": {
+    "nom": "DAR-EL KOUTI",
+    "sous_prefecture": 21
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 53,
+  "fields": {
+    "nom": "MBOLLO-KPATA",
+    "sous_prefecture": 21
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 54,
+  "fields": {
+    "nom": "VASSAKO",
+    "sous_prefecture": 22
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 55,
+  "fields": {
+    "nom": "BRIA",
+    "sous_prefecture": 23
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 56,
+  "fields": {
+    "nom": "1er Arrondissement de BRIA",
+    "sous_prefecture": 23
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 57,
+  "fields": {
+    "nom": "2ème Arrondissement de BRIA",
+    "sous_prefecture": 23
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 58,
+  "fields": {
+    "nom": "DABA-NYDOU",
+    "sous_prefecture": 23
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 59,
+  "fields": {
+    "nom": "DAHOU-MBOUTOU",
+    "sous_prefecture": 23
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 60,
+  "fields": {
+    "nom": "YALINGA",
+    "sous_prefecture": 24
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 61,
+  "fields": {
+    "nom": "OUADDA-MAÏKAGA",
+    "sous_prefecture": 25
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 62,
+  "fields": {
+    "nom": "OUANDJA-KOTTO",
+    "sous_prefecture": 26
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 63,
+  "fields": {
+    "nom": "RIDINA",
+    "sous_prefecture": 27
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 64,
+  "fields": {
+    "nom": "OUANDJA",
+    "sous_prefecture": 28
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 65,
+  "fields": {
+    "nom": "VOKOUMA",
+    "sous_prefecture": 29
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 66,
+  "fields": {
+    "nom": "AMDAFOCK",
+    "sous_prefecture": 30
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 67,
+  "fields": {
+    "nom": "SIBUT",
+    "sous_prefecture": 31
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 68,
+  "fields": {
+    "nom": "NGOUMBELE",
+    "sous_prefecture": 31
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 69,
+  "fields": {
+    "nom": "DEKOA",
+    "sous_prefecture": 32
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 70,
+  "fields": {
+    "nom": "GUIFFA",
+    "sous_prefecture": 32
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 71,
+  "fields": {
+    "nom": "TILO",
+    "sous_prefecture": 32
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 72,
+  "fields": {
+    "nom": "GALABADJIA",
+    "sous_prefecture": 33
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 73,
+  "fields": {
+    "nom": "GALAFONDO",
+    "sous_prefecture": 33
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 74,
+  "fields": {
+    "nom": "MALA",
+    "sous_prefecture": 34
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 75,
+  "fields": {
+    "nom": "KAGA-BANDORO",
+    "sous_prefecture": 35
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 76,
+  "fields": {
+    "nom": "BOTTO",
+    "sous_prefecture": 35
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 77,
+  "fields": {
+    "nom": "NDENGA",
+    "sous_prefecture": 35
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 78,
+  "fields": {
+    "nom": "NGREVAÏ-PAMIA",
+    "sous_prefecture": 35
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 79,
+  "fields": {
+    "nom": "NANA-OUTA",
+    "sous_prefecture": 36
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 80,
+  "fields": {
+    "nom": "MBRES",
+    "sous_prefecture": 37
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 81,
+  "fields": {
+    "nom": "BAMBARI",
+    "sous_prefecture": 38
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 82,
+  "fields": {
+    "nom": "1er Arrondissement de BAMBARI",
+    "sous_prefecture": 38
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 83,
+  "fields": {
+    "nom": "2ème Arrondissement de BAMBARI",
+    "sous_prefecture": 38
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 84,
+  "fields": {
+    "nom": "DANGA-GBOUDOU",
+    "sous_prefecture": 38
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 85,
+  "fields": {
+    "nom": "HAUTE-BAÏDOU",
+    "sous_prefecture": 38
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 86,
+  "fields": {
+    "nom": "OUROU-DJAFOUN",
+    "sous_prefecture": 38
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 87,
+  "fields": {
+    "nom": "PLADAMA-OUAKA",
+    "sous_prefecture": 38
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 88,
+  "fields": {
+    "nom": "NGOUGBIA",
+    "sous_prefecture": 38
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 89,
+  "fields": {
+    "nom": "GRIMARI",
+    "sous_prefecture": 39
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 90,
+  "fields": {
+    "nom": "KOBADJIA",
+    "sous_prefecture": 39
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 91,
+  "fields": {
+    "nom": "LISSA",
+    "sous_prefecture": 39
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 92,
+  "fields": {
+    "nom": "POUYAMBA",
+    "sous_prefecture": 39
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 93,
+  "fields": {
+    "nom": "IPPY",
+    "sous_prefecture": 40
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 94,
+  "fields": {
+    "nom": "YENGOU",
+    "sous_prefecture": 40
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 95,
+  "fields": {
+    "nom": "BAÏDOU-NGOUMBROU",
+    "sous_prefecture": 40
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 96,
+  "fields": {
+    "nom": "KOUDOU-BEGO",
+    "sous_prefecture": 41
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 97,
+  "fields": {
+    "nom": "KOUANGO (GAZAKO-YADA)",
+    "sous_prefecture": 42
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 98,
+  "fields": {
+    "nom": "COCHIO-TOULOU",
+    "sous_prefecture": 42
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 99,
+  "fields": {
+    "nom": "AZENGUE-MINDOU",
+    "sous_prefecture": 42
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 100,
+  "fields": {
+    "nom": "BOZOUM",
+    "sous_prefecture": 43
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 101,
+  "fields": {
+    "nom": "KOUAZO",
+    "sous_prefecture": 43
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 102,
+  "fields": {
+    "nom": "DANA-YERIN",
+    "sous_prefecture": 43
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 103,
+  "fields": {
+    "nom": "BIRVAN-BOLE",
+    "sous_prefecture": 43
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 104,
+  "fields": {
+    "nom": "DAN-GBABIRI",
+    "sous_prefecture": 43
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 105,
+  "fields": {
+    "nom": "BOCARANGA",
+    "sous_prefecture": 44
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 106,
+  "fields": {
+    "nom": "1er Arrondissement de BOCARANGA",
+    "sous_prefecture": 44
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 107,
+  "fields": {
+    "nom": "2ème Arrondissement de BOCARANGA",
+    "sous_prefecture": 44
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 108,
+  "fields": {
+    "nom": "PENDE",
+    "sous_prefecture": 44
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 109,
+  "fields": {
+    "nom": "LOURA",
+    "sous_prefecture": 44
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 110,
+  "fields": {
+    "nom": "KOUI (COMMNUNE D'ELEVAGE)",
+    "sous_prefecture": 45
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 111,
+  "fields": {
+    "nom": "BINON",
+    "sous_prefecture": 46
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 112,
+  "fields": {
+    "nom": "LIM",
+    "sous_prefecture": 47
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 113,
+  "fields": {
+    "nom": "DILOUKI",
+    "sous_prefecture": 47
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 114,
+  "fields": {
+    "nom": "YEME",
+    "sous_prefecture": 47
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 115,
+  "fields": {
+    "nom": "NDIM",
+    "sous_prefecture": 48
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 116,
+  "fields": {
+    "nom": "KODI (MANN)",
+    "sous_prefecture": 49
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 117,
+  "fields": {
+    "nom": "MOM",
+    "sous_prefecture": 50
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 118,
+  "fields": {
+    "nom": "PAOUA",
+    "sous_prefecture": 51
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 119,
+  "fields": {
+    "nom": "BIMBI",
+    "sous_prefecture": 51
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 120,
+  "fields": {
+    "nom": "MIA-PENDE",
+    "sous_prefecture": 51
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 121,
+  "fields": {
+    "nom": "BAH-BESSAR",
+    "sous_prefecture": 51
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 122,
+  "fields": {
+    "nom": "NANA-BARYA",
+    "sous_prefecture": 51
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 123,
+  "fields": {
+    "nom": "MALE",
+    "sous_prefecture": 51
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 124,
+  "fields": {
+    "nom": "BANH",
+    "sous_prefecture": 51
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 125,
+  "fields": {
+    "nom": "BOSSANGOA",
+    "sous_prefecture": 52
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 126,
+  "fields": {
+    "nom": "1er Arrondissement de BOSSANGOA",
+    "sous_prefecture": 52
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 127,
+  "fields": {
+    "nom": "2ème Arrondissement de BOSSANGOA",
+    "sous_prefecture": 52
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 128,
+  "fields": {
+    "nom": "KORO-MPOKO",
+    "sous_prefecture": 52
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 129,
+  "fields": {
+    "nom": "BEN-ZAMBE",
+    "sous_prefecture": 52
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 130,
+  "fields": {
+    "nom": "NDOROMBOLI",
+    "sous_prefecture": 52
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 131,
+  "fields": {
+    "nom": "OUHAM-BAC",
+    "sous_prefecture": 52
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 132,
+  "fields": {
+    "nom": "SOUMBE",
+    "sous_prefecture": 52
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 133,
+  "fields": {
+    "nom": "NANA-BAKASSA",
+    "sous_prefecture": 53
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 134,
+  "fields": {
+    "nom": "MARKOUNDA",
+    "sous_prefecture": 54
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 135,
+  "fields": {
+    "nom": "NANGA-BOGUILA",
+    "sous_prefecture": 55
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 136,
+  "fields": {
+    "nom": "BATANGAFO",
+    "sous_prefecture": 56
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 137,
+  "fields": {
+    "nom": "BEDE",
+    "sous_prefecture": 56
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 138,
+  "fields": {
+    "nom": "OUASSI",
+    "sous_prefecture": 56
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 139,
+  "fields": {
+    "nom": "HAMA",
+    "sous_prefecture": 56
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 140,
+  "fields": {
+    "nom": "BAKASSA",
+    "sous_prefecture": 56
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 141,
+  "fields": {
+    "nom": "BOUCA-BOBO",
+    "sous_prefecture": 57
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 142,
+  "fields": {
+    "nom": "OUHAM-FAFA",
+    "sous_prefecture": 57
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 143,
+  "fields": {
+    "nom": "FAFA-BOUNGOU",
+    "sous_prefecture": 57
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 144,
+  "fields": {
+    "nom": "LADY-GBAWI",
+    "sous_prefecture": 57
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 145,
+  "fields": {
+    "nom": "SIDO",
+    "sous_prefecture": 58
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 146,
+  "fields": {
+    "nom": "OUAKI",
+    "sous_prefecture": 59
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 147,
+  "fields": {
+    "nom": "KABO",
+    "sous_prefecture": 59
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 148,
+  "fields": {
+    "nom": "NOLA",
+    "sous_prefecture": 60
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 149,
+  "fields": {
+    "nom": "1er Arrondissement de NOLA",
+    "sous_prefecture": 60
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 150,
+  "fields": {
+    "nom": "2ème Arrondissement de NOLA",
+    "sous_prefecture": 60
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 151,
+  "fields": {
+    "nom": "BILOLO",
+    "sous_prefecture": 60
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 152,
+  "fields": {
+    "nom": "SALO",
+    "sous_prefecture": 61
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 153,
+  "fields": {
+    "nom": "YOBE-SANGHA",
+    "sous_prefecture": 62
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 154,
+  "fields": {
+    "nom": "MBAERE",
+    "sous_prefecture": 63
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 155,
+  "fields": {
+    "nom": "BERBERATI",
+    "sous_prefecture": 64
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 156,
+  "fields": {
+    "nom": "1er Arrondissement de BERBERATI",
+    "sous_prefecture": 64
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 157,
+  "fields": {
+    "nom": "2ème Arrondissement de BERBERATI",
+    "sous_prefecture": 64
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 158,
+  "fields": {
+    "nom": "3ème Arrondissement de BERBERATI",
+    "sous_prefecture": 64
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 159,
+  "fields": {
+    "nom": "BASSE-BATOURI",
+    "sous_prefecture": 64
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 160,
+  "fields": {
+    "nom": "OUAKANGA",
+    "sous_prefecture": 64
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 161,
+  "fields": {
+    "nom": "HAUTE-BATOURI (NANDOBO)",
+    "sous_prefecture": 64
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 162,
+  "fields": {
+    "nom": "BASSE-MAMBERE (BANIA)",
+    "sous_prefecture": 64
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 163,
+  "fields": {
+    "nom": "HAUTE-KADEÏ",
+    "sous_prefecture": 65
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 164,
+  "fields": {
+    "nom": "BASSE-KADEÏ",
+    "sous_prefecture": 66
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 165,
+  "fields": {
+    "nom": "BASSE-BOUMBE",
+    "sous_prefecture": 67
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 166,
+  "fields": {
+    "nom": "CARNOT",
+    "sous_prefecture": 68
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 167,
+  "fields": {
+    "nom": "1er Arrondissement de CARNOT",
+    "sous_prefecture": 68
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 168,
+  "fields": {
+    "nom": "2ème Arrondissement de CARNOT",
+    "sous_prefecture": 68
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 169,
+  "fields": {
+    "nom": "TOPIA",
+    "sous_prefecture": 69
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 170,
+  "fields": {
+    "nom": "MBALI",
+    "sous_prefecture": 69
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 171,
+  "fields": {
+    "nom": "HAUTE-BOUMBE",
+    "sous_prefecture": 70
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 172,
+  "fields": {
+    "nom": "SENKPA-MBAERE (MBOULA)",
+    "sous_prefecture": 71
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 173,
+  "fields": {
+    "nom": "BOUAR",
+    "sous_prefecture": 72
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 174,
+  "fields": {
+    "nom": "1er Arrondissement de BOUAR",
+    "sous_prefecture": 72
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 175,
+  "fields": {
+    "nom": "2ème Arrondissement de BOUAR",
+    "sous_prefecture": 72
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 176,
+  "fields": {
+    "nom": "DOAKA-KOURSOU",
+    "sous_prefecture": 72
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 177,
+  "fields": {
+    "nom": "BEA-NANA",
+    "sous_prefecture": 72
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 178,
+  "fields": {
+    "nom": "NIEM-YELEWA",
+    "sous_prefecture": 72
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 179,
+  "fields": {
+    "nom": "HERMAN-BROUSSE",
+    "sous_prefecture": 72
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 180,
+  "fields": {
+    "nom": "ZOTOUA-BANGUEREM",
+    "sous_prefecture": 72
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 181,
+  "fields": {
+    "nom": "GBAWI-TEDOUA",
+    "sous_prefecture": 73
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 182,
+  "fields": {
+    "nom": "YORO-SAMBA BOUNGOULOU",
+    "sous_prefecture": 73
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 183,
+  "fields": {
+    "nom": "BABOUA",
+    "sous_prefecture": 74
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 184,
+  "fields": {
+    "nom": "GAUDROT",
+    "sous_prefecture": 74
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 185,
+  "fields": {
+    "nom": "BINGUE",
+    "sous_prefecture": 74
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 186,
+  "fields": {
+    "nom": "KOUNDE",
+    "sous_prefecture": 74
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 187,
+  "fields": {
+    "nom": "FOH",
+    "sous_prefecture": 74
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 188,
+  "fields": {
+    "nom": "ABBA",
+    "sous_prefecture": 75
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 189,
+  "fields": {
+    "nom": "NADZI-BORO",
+    "sous_prefecture": 75
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 190,
+  "fields": {
+    "nom": "BOALI",
+    "sous_prefecture": 76
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 191,
+  "fields": {
+    "nom": "BOGANGOLO",
+    "sous_prefecture": 77
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 192,
+  "fields": {
+    "nom": "BOSSEMBELE",
+    "sous_prefecture": 78
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 193,
+  "fields": {
+    "nom": "LAMBI",
+    "sous_prefecture": 78
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 194,
+  "fields": {
+    "nom": "YALOKE",
+    "sous_prefecture": 79
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 195,
+  "fields": {
+    "nom": "GUEZELI",
+    "sous_prefecture": 79
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 196,
+  "fields": {
+    "nom": "COMMNUNE D'ELEVAGE",
+    "sous_prefecture": 79
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 197,
+  "fields": {
+    "nom": "DAMARA",
+    "sous_prefecture": 80
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 198,
+  "fields": {
+    "nom": "M'BAÏKI",
+    "sous_prefecture": 81
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 199,
+  "fields": {
+    "nom": "MBATA",
+    "sous_prefecture": 81
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 200,
+  "fields": {
+    "nom": "PISSA",
+    "sous_prefecture": 81
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 201,
+  "fields": {
+    "nom": "LESSE",
+    "sous_prefecture": 81
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 202,
+  "fields": {
+    "nom": "BOGONGO-GAZA",
+    "sous_prefecture": 81
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 203,
+  "fields": {
+    "nom": "NOLA",
+    "sous_prefecture": 81
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 204,
+  "fields": {
+    "nom": "BALELOKO",
+    "sous_prefecture": 81
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 205,
+  "fields": {
+    "nom": "MONGOUMBA",
+    "sous_prefecture": 82
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 206,
+  "fields": {
+    "nom": "BODA",
+    "sous_prefecture": 83
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 207,
+  "fields": {
+    "nom": "LOBAYE-NGOTTO",
+    "sous_prefecture": 83
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 208,
+  "fields": {
+    "nom": "BOGANDA",
+    "sous_prefecture": 84
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 209,
+  "fields": {
+    "nom": "MOBOMA",
+    "sous_prefecture": 85
+  }
+},
+{
+  "model": "CF.commune",
+  "pk": 210,
+  "fields": {
+    "nom": "BOUTELOSSI",
+    "sous_prefecture": 86
+  }
+},
+{
+  "model": "CF.secteur",
+  "pk": 1,
+  "fields": {
+    "nom": "BTP"
+  }
+},
+{
+  "model": "CF.secteur",
+  "pk": 2,
+  "fields": {
+    "nom": "AGRICULTURE"
+  }
+},
+{
+  "model": "CF.secteur",
+  "pk": 3,
+  "fields": {
+    "nom": "ELEVAGE"
+  }
+},
+{
+  "model": "CF.secteur",
+  "pk": 4,
+  "fields": {
+    "nom": "PÊCHE"
+  }
+},
+{
+  "model": "CF.secteur",
+  "pk": 5,
+  "fields": {
+    "nom": "ARTS ET CULTURE"
+  }
+},
+{
+  "model": "CF.secteur",
+  "pk": 6,
+  "fields": {
+    "nom": "MECANIQUE ET AJUSTAGE"
+  }
+},
+{
+  "model": "CF.secteur",
+  "pk": 7,
+  "fields": {
+    "nom": "ALIMENTATION"
+  }
+},
+{
+  "model": "CF.secteur",
+  "pk": 8,
+  "fields": {
+    "nom": "INFORMATIQUE & INTERNET"
+  }
+},
+{
+  "model": "CF.secteur",
+  "pk": 9,
+  "fields": {
+    "nom": "SANTE"
+  }
+},
+{
+  "model": "CF.secteur",
+  "pk": 10,
+  "fields": {
+    "nom": "METIERS VERTS"
+  }
+},
+{
+  "model": "CF.publiccible",
+  "pk": 1,
+  "fields": {
+    "nom": "Jeunes désœuvrés"
+  }
+},
+{
+  "model": "CF.publiccible",
+  "pk": 2,
+  "fields": {
+    "nom": "Jeunes déscolarisés"
+  }
+},
+{
+  "model": "CF.publiccible",
+  "pk": 3,
+  "fields": {
+    "nom": "Orphelins"
+  }
+},
+{
+  "model": "CF.publiccible",
+  "pk": 4,
+  "fields": {
+    "nom": "Veufs/veuves"
+  }
+},
+{
+  "model": "CF.publiccible",
+  "pk": 5,
+  "fields": {
+    "nom": "Personnes handicapées"
+  }
+},
+{
+  "model": "CF.publiccible",
+  "pk": 6,
+  "fields": {
+    "nom": "Étudiants"
+  }
+},
+{
+  "model": "CF.centreformation",
+  "pk": 1,
+  "fields": {
+    "intitule": "LBS PRO",
+    "sigle": "Nouvelle vision",
+    "categorie": "",
+    "commune": 2,
+    "adresse": "Benzvi",
+    "telephone": "871527",
+    "email": "oui@gmzil.com"
+  }
+},
+{
+  "model": "CF.centreformation",
+  "pk": 3,
+  "fields": {
+    "intitule": "SJKBD",
+    "sigle": "SKDS",
+    "categorie": "",
+    "commune": 19,
+    "adresse": "Beznvi",
+    "telephone": "ddd",
+    "email": "ssss@gmail.com"
+  }
+},
+{
+  "model": "CF.centreformation",
+  "pk": 4,
+  "fields": {
+    "intitule": "poin",
+    "sigle": "p",
+    "categorie": "",
+    "commune": 19,
+    "adresse": "sjscs",
+    "telephone": "ds",
+    "email": "sds@gmail.com"
+  }
+},
+{
+  "model": "CF.centreformation",
+  "pk": 5,
+  "fields": {
+    "intitule": "ni",
+    "sigle": "ni",
+    "categorie": "",
+    "commune": 15,
+    "adresse": "ss",
+    "telephone": "785878",
+    "email": "no@gmail.com"
+  }
+},
+{
+  "model": "CF.centreformation",
+  "pk": 6,
+  "fields": {
+    "intitule": "fddfdf",
+    "sigle": "ddfd",
+    "categorie": "",
+    "commune": 106,
+    "adresse": "fdfd",
+    "telephone": "dfdfd",
+    "email": "nimipdede@gmail.com"
+  }
+},
+{
+  "model": "CF.documentadministratif",
+  "pk": 1,
+  "fields": {
+    "centre": 1,
+    "contrat_bail": "documents/centre_LBS_PRO/centres_filtrés_2.docx",
+    "titre_foncier": "documents/centre_LBS_PRO/centre_poin_3.pdf",
+    "autre_document": "",
+    "immatriculation_cnss": "",
+    "immatriculation_acfpe": "",
+    "acquittement_fiscal": "",
+    "agrement_valide": ""
+  }
+},
+{
+  "model": "CF.documentadministratif",
+  "pk": 3,
+  "fields": {
+    "centre": 3,
+    "contrat_bail": "",
+    "titre_foncier": "",
+    "autre_document": "",
+    "immatriculation_cnss": "",
+    "immatriculation_acfpe": "",
+    "acquittement_fiscal": "",
+    "agrement_valide": ""
+  }
+},
+{
+  "model": "CF.documentadministratif",
+  "pk": 4,
+  "fields": {
+    "centre": 4,
+    "contrat_bail": "documents/centre_4/Nouveau_Document_Microsoft_Word.docx",
+    "titre_foncier": "documents/centre_poin/Budget_IFDS.doc",
+    "autre_document": "",
+    "immatriculation_cnss": "",
+    "immatriculation_acfpe": "",
+    "acquittement_fiscal": "",
+    "agrement_valide": ""
+  }
+},
+{
+  "model": "CF.documentadministratif",
+  "pk": 5,
+  "fields": {
+    "centre": 5,
+    "contrat_bail": "documents/centre_ni/code.html",
+    "titre_foncier": "",
+    "autre_document": "",
+    "immatriculation_cnss": "",
+    "immatriculation_acfpe": "",
+    "acquittement_fiscal": "",
+    "agrement_valide": ""
+  }
+},
+{
+  "model": "CF.documentadministratif",
+  "pk": 6,
+  "fields": {
+    "centre": 6,
+    "contrat_bail": "",
+    "titre_foncier": "",
+    "autre_document": "",
+    "immatriculation_cnss": "",
+    "immatriculation_acfpe": "",
+    "acquittement_fiscal": "",
+    "agrement_valide": ""
+  }
+},
+{
+  "model": "CF.personnereference",
+  "pk": 1,
+  "fields": {
+    "centre": 1,
+    "nom": "BAGAZA",
+    "prenom": "loulou",
+    "telephone": "871527",
+    "email": "oui@gmzil.com",
+    "fonction_libre": "Directeur"
+  }
+},
+{
+  "model": "CF.personnereference",
+  "pk": 3,
+  "fields": {
+    "centre": 3,
+    "nom": "ss",
+    "prenom": "ssd",
+    "telephone": "ddd",
+    "email": "ssss@gmail.com",
+    "fonction_libre": "pf"
+  }
+},
+{
+  "model": "CF.personnereference",
+  "pk": 4,
+  "fields": {
+    "centre": 4,
+    "nom": "sd",
+    "prenom": "dsd",
+    "telephone": "ds",
+    "email": "sds@gmail.com",
+    "fonction_libre": "dsd"
+  }
+},
+{
+  "model": "CF.personnereference",
+  "pk": 5,
+  "fields": {
+    "centre": 5,
+    "nom": "cdcd",
+    "prenom": "cdcccdz",
+    "telephone": "785878",
+    "email": "no@gmail.com",
+    "fonction_libre": "po"
+  }
+},
+{
+  "model": "CF.personnereference",
+  "pk": 6,
+  "fields": {
+    "centre": 6,
+    "nom": "dfdf",
+    "prenom": "dfdfd",
+    "telephone": "dfdfd",
+    "email": "nimipdede@gmail.com",
+    "fonction_libre": "ddf"
+  }
+}

@@ -787,6 +787,10 @@ def publiccible_view(request, pk=None):
     )
 
 def centre_formation_view(request):
+    print("🔍 Méthode requête :", request.method)
+    print("📦 POST data :", request.POST) 
+    print("🔍 Méthode requête :", request.method)
+    print("📦 POST data :", request.POST)
     centres = CentreFormation.objects.all()
 
     # Export PDF
@@ -823,7 +827,7 @@ def centre_formation_view(request):
     form_docs = DocumentAdministratifForm(request.POST or None, request.FILES or None)
     form_ref = PersonneReferenceForm(request.POST or None)
 
-    if request.method == "POST" and "submit_forms" in request.POST:
+    if request.method == "POST":
         if (
             form_centre.is_valid()
             and form_domaine.is_valid()
@@ -837,6 +841,7 @@ def centre_formation_view(request):
             domaine.centre = centre
             domaine.save()
             form_domaine.save_m2m()
+           
 
             formateur = form_formateur.save(commit=False)
             formateur.centre = centre
@@ -854,6 +859,11 @@ def centre_formation_view(request):
             return redirect("centre_formation")
         else:
             messages.error(request, "Erreur dans les formulaires. Veuillez corriger les champs.")
+            print("Erreurs validation centre :", form_centre.errors)
+            print("Erreurs validation domaine :", form_domaine.errors)
+            print("Erreurs validation formateur :", form_formateur.errors)
+            print("Erreurs validation docs :", form_docs.errors)
+            print("Erreurs validation ref :", form_ref.errors)
 
     return render(
         request,
@@ -883,7 +893,7 @@ def centre_detail(request, pk):
             "domaine_activite_capacite",
             "document_administratif",
             "personne_reference",
-        ).prefetch_related("secteurs", "public_cibles"),
+        ).prefetch_related("domaine_activite_capacite__secteurs", "domaine_activite_capacite__public_cibles"),
         pk=pk,
     )
 
@@ -963,8 +973,8 @@ def centre_detail(request, pk):
             "sous_prefecture": centre.commune.sous_prefecture,
             "prefecture": centre.commune.sous_prefecture.prefecture,
             "region": centre.commune.sous_prefecture.prefecture.region,
-            "secteurs": centre.secteurs.all(),
-            "publics_cibles": centre.public_cibles.all(),
+            "secteurs": centre.domaine_activite_capacite.secteurs.all(),
+            "publics_cibles": centre.domaine_activite_capacite.public_cibles.all() if hasattr(centre, "domaine_activite_capacite") else [],
             "documents": doc,
             "personne_reference": ref,
         },
