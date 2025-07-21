@@ -175,7 +175,7 @@ class DomaineActiviteCapacite(models.Model):
         related_name="domaine_activite_capacite"
     )
     annee_experience = models.PositiveIntegerField(default=0)
-    secteurs = models.ManyToManyField(Secteur, related_name="centres")
+    secteurs = models.ManyToManyField(Secteur, related_name="secteurs")
     public_cibles = models.ManyToManyField(
         PublicCible, related_name="centres", blank=True
     )

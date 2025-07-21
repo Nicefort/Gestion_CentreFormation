@@ -15,8 +15,15 @@ from django.template.loader import render_to_string
 from django.db.models import Count, Q
 import pdfkit
 from docx import Document
+from django.contrib.auth import authenticate, login
+from django.contrib import messages
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
 
 
+
+@login_required
 def region_view(request, pk=None):
     obj = get_object_or_404(Region, pk=pk) if pk else None
     preview_data = None
@@ -77,6 +84,7 @@ def region_view(request, pk=None):
     )
 
 
+@login_required
 def region_detail(request, pk):
     region = get_object_or_404(Region, pk=pk)
 
@@ -111,7 +119,7 @@ def region_detail(request, pk):
         centres = (
             CentreFormation.objects.filter(commune__in=communes_qs)
             .select_related("commune")
-            .prefetch_related("secteurs")
+            .prefetch_related("domaine_activite_capacite__secteurs")
         )
 
         if secteur_ids:
@@ -125,7 +133,7 @@ def region_detail(request, pk):
         nombre_centres = 0
 
     secteurs = Secteur.objects.filter(
-        centres__commune__sous_prefecture__prefecture__region=region
+        secteurs__centre__commune__sous_prefecture__prefecture__region=region
     ).distinct()
 
     data = []
@@ -161,6 +169,7 @@ def region_detail(request, pk):
 
 
 # View qui gere les prefectures
+@login_required
 def prefecture_view(request, pk=None):
     # Récupération de l'objet à modifier (s'il y a un pk dans l'URL)
     if pk:
@@ -266,6 +275,7 @@ def prefecture_view(request, pk=None):
     )
 
 
+@login_required
 def prefecture_detail(request, pk):
     prefecture = get_object_or_404(Prefecture, pk=pk)
 
@@ -297,7 +307,7 @@ def prefecture_detail(request, pk):
         centres = (
             CentreFormation.objects.filter(commune__in=communes_qs)
             .select_related("commune")
-            .prefetch_related("secteurs")
+            .prefetch_related("domaine_activite_capacite__secteurs")
         )
 
         if secteur_ids:
@@ -311,7 +321,7 @@ def prefecture_detail(request, pk):
         nombre_centres = 0
 
     secteurs = Secteur.objects.filter(
-        centres__commune__sous_prefecture__prefecture=prefecture
+        secteurs__centre__commune__sous_prefecture__prefecture=prefecture
     ).distinct()
 
     data = []
@@ -342,6 +352,7 @@ def prefecture_detail(request, pk):
 
 
 # Vue qui gere les Sous Prefectures
+@login_required
 def sousprefecture_view(request, pk=None):
     if pk:
         obj = get_object_or_404(SousPrefecture, pk=pk)
@@ -431,6 +442,7 @@ def sousprefecture_view(request, pk=None):
     )
 
 
+@login_required
 def sousprefecture_detail(request, pk):
     sous_prefecture = get_object_or_404(SousPrefecture, pk=pk)
 
@@ -456,7 +468,7 @@ def sousprefecture_detail(request, pk):
         centres = (
             CentreFormation.objects.filter(commune__in=communes_qs)
             .select_related("commune")
-            .prefetch_related("secteurs")
+            .prefetch_related("domaine_activite_capacite__secteurs")
         )
 
         if secteur_ids:
@@ -470,7 +482,7 @@ def sousprefecture_detail(request, pk):
         nombre_centres = 0
 
     secteurs = Secteur.objects.filter(
-        centres__commune__sous_prefecture=sous_prefecture
+        secteurs__centre__commune__sous_prefecture=sous_prefecture
     ).distinct()
 
     data = []
@@ -496,6 +508,7 @@ def sousprefecture_detail(request, pk):
 
 
 # Vue qui gere les Communes
+@login_required
 def commune_view(request, pk=None):
     if pk:
         obj = get_object_or_404(Commune, pk=pk)
@@ -585,6 +598,7 @@ def commune_view(request, pk=None):
     )
 
 
+@login_required
 def commune_detail(request, pk):
     commune = get_object_or_404(Commune, pk=pk)
 
@@ -644,6 +658,7 @@ def commune_detail(request, pk):
 
 
 # Vue qui gere les Secteurs
+@login_required
 def secteur_view(request, pk=None):
     if pk:
         obj = get_object_or_404(Secteur, pk=pk)
@@ -717,7 +732,7 @@ def secteur_view(request, pk=None):
         },
     )
 
-
+@login_required
 def publiccible_view(request, pk=None):
     if pk:
         obj = get_object_or_404(PublicCible, pk=pk)
@@ -786,9 +801,10 @@ def publiccible_view(request, pk=None):
         },
     )
 
+@login_required
 def centre_formation_view(request):
     print("🔍 Méthode requête :", request.method)
-    print("📦 POST data :", request.POST) 
+    print("📦 POST data :", request.POST)
     print("🔍 Méthode requête :", request.method)
     print("📦 POST data :", request.POST)
     centres = CentreFormation.objects.all()
@@ -816,7 +832,9 @@ def centre_formation_view(request):
         response = HttpResponse(
             content_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
         )
-        response["Content-Disposition"] = 'attachment; filename="centres_formation.docx"'
+        response["Content-Disposition"] = (
+            'attachment; filename="centres_formation.docx"'
+        )
         doc.save(response)
         return response
 
@@ -841,7 +859,6 @@ def centre_formation_view(request):
             domaine.centre = centre
             domaine.save()
             form_domaine.save_m2m()
-           
 
             formateur = form_formateur.save(commit=False)
             formateur.centre = centre
@@ -855,10 +872,14 @@ def centre_formation_view(request):
             ref.centre = centre
             ref.save()
 
-            messages.success(request, "Les informations ont été enregistrées avec succès !")
+            messages.success(
+                request, "Les informations ont été enregistrées avec succès !"
+            )
             return redirect("centre_formation")
         else:
-            messages.error(request, "Erreur dans les formulaires. Veuillez corriger les champs.")
+            messages.error(
+                request, "Erreur dans les formulaires. Veuillez corriger les champs."
+            )
             print("Erreurs validation centre :", form_centre.errors)
             print("Erreurs validation domaine :", form_domaine.errors)
             print("Erreurs validation formateur :", form_formateur.errors)
@@ -884,8 +905,7 @@ def centre_formation_view(request):
         },
     )
 
-
-# views.py
+@login_required
 def centre_detail(request, pk):
     centre = get_object_or_404(
         CentreFormation.objects.select_related(
@@ -893,21 +913,29 @@ def centre_detail(request, pk):
             "domaine_activite_capacite",
             "document_administratif",
             "personne_reference",
-        ).prefetch_related("domaine_activite_capacite__secteurs", "domaine_activite_capacite__public_cibles"),
+        ).prefetch_related(
+            "domaine_activite_capacite__secteurs",
+            "domaine_activite_capacite__public_cibles",
+        ),
         pk=pk,
     )
 
     try:
         doc = centre.document_administratif
     except DocumentAdministratif.DoesNotExist:
-        doc = DocumentAdministratif()
+        doc = DocumentAdministratif(centre=centre)
 
     try:
         ref = centre.personne_reference
     except PersonneReference.DoesNotExist:
-        ref = PersonneReference()
+        ref = PersonneReference(centre=centre)
 
-    # 🔹 Si l'utilisateur clique sur "Exporter en PDF"
+    try:
+        formateur = centre.formateur
+    except Formateur.DoesNotExist:
+        formateur = Formateur(centre=centre)
+
+    # 🔹 Export PDF
     if request.GET.get("export") == "pdf":
         template_path = "pages/centre_pdf.html"
         context = {
@@ -916,23 +944,45 @@ def centre_detail(request, pk):
             "sous_prefecture": centre.commune.sous_prefecture,
             "prefecture": centre.commune.sous_prefecture.prefecture,
             "region": centre.commune.sous_prefecture.prefecture.region,
-            "secteurs": centre.secteurs.all(),
-            "publics_cibles": centre.public_cibles.all(),
+            "secteurs": (
+                centre.domaine_activite_capacite.secteurs.all()
+                if hasattr(centre, "domaine_activite_capacite")
+                else []
+            ),
+            "publics_cibles": (
+                centre.domaine_activite_capacite.public_cibles.all()
+                if hasattr(centre, "domaine_activite_capacite")
+                else []
+            ),
             "documents": doc,
             "personne_reference": ref,
+            "formateur": formateur,
+            "niveaux_formateur": (
+                formateur.niveaux_formateur
+                if formateur and formateur.niveaux_formateur
+                else []
+            ),
+            "experience_formateur": (
+                formateur.experience_formateur
+                if formateur and formateur.experience_formateur
+                else []
+            ),
+            "nombre_formateur_permanant": (
+                formateur.nombre_formateur_permanant if formateur else 0
+            ),
+            "nombre_formateur_nonpermanant": (
+                formateur.nombre_formateur_nonpermanant if formateur else 0
+            ),
         }
-        response = HttpResponse(content_type="application/pdf")
+        html = render_to_string(template_path, context)
+        pdf = pdfkit.from_string(html, False)
+        response = HttpResponse(pdf, content_type="application/pdf")
         response["Content-Disposition"] = (
             f'attachment; filename="centre_{centre.intitule}.pdf"'
         )
-        template = get_template(template_path)
-        html = template.render(context)
-        pisa_status = pisa.CreatePDF(html, dest=response)
-        if pisa_status.err:
-            return HttpResponse("Erreur lors de la génération du PDF", status=500)
-        return response
+        return response  # ✅ maintenant dans le bloc if
 
-    # 🔹 Traitement de formulaire (modification ou suppression)
+    # 🔹 Traitement des formulaires
     if request.method == "POST":
         if "delete" in request.POST:
             centre.delete()
@@ -940,14 +990,32 @@ def centre_detail(request, pk):
             return redirect("centre_formation")
 
         form_centre = CentreFormationForm(request.POST, instance=centre)
-        form_domaineActiviteCapacite = DomaineActiviteCapaciteForm(request.POST, instance=centre)
+        form_domaineActiviteCapacite = DomaineActiviteCapaciteForm(
+            request.POST,
+            instance=(
+                centre.domaine_activite_capacite
+                if hasattr(centre, "domaine_activite_capacite")
+                else None
+            ),
+        )
+        form_formateur = FormateurForm(request.POST, instance=formateur)
         form_docs = DocumentAdministratifForm(request.POST, request.FILES, instance=doc)
         form_ref = PersonneReferenceForm(request.POST, instance=ref)
 
-        if form_centre.is_valid() and form_docs.is_valid() and form_ref.is_valid():
+        if all(
+            [
+                form_centre.is_valid(),
+                form_domaineActiviteCapacite.is_valid(),
+                form_formateur.is_valid(),
+                form_docs.is_valid(),
+                form_ref.is_valid(),
+            ]
+        ):
             form_centre.save()
-            form_domaineActiviteCapacite.instance.centre= centre
+            form_domaineActiviteCapacite.instance.centre = centre
             form_domaineActiviteCapacite.save()
+            form_formateur.instance.centre = centre
+            form_formateur.save()
             form_docs.instance.centre = centre
             form_docs.save()
             form_ref.instance.centre = centre
@@ -956,7 +1024,14 @@ def centre_detail(request, pk):
             return redirect("centre_detail", pk=centre.pk)
     else:
         form_centre = CentreFormationForm(instance=centre)
-        form_domaineActiviteCapacite = DomaineActiviteCapaciteForm(instance=centre)
+        form_domaineActiviteCapacite = DomaineActiviteCapaciteForm(
+            instance=(
+                centre.domaine_activite_capacite
+                if hasattr(centre, "domaine_activite_capacite")
+                else None
+            )
+        )
+        form_formateur = FormateurForm(instance=formateur)
         form_docs = DocumentAdministratifForm(instance=doc)
         form_ref = PersonneReferenceForm(instance=ref)
 
@@ -967,20 +1042,39 @@ def centre_detail(request, pk):
             "centre": centre,
             "form_centre": form_centre,
             "form_domaineActiviteCapacite": form_domaineActiviteCapacite,
+            "form_formateur": form_formateur,
             "form_docs": form_docs,
             "form_ref": form_ref,
             "commune": centre.commune,
             "sous_prefecture": centre.commune.sous_prefecture,
             "prefecture": centre.commune.sous_prefecture.prefecture,
             "region": centre.commune.sous_prefecture.prefecture.region,
-            "secteurs": centre.domaine_activite_capacite.secteurs.all(),
-            "publics_cibles": centre.domaine_activite_capacite.public_cibles.all() if hasattr(centre, "domaine_activite_capacite") else [],
+            "secteurs": (
+                centre.domaine_activite_capacite.secteurs.all()
+                if hasattr(centre, "domaine_activite_capacite")
+                else []
+            ),
+            "publics_cibles": (
+                centre.domaine_activite_capacite.public_cibles.all()
+                if hasattr(centre, "domaine_activite_capacite")
+                else []
+            ),
+            "niveaux_formateur": (
+                formateur.niveaux_formateur
+                if formateur and formateur.niveaux_formateur
+                else []
+            ),
+            "experience_formateur": (
+                formateur.experience_formateur
+                if formateur and formateur.experience_formateur
+                else []
+            ),
             "documents": doc,
             "personne_reference": ref,
         },
     )
 
-
+@login_required
 def index(request):
     # Données pour les graphiques
     region_data = list(
@@ -1011,9 +1105,27 @@ def index(request):
     total_centre = CentreFormation.objects.count()
 
     # ➕ Centres unisectoriels et multisectoriels
-    centres = DomaineActiviteCapacite.objects.annotate(nb_secteurs=Count("secteurs"))
-    total_centres_uni = centres.filter(nb_secteurs=1).count()
-    total_centres_multi = centres.filter(nb_secteurs__gt=1).count()
+    # Centres unisectoriels
+    total_centres_uni = DomaineActiviteCapacite.objects.annotate(
+        nb_secteurs=Count("secteurs")
+    ).filter(nb_secteurs=1).count()
+
+    # Compter les centres multisectoriels
+    total_centres_multi = DomaineActiviteCapacite.objects.annotate(
+        nb_secteurs=Count("secteurs")
+    ).filter(nb_secteurs__gt=1).count()
+    
+    centres_en_regle = CentreFormation.objects.filter(
+    document_administratif__immatriculation_acfpe__isnull=False
+).exclude(
+    document_administratif__immatriculation_acfpe=''
+).filter(
+    document_administratif__agrement_valide__isnull=False
+).exclude(
+    document_administratif__agrement_valide=''
+)
+
+    total_centre_en_regle=centres_en_regle.count()
 
     context = {
         "region_data": json.dumps(region_data),
@@ -1021,6 +1133,7 @@ def index(request):
         "sousprefecture_data": json.dumps(souspref_data),
         "commune_data": json.dumps(commune_data),
         # Statistiques globales
+        "total_centre_en_regle":total_centre_en_regle,
         "total_regions": total_regions,
         "total_prefectures": total_prefectures,
         "total_sousprefectures": total_sousprefectures,
@@ -1036,3 +1149,42 @@ def index(request):
 
 # def calendar(request):
 #    return render(request,"pages/index.html")
+MESSAGE_TAGS = {
+    messages.DEBUG: 'debug',
+    messages.INFO: 'info',
+    messages.SUCCESS: 'success',
+    messages.WARNING: 'warning',
+    messages.ERROR: 'error',
+}
+
+def login_view(request):
+    if request.user.is_authenticated:
+        return redirect('index')
+
+    form = AuthenticationForm(request, data=request.POST or None)
+
+    if request.method == 'POST':
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+
+            if user is not None:
+                login(request, user)
+                messages.success(request, f"Connexion Reussie\n Bienvenue {user.username} !")
+                return redirect('index')
+            else:
+                # Ce bloc est rarement atteint si form.is_valid() est True, mais on garde une sécurité
+                messages.error(request, "Nom d'utilisateur ou mot de passe incorrect.")
+        else:
+            # Affichage de message global pour erreur de connexion
+            messages.error(request, "Nom d'utilisateur ou mot de passe incorrect\n Veullez ressayer.")
+
+    return render(request, 'pages/login-v1.html', {'form': form})
+
+
+
+def logout_view(request):
+    logout(request)
+    messages.info(request, "Déconnexion réussie.")
+    return redirect('login')

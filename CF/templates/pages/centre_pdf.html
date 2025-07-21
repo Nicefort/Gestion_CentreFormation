@@ -4,43 +4,45 @@
     <meta charset="UTF-8">
     <title>Détails du Centre - PDF</title>
     <style>
-        body { font-family: Arial, sans-serif; font-size: 13px; color: #333; }
-        h1, h2 { color: #003366; }
-        table { width: 100%; border-collapse: collapse; margin: 10px 0; }
-        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
-        th { background-color: #f0f0f0; }
-        ul { padding-left: 20px; }
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+            color: #333;
+        }
+        h1, h2 {
+            color: #003366;
+            margin-bottom: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 6px;
+            text-align: left;
+        }
+        th {
+            background-color: #f0f0f0;
+        }
+        .section {
+            margin-top: 30px;
+        }
     </style>
 </head>
 <body>
 
-    <h1>Détails du Centre de Formation</h1>
+    <h1 style="text-align: center;">FICHE D'INFORMATIONS SUR LE CENTRE: {{ centre.intitule }}</h1>
 
+    <h2>Informations Générales</h2>
     <table>
         <tr><th>Intitulé</th><td>{{ centre.intitule }}</td></tr>
         <tr><th>Sigle</th><td>{{ centre.sigle }}</td></tr>
         <tr><th>Adresse</th><td>{{ centre.adresse }}</td></tr>
         <tr><th>Téléphone</th><td>{{ centre.telephone }}</td></tr>
         <tr><th>Email</th><td>{{ centre.email }}</td></tr>
-        <tr><th>Capacité maximale</th><td>{{ centre.capacite_max }}</td></tr>
-        <tr><th>Liste des activités</th><td>{{ centre.liste_activites }}</td></tr>
-        <tr><th>Activités populaires</th><td>{{ centre.activites_populaires }}</td></tr>
-        <tr>
-            <th>Secteurs</th>
-            <td>
-                {% for secteur in secteurs %}
-                    {{ secteur.nom }}{% if not forloop.last %}, {% endif %}
-                {% endfor %}
-            </td>
-        </tr>
-        <tr>
-            <th>Publics Cibles</th>
-            <td>
-                {% for p in publics_cibles %}
-                    {{ p.nom }}{% if not forloop.last %}, {% endif %}
-                {% endfor %}
-            </td>
-        </tr>
+        <tr><th>Catégorie</th><td>{{ centre.categorie }}</td></tr>
     </table>
 
     <h2>Localisation Administrative</h2>
@@ -51,6 +53,75 @@
         <tr><th>Région</th><td>{{ region.nom }}</td></tr>
     </table>
 
+    <h2>Domaine d’activité et Capacité</h2>
+    <table>
+        <tr><th>Capacité max. d’accueil</th><td>{{ centre.domaine_activite_capacite.capacite_max }}</td></tr>
+        <tr><th>Nombre de salles</th><td>{{ centre.domaine_activite_capacite.nombre_salles }}</td></tr>
+        <tr><th>Années d’expérience</th><td>{{ centre.domaine_activite_capacite.annee_experience }} ans</td></tr>
+        <tr>
+            <th>Secteurs</th>
+            <td>
+                {% for secteur in secteurs %}
+                    {{ secteur.nom }}{% if not forloop.last %}, {% endif %}
+                {% empty %}
+                    Aucun secteur
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <th>Publics cibles</th>
+            <td>
+                {% for p in publics_cibles %}
+                    {{ p.nom }}{% if not forloop.last %}, {% endif %}
+                {% empty %}
+                    Aucun public cible
+                {% endfor %}
+            </td>
+        </tr>
+        <tr><th>Liste des activités</th><td>{{ centre.domaine_activite_capacite.liste_activites|default:"-" }}</td></tr>
+        <tr><th>Activités populaires</th><td>{{ centre.domaine_activite_capacite.activites_populaires|default:"-" }}</td></tr>
+        <tr><th>Liste des ateliers / lieux de formation</th><td>{{ centre.domaine_activite_capacite.ListeAtelier|default:"-" }}</td></tr>
+    </table>
+
+    <h2>Formateurs</h2>
+    <table>
+        <tr><th>Formateurs permanents</th><td>{{ formateur.nombre_formateur_permanant }}</td></tr>
+        <tr><th>Formateurs non permanents</th><td>{{ formateur.nombre_formateur_nonpermanant }}</td></tr>
+        <tr>
+            <th>Niveaux des formateurs</th>
+            <td>
+                {% for niveau in niveaux_formateur %}
+                    {{ niveau }}{% if not forloop.last %}, {% endif %}
+                {% empty %}
+                    Aucun niveau renseigné
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <th>Années d'expérience des formateurs</th>
+            <td>
+                {% for exp in experience_formateur %}
+                    {{ exp }}{% if not forloop.last %}, {% endif %}
+                {% empty %}
+                    Aucune donnée
+                {% endfor %}
+            </td>
+        </tr>
+    </table>
+
+    <h2>Personne de Référence</h2>
+    {% if personne_reference %}
+    <table>
+        <tr><th>Nom</th><td>{{ personne_reference.nom }}</td></tr>
+        <tr><th>Prénom</th><td>{{ personne_reference.prenom }}</td></tr>
+        <tr><th>Fonction</th><td>{{ personne_reference.fonction_libre }}</td></tr>
+        <tr><th>Téléphone</th><td>{{ personne_reference.telephone }}</td></tr>
+        <tr><th>Email</th><td>{{ personne_reference.email|default:"-" }}</td></tr>
+    </table>
+    {% else %}
+    <p>Aucune personne de référence enregistrée.</p>
+    {% endif %}
+
     <h2>Documents Administratifs</h2>
     <table>
         <tr><th>Contrat de bail</th><td>{% if documents.contrat_bail %}Oui{% else %}Non{% endif %}</td></tr>
@@ -60,15 +131,6 @@
         <tr><th>Acquittement fiscal</th><td>{% if documents.acquittement_fiscal %}Oui{% else %}Non{% endif %}</td></tr>
         <tr><th>Agrément valide</th><td>{% if documents.agrement_valide %}Oui{% else %}Non{% endif %}</td></tr>
         <tr><th>Autre document</th><td>{% if documents.autre_document %}Oui{% else %}Non{% endif %}</td></tr>
-    </table>
-
-    <h2>Personne de Référence</h2>
-    <table>
-        <tr><th>Nom</th><td>{{ personne_reference.nom }}</td></tr>
-        <tr><th>Prénom</th><td>{{ personne_reference.prenom }}</td></tr>
-        <tr><th>Téléphone</th><td>{{ personne_reference.telephone }}</td></tr>
-        <tr><th>Email</th><td>{{ personne_reference.email|default:"-" }}</td></tr>
-        <tr><th>Fonction</th><td>{{ personne_reference.fonction_libre }}</td></tr>
     </table>
 
 </body>

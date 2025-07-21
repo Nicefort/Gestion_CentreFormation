@@ -274,7 +274,7 @@
           <div class="row page-titles mx-0">
             <div class="col-sm-6 p-md-0">
               <div class="welcome-text">
-                <h4>REGION</h4>
+                <h4>LISTE DES REGIONS</h4>
                 <p class="mb-0"></p>
               </div>
             </div>
@@ -303,7 +303,7 @@
                     <div class="col-12">
                       <div class="card">
                         <div class="card-header">
-                          <h4 class="card-title">List des Regions</h4>
+                          <h4 class="card-title"></h4>
                         </div>
                         <div class="card-body">
                           <div class="table-responsive">
@@ -321,19 +321,13 @@
 
                               <tbody>
                                 {% for region in regions %}
-                                <tr>
-                                  <td>{{ region.nom }}</td>
+                                <tr class=" text-dark ">
+                                  <td>Region N°{{region.numero}}: {{ region.nom }}</td>
                                   <td><a href="{% url 'region_detail' region.pk %}">detail</a></td>
                                   
                                 </tr>
                                 {% endfor %}
                               </tbody>
-                              <tfoot>
-                                <tr>
-                                  <th>Nom</th>
-                                  <th>Action</th>
-                                </tr>
-                              </tfoot>
                             </table>
                           </div>
                         </div>

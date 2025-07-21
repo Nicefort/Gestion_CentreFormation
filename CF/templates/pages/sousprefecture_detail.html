@@ -254,7 +254,8 @@
                             <th>Capacité</th>
                             <th>telephone</th>
                             <th>Commune</th>
-                            <th>Action</th>
+                            <th>Secteur</th>
+                            <th>Domaine d'activité</th>
                           </tr>
                         </thead>
                         <tbody id="tableau-centres">
@@ -262,17 +263,24 @@
                             <tr class="centre-row"
                                 data-sousprefecture="{{ centre.commune.sous_prefecture.id }}"
                                 data-commune="{{ centre.commune.id }}"
-                                data-secteurs="{% for s in centre.secteurs.all %}{{ s.id }} {% endfor %}"
-                                data-capacite="{{ centre.capacite_max }}">
+                                data-secteurs="{% for s in centre.domaine_activite_capacite.secteurs.all %}{{ s.id }} {% endfor %}"
+                                data-capacite="{{ centre.domaine_activite_capacite.capacite_max }}">
                               <td>
                                 <a href="{% url 'centre_detail' centre.pk %}">{{ centre.intitule }}</a>
                               </td>
                               <td>{{ centre.sigle }}</td>
                               <td>{{ centre.adresse }}</td>
-                              <td>{{ centre.capacite_max }}</td>
+                              <td>{{ centre.domaine_activite_capacite.capacite_max }}</td>
                               <td>{{ centre.telephone }}</td>
                               <td>{{ centre.commune.nom }}</td>
-                              <td>Action</td>
+                              <td>
+                                {% for secteur in centre.domaine_activite_capacite.secteurs.all %}
+                                  {{ secteur.nom }}{% if not forloop.last %}, {% endif %}
+                                {% endfor %}
+                              </td>
+                              
+                              <td>{{ centre.domaine_activite_capacite.liste_activites }}</td>
+                          
                             </tr>
                           {% empty %}
                             <tr>
@@ -333,6 +341,131 @@
         Scripts
     ***********************************-->
 <!-- Required vendors -->
+<!-- Bibliothèques nécessaires -->
+<!-- Dépendances -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/docx/8.0.1/docx.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/docx/7.7.0/docx.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/docx@9.5.0/dist/index.iife.js"></script>
+<!-- Élément caché pour récupérer le nom de la sous-préfecture -->
+<span id="sousprefecture-name" data-sousprefecture="{{ sous_prefecture.nom }}" hidden></span>
+
+<script>
+// 📄 Export PDF
+document.getElementById("export-pdf").addEventListener("click", async function () {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+
+  const sousPrefectureName = document.getElementById("sousprefecture-name").dataset.sousprefecture;
+  const pageWidth = doc.internal.pageSize.getWidth();
+
+  doc.setFontSize(16);
+  doc.text("LISTE DES CENTRES DE FORMATION PROFESSIONNELLE ET", pageWidth / 2, 15, { align: "center" });
+  doc.text(`TECHNIQUE DE LA SOUS-PRÉFECTURE DE : ${sousPrefectureName}`, pageWidth / 2, 23, { align: "center" });
+
+  const table = document.getElementById("example");
+  const visibleRows = Array.from(table.querySelectorAll("tbody tr")).filter(row => row.offsetParent !== null);
+
+  const tempTable = document.createElement("table");
+
+  // Garde l'en-tête tel quel
+  const theadClone = table.querySelector("thead").cloneNode(true);
+  tempTable.appendChild(theadClone);
+
+  // Cloner uniquement les lignes visibles
+  const tbody = document.createElement("tbody");
+  visibleRows.forEach(row => {
+    const newRow = row.cloneNode(true);
+    tbody.appendChild(newRow);
+  });
+  tempTable.appendChild(tbody);
+
+  doc.autoTable({
+    html: tempTable,
+    startY: 35,
+    theme: "grid",
+    styles: { fontSize: 9 },
+    headStyles: { fillColor: [0, 102, 204], textColor: 255 },
+    alternateRowStyles: { fillColor: [240, 240, 240] },
+  });
+
+  const pdfUrl = doc.output('bloburl');
+  window.open(pdfUrl, '_blank');
+  doc.save(`centres_${sousPrefectureName.replace(/\s+/g, '_')}.pdf`);
+});
+
+
+// 📄 Export Word
+document.getElementById("export-word").addEventListener("click", async function () {
+  const { Document, Packer, Paragraph, TextRun, Table, TableRow, TableCell, WidthType, AlignmentType } = docx;
+
+  const sousPrefectureName = document.getElementById("sousprefecture-name").dataset.sousprefecture || "SOUS-PRÉFECTURE";
+  const table = document.querySelector("#example");
+
+  const title = new Paragraph({
+    children: [
+      new TextRun({
+        text: `LISTE DES CENTRES DE FORMATION PROFESSIONNELLE ET TECHNIQUE DE LA SOUS-PRÉFECTURE DE: ${sousPrefectureName}`,
+        bold: true,
+        size: 28,
+        font: "Times New Roman",
+      }),
+    ],
+    alignment: AlignmentType.CENTER,
+    spacing: { after: 300 }
+  });
+
+  // Récupération des lignes visibles
+  const visibleRows = Array.from(table.querySelectorAll("tbody tr")).filter(row => row.offsetParent !== null);
+
+  const headerCells = Array.from(table.querySelectorAll("thead tr th")).map(cell =>
+    new TableCell({
+      width: { size: 100, type: WidthType.AUTO },
+      children: [new Paragraph({
+        children: [new TextRun({ text: cell.textContent, bold: true, size: 24, font: "Times New Roman" })]
+      })],
+    
+    })
+  );
+
+  const wordRows = [new TableRow({ children: headerCells })];
+
+  visibleRows.forEach(row => {
+    const cells = Array.from(row.cells).map(cell =>
+      new TableCell({
+        width: { size: 100, type: WidthType.AUTO },
+        children: [new Paragraph({
+          children: [new TextRun({ text: cell.textContent.trim() || "•", size: 24, font: "Times New Roman" })]
+        })],
+      })
+    );
+    wordRows.push(new TableRow({ children: cells }));
+  });
+
+  const wordTable = new Table({
+    rows: wordRows,
+    width: { size: 100, type: WidthType.PERCENTAGE }
+  });
+
+  const doc = new Document({
+    sections: [{
+      properties: {},
+      children: [title, wordTable],
+    }]
+  });
+
+  const blob = await Packer.toBlob(doc);
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = `Liste_Centres_${sousPrefectureName.replace(/\s+/g, '_')}.docx`;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+});
+</script>
+
 <script>
       // Initialisation de Choices.js
       const selects = document.querySelectorAll(".filtre-select");
@@ -391,80 +524,8 @@
         .getElementById("filtre-capacite")
         .addEventListener("input", filtrerTableau);
 </script>
-<script>
-  // 📄 Export PDF
-  document.getElementById("export-pdf").addEventListener("click", async function () {
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF();
 
-    // Filtrer lignes visibles
-    const table = document.getElementById("example");
-    const visibleRows = Array.from(table.querySelectorAll("tbody tr"))
-      .filter(row => row.offsetParent !== null);
 
-    // Créer une table temporaire avec uniquement les lignes visibles
-    const tempTable = document.createElement("table");
-    tempTable.innerHTML = table.querySelector("thead").outerHTML;
-
-    const tbody = document.createElement("tbody");
-    visibleRows.forEach(row => tbody.appendChild(row.cloneNode(true)));
-    tempTable.appendChild(tbody);
-
-    doc.autoTable({
-      html: tempTable,
-      startY: 20,
-      theme: "grid",
-      headStyles: { fillColor: [52, 58, 64] }, // Bootstrap dark
-    });
-
-    doc.save("centres_filtrés.pdf");
-  });
-
-  // 📄 Export Word
-  document.getElementById("export-word").addEventListener("click", async function () {
-    const {
-      Document, Packer, Paragraph, Table, TableRow, TableCell, TextRun
-    } = window.docx;
-
-    const table = document.getElementById("example");
-
-    // En-tête
-    const headerCells = Array.from(table.querySelectorAll("thead th")).map(th =>
-      new TableCell({
-        children: [new Paragraph({ children: [new TextRun(th.innerText)] })],
-      })
-    );
-
-    // Lignes visibles
-    const visibleRows = Array.from(table.querySelectorAll("tbody tr"))
-      .filter(row => row.offsetParent !== null);
-
-    const dataRows = visibleRows.map(row => {
-      const cells = Array.from(row.querySelectorAll("td")).map(td =>
-        new TableCell({
-          children: [new Paragraph(td.innerText)],
-        })
-      );
-      return new TableRow({ children: cells });
-    });
-
-    const doc = new Document({
-      sections: [
-        {
-          children: [
-            new Paragraph({ text: "Liste des centres filtrés", heading: "Heading1" }),
-            new Table({
-              rows: [new TableRow({ children: headerCells }), ...dataRows]
-            })
-          ]
-        }
-      ]
-    });
-
-    const blob = await Packer.toBlob(doc);
-    saveAs(blob, "centres_filtrés.docx");
-  });
-</script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
       const filters = [

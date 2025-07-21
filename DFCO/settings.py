@@ -137,3 +137,5 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
+LOGIN_URL = 'login'           # Pour rediriger les utilisateurs non connectés
+LOGIN_REDIRECT_URL = 'index'  # Pour redirect automatique après login si tu utilises LoginView

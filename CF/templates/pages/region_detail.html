@@ -29,8 +29,8 @@
         overflow-y: auto;
       }
     </style>-->
-    <link href="{% static 'dependances/choices.min.css' %}" rel="stylesheet"/>
-     <script src="{% static 'dependances/choices.min.js' %}"></script>
+    <link href="{% static 'dependances/choices.min.css' %}" rel="stylesheet" />
+    <script src="{% static 'dependances/choices.min.js' %}"></script>
     <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
@@ -174,7 +174,7 @@
     <div class="row page-titles mx-0">
       <div class="col-sm-6 p-md-0">
         <div class="welcome-text">
-          <h4>Nom de la region :{{ region.nom }}</h4>
+          <h4>Region n° {{region.numero}} : {{ region.nom }}</h4>
         </div>
       </div>
       <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
@@ -279,40 +279,48 @@
                       <table id="example" class="display" style="min-width: 845px">
                         <thead>
                           <tr>
-                            <th>Intitule</th>
-                            <th>Sigle</th>
-                            <th>Adresse</th>
-                            <th>Capacité</th>
-                            <th>telephone</th>
-                            <th>Commune</th>
-                         
+                            <th class="text-dark">Intitule</th>
+                            <th class="text-dark" >Sigle</th>
+                            <th class="text-dark" >Adresse</th>
+                            <th class="text-dark" >Capacité</th>
+                            <th class="text-dark" >telephone</th>
+                            <th class="text-dark" >Commune</th>
+                            <th class="text-dark" >Secteur</th>
+                            <th class="text-dark" >Domaine d'activité</th>
                           </tr>
                         </thead>
+                        
                         <tbody id="tableau-centres">
                           {% for centre in centres %}
-                            <tr class="centre-row"
+                            <tr class="centre-row text-dark"
                                 data-prefecture="{{ centre.commune.sous_prefecture.prefecture.id }}"
                                 data-sousprefecture="{{ centre.commune.sous_prefecture.id }}"
                                 data-commune="{{ centre.commune.id }}"
-                                data-secteurs="{% for s in centre.secteurs.all %}{{ s.id }} {% endfor %}"
-                                data-capacite="{{ centre.capacite_max }}">
+                                data-secteurs="{% for s in centre.domaine_activite_capacite.secteurs.all %}{{ s.id }} {% endfor %}"
+                                data-capacite="{{ centre.domaine_activite_capacite.capacite_max }}">
                               <td>
-                                <a href="{% url 'centre_detail' centre.pk %}">{{ centre.intitule }}</a>
+                                <a class="text-dark" href="{% url 'centre_detail' centre.pk %}">{{ centre.intitule }}</a>
                               </td>
                               <td>{{ centre.sigle }}</td>
                               <td>{{ centre.adresse }}</td>
-                              <td>{{ centre.capacite_max }}</td>
+                              <td>{{ centre.domaine_activite_capacite.capacite_max }}</td>
                               <td>{{ centre.telephone }}</td>
                               <td>{{ centre.commune.nom }}</td>
+                              <td>
+                                {% for secteur in centre.domaine_activite_capacite.secteurs.all %}
+                                  {{ secteur.nom }}{% if not forloop.last %}, {% endif %}
+                                {% endfor %}
+                              </td>
                               
+                              <td>{{ centre.domaine_activite_capacite.liste_activites }}</td>
                             </tr>
                           {% empty %}
                             <tr>
-                              <td colspan="7">Aucun centre trouvé dans cette région.</td>
+                              <td colspan="7" class=" text-center text-dark">Aucun centre trouvé dans cette région.</td>
                             </tr>
                           {% endfor %}
                         </tbody>
-                        <tfoot>
+                        <!--<tfoot>
                           <tr>
                             <th>Intitule</th>
                             <th>Sigle</th>
@@ -320,9 +328,8 @@
                             <th>Capacité</th>
                             <th>telephone</th>
                             <th>Commune</th>
-                        
                           </tr>
-                        </tfoot>
+                        </tfoot>-->
                       </table>
                     </div>
                   </div>
@@ -366,80 +373,127 @@
     ***********************************-->
 <!-- Required vendors -->
 <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+<!-- ⚠️ Ajoute cet élément caché dans ton HTML pour que le script JS récupère la région -->
+<span id="region-name" data-region="{{ region.nom }}" hidden></span>
+<span id="region-num" data-region="{{ region.numero }}" hidden></span>
+
 <script>
-  // 📄 Export PDF
-  document.getElementById("export-pdf").addEventListener("click", async function () {
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF();
+// 📄 Export PDF
+document.getElementById("export-pdf").addEventListener("click", async function () {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
 
-    // Filtrer lignes visibles
-    const table = document.getElementById("example");
-    const visibleRows = Array.from(table.querySelectorAll("tbody tr"))
-      .filter(row => row.offsetParent !== null);
+  const regionName = document.getElementById("region-name").dataset.region;
+  const regionNum = document.getElementById("region-num").dataset.region;
+  const pageWidth = doc.internal.pageSize.getWidth();
 
-    // Créer une table temporaire avec uniquement les lignes visibles
-    const tempTable = document.createElement("table");
-    tempTable.innerHTML = table.querySelector("thead").outerHTML;
+  doc.setFontSize(16);
+  doc.text("LISTE DES CENTRES DE FORMATION PROFESSIONNELLE ET", pageWidth / 2, 15, { align: "center" });
+  doc.text(`TECHNIQUE DE LA RÉGION N° ${regionNum} ${regionName}`, pageWidth / 2, 23, { align: "center" });
 
-    const tbody = document.createElement("tbody");
-    visibleRows.forEach(row => tbody.appendChild(row.cloneNode(true)));
-    tempTable.appendChild(tbody);
+  const table = document.getElementById("example");
+  const visibleRows = Array.from(table.querySelectorAll("tbody tr")).filter(row => row.offsetParent !== null);
 
-    doc.autoTable({
-      html: tempTable,
-      startY: 20,
-      theme: "grid",
-      headStyles: { fillColor: [52, 58, 64] }, // Bootstrap dark
-    });
+  const tempTable = document.createElement("table");
 
-    doc.save("centres_filtrés.pdf");
+  // Garde l'en-tête tel quel
+  const theadClone = table.querySelector("thead").cloneNode(true);
+  tempTable.appendChild(theadClone);
+
+  // Cloner uniquement les lignes visibles
+  const tbody = document.createElement("tbody");
+  visibleRows.forEach(row => {
+    const newRow = row.cloneNode(true);
+    tbody.appendChild(newRow);
+  });
+  tempTable.appendChild(tbody);
+
+  doc.autoTable({
+    html: tempTable,
+    startY: 35,
+    theme: "grid",
+    styles: { fontSize: 9 },
+    headStyles: { fillColor: [0, 102, 204], textColor: 255 },
+    alternateRowStyles: { fillColor: [240, 240, 240] },
   });
 
-  // 📄 Export Word
-  document.getElementById("export-word").addEventListener("click", async function () {
-    const {
-      Document, Packer, Paragraph, Table, TableRow, TableCell, TextRun
-    } = window.docx;
+  const pdfUrl = doc.output('bloburl');
+  window.open(pdfUrl, '_blank');
+  doc.save(`centres_${regionName}.pdf`);
+});
 
-    const table = document.getElementById("example");
 
-    // En-tête
-    const headerCells = Array.from(table.querySelectorAll("thead th")).map(th =>
+// 📄 Export Word
+document.getElementById("export-word").addEventListener("click", async function () {
+  const { Document, Packer, Paragraph, TextRun, Table, TableRow, TableCell, WidthType, AlignmentType } = docx;
+
+  const region = document.getElementById("region-name").dataset.region || "RÉGION";
+  const regionNum = document.getElementById("region-num").dataset.region;
+  const table = document.querySelector("#example");
+
+  const title = new Paragraph({
+    children: [
+      new TextRun({
+        text: `LISTE DES CENTRES DE FORMATION PROFESSIONNELLE ET TECHNIQUE DE LA RÉGION N° :${regionNum} ${region}`,
+        bold: true,
+        size: 28,
+        font: "Times New Roman",
+      }),
+    ],
+    alignment: AlignmentType.CENTER,
+    spacing: { after: 300 }
+  });
+
+  // Récupération des lignes visibles
+  const visibleRows = Array.from(table.querySelectorAll("tbody tr")).filter(row => row.offsetParent !== null);
+
+  const headerCells = Array.from(table.querySelectorAll("thead tr th")).map(cell =>
+    new TableCell({
+      width: { size: 100, type: WidthType.AUTO },
+      children: [new Paragraph({
+        children: [new TextRun({ text: cell.textContent, bold: true, size: 24, font: "Times New Roman" })]
+      })],
+    })
+  );
+
+  const wordRows = [new TableRow({ children: headerCells })];
+
+  visibleRows.forEach(row => {
+    const cells = Array.from(row.cells).map(cell =>
       new TableCell({
-        children: [new Paragraph({ children: [new TextRun(th.innerText)] })],
+        width: { size: 100, type: WidthType.AUTO },
+        children: [new Paragraph({
+          children: [new TextRun({ text: cell.textContent.trim(), size: 24, font: "Times New Roman" })]
+        })],
       })
     );
-
-    // Lignes visibles
-    const visibleRows = Array.from(table.querySelectorAll("tbody tr"))
-      .filter(row => row.offsetParent !== null);
-
-    const dataRows = visibleRows.map(row => {
-      const cells = Array.from(row.querySelectorAll("td")).map(td =>
-        new TableCell({
-          children: [new Paragraph(td.innerText)],
-        })
-      );
-      return new TableRow({ children: cells });
-    });
-
-    const doc = new Document({
-      sections: [
-        {
-          children: [
-            new Paragraph({ text: "Liste des centres filtrés", heading: "Heading1" }),
-            new Table({
-              rows: [new TableRow({ children: headerCells }), ...dataRows]
-            })
-          ]
-        }
-      ]
-    });
-
-    const blob = await Packer.toBlob(doc);
-    saveAs(blob, "centres_filtrés.docx");
+    wordRows.push(new TableRow({ children: cells }));
   });
+
+  const wordTable = new Table({
+    rows: wordRows,
+    width: { size: 100, type: WidthType.PERCENTAGE }
+  });
+
+  const doc = new Document({
+    sections: [{
+      properties: {},
+      children: [title, wordTable],
+    }]
+  });
+
+  const blob = await Packer.toBlob(doc);
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = `Liste_Centres_${region}.docx`;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+});
+
+
 </script>
+
 <script>
     document.addEventListener('DOMContentLoaded', function () {
       const filters = [
