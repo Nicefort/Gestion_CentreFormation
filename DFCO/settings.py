@@ -133,6 +133,10 @@ STATIC_URL = "static/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
+# Déconnexion après 10 minutes d’inactivité
+SESSION_COOKIE_AGE = 600  # 600 secondes = 10 minutes
+SESSION_SAVE_EVERY_REQUEST = True  # remet à zéro le timer à chaque requête
+
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 MEDIA_URL = "/media/"

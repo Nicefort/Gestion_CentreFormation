@@ -25,6 +25,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/docx/7.7.0/docx.umd.min.js"></script>
+     <style>
+      body {
+  background-color: #edf1f5;
+}
+
+    </style>
   </head>
   <body>
     <!--*******************
@@ -65,42 +71,7 @@
       <!--**********************************
             Header start
         ***********************************-->
-      <div class="header">
-        <div class="header-content">
-          <nav class="navbar navbar-expand">
-            <div class="collapse navbar-collapse justify-content-between">
-              <div class="header-left">
-                <div class="search_bar dropdown">
-                  <span class="search_icon p-3 c-pointer" data-toggle="dropdown">
-                    <i class="mdi mdi-magnify"></i>
-                  </span>
-                  <div class="dropdown-menu p-0 m-0">
-                    <form>
-                      <input class="form-control"
-                             type="search"
-                             placeholder="Search"
-                             aria-label="Search" />
-                    </form>
-                  </div>
-                </div>
-              </div>
-              <ul class="navbar-nav header-right">
-                <li class="nav-item dropdown header-profile">
-                  <a class="nav-link" href="#" role="button" data-toggle="dropdown">
-                    <i class="mdi mdi-account"></i>
-                  </a>
-                  <div class="dropdown-menu dropdown-menu-right">
-                    <a href="./page-login.html" class="dropdown-item">
-                      <i class="icon-key"></i>
-                      <span class="ml-2">Logout</span>
-                    </a>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </nav>
-        </div>
-      </div>
+        {% include "./Titre.html" %}
       <!--**********************************
             Header end ti-comment-alt
 ***********************************-->
@@ -112,7 +83,7 @@
           <ul class="metismenu" id="menu">
             <li class="nav-label first">Main Menu</li>
             <li>
-              <a href="{% url 'index' %}" aria-expanded="false"><i class="bi bi-house"></i><span class="nav-text">Acceuil</span></a>
+              <a href="{% url 'index' %}" aria-expanded="false"><i class="mdi mdi-home"></i><span class="nav-text">Acceuil</span></a>
             </li>
             <li>
               <a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-map-marker"></i><span class="nav-text">Localisation</span></a>
@@ -184,11 +155,11 @@
               <div class="text-center mt-4 border-bottom-1 pb-3">
                 <div class="row">
                   <div class="col">
-                    <span>Nombre de Centre de Formations</span>
+                    <span class="text-dark">Nombre de Centre de Formations</span>
                     <h3 class="m-b-0">{{ nombre_centres }}</h3>
                   </div>
                   <div class="col">
-                    <span>Nombre commune</span>
+                    <span class="text-dark" >Nombre commune</span>
                     <h3 class="m-b-0">{{ nombre_communes }}</h3>
                   </div>
                 </div>
@@ -200,7 +171,7 @@
           <div class="card">
             <div class="card-body">
               <h4 class="card-intro-title">Filtrer</h4>
-              <div class="d-flex flex-column gap-3">
+              <div class="d-flex flex-column gap-3 text-dark">
                 <!-- Commune -->
                 <div class="form-group">
                   <label for="filtre-commune">Commune :</label>
@@ -252,6 +223,7 @@
                             <th>Sigle</th>
                             <th>Adresse</th>
                             <th>Capacité</th>
+                            <th>categorie<th>
                             <th>telephone</th>
                             <th>Commune</th>
                             <th>Secteur</th>
@@ -271,6 +243,7 @@
                               <td>{{ centre.sigle }}</td>
                               <td>{{ centre.adresse }}</td>
                               <td>{{ centre.domaine_activite_capacite.capacite_max }}</td>
+                              <td> {{centre.categorie}} </td>
                               <td>{{ centre.telephone }}</td>
                               <td>{{ centre.commune.nom }}</td>
                               <td>
@@ -284,21 +257,11 @@
                             </tr>
                           {% empty %}
                             <tr>
-                              <td colspan="7">Aucun centre trouvé dans cette région.</td>
+                              <td class="text-center" colspan="7">Aucun centre trouvé dans cette région.</td>
                             </tr>
                           {% endfor %}
                         </tbody>
-                        <tfoot>
-                          <tr>
-                            <th>Intitule</th>
-                            <th>Sigle</th>
-                            <th>Adresse</th>
-                            <th>Capacité</th>
-                            <th>telephone</th>
-                            <th>Commune</th>
-                            <th>Action</th>
-                          </tr>
-                        </tfoot>
+                        
                       </table>
                     </div>
                   </div>

@@ -8,6 +8,8 @@
     <title>LISTES DES CENTRES DE FORMATION</title>
     <!-- Favicon icon -->
     <!-- jsPDF et AutoTable -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src"{% static 'dependnances/' %}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
@@ -83,12 +85,10 @@
         border-bottom: 1px solid #ccc;
         padding-bottom: 8px;
       }
-      
-      </style>
-      
-      
-  
-    
+      body{
+         background-color: #edf1f5;
+      }
+    </style>
   </head>
   <body>
     <!--*******************
@@ -112,11 +112,11 @@
             Nav header start
         ***********************************-->
       <div class="nav-header">
-        <a href="{% url 'index' %}" class="brand-logo">
+        <!--<a href="{% url 'index' %}" class="brand-logo">
           <img class="img-fluid w-40 rounded center"
                src="{% static 'images/acfpe.png' %}"
                alt="" />
-        </a>
+        </a>-->
         <div class="nav-control">
           <div class="hamburger">
             <span class="line"></span><span class="line"></span><span class="line"></span>
@@ -129,121 +129,7 @@
       <!--**********************************
             Header start
         ***********************************-->
-      <div class="header">
-        <div class="header-content">
-          <nav class="navbar navbar-expand">
-            <div class="collapse navbar-collapse justify-content-between">
-              <div class="header-left">
-                <div class="search_bar dropdown">
-                  <span class="search_icon p-3 c-pointer" data-toggle="dropdown">
-                    <i class="mdi mdi-magnify"></i>
-                  </span>
-                  <div class="dropdown-menu p-0 m-0">
-                    <form>
-                      <input class="form-control"
-                             type="search"
-                             placeholder="Search"
-                             aria-label="Search" />
-                    </form>
-                  </div>
-                </div>
-              </div>
-              <ul class="navbar-nav header-right">
-                <li class="nav-item dropdown notification_dropdown">
-                  <a class="nav-link" href="#" role="button" data-toggle="dropdown">
-                    <i class="mdi mdi-bell"></i>
-                    <div class="pulse-css"></div>
-                  </a>
-                  <div class="dropdown-menu dropdown-menu-right">
-                    <ul class="list-unstyled">
-                      <li class="media dropdown-item">
-                        <span class="success"><i class="ti-user"></i></span>
-                        <div class="media-body">
-                          <a href="#">
-                            <p>
-                              <strong>Martin</strong> has added a
-                              <strong>customer</strong> Successfully
-                            </p>
-                          </a>
-                        </div>
-                        <span class="notify-time">3:20 am</span>
-                      </li>
-                      <li class="media dropdown-item">
-                        <span class="primary"><i class="ti-shopping-cart"></i></span>
-                        <div class="media-body">
-                          <a href="#">
-                            <p>
-                              <strong>Jennifer</strong> purchased Light
-                              Dashboard 2.0.
-                            </p>
-                          </a>
-                        </div>
-                        <span class="notify-time">3:20 am</span>
-                      </li>
-                      <li class="media dropdown-item">
-                        <span class="danger"><i class="ti-bookmark"></i></span>
-                        <div class="media-body">
-                          <a href="#">
-                            <p>
-                              <strong>Robin</strong> marked a
-                              <strong>ticket</strong> as unsolved.
-                            </p>
-                          </a>
-                        </div>
-                        <span class="notify-time">3:20 am</span>
-                      </li>
-                      <li class="media dropdown-item">
-                        <span class="primary"><i class="ti-heart"></i></span>
-                        <div class="media-body">
-                          <a href="#">
-                            <p>
-                              <strong>David</strong> purchased Light Dashboard
-                              1.0.
-                            </p>
-                          </a>
-                        </div>
-                        <span class="notify-time">3:20 am</span>
-                      </li>
-                      <li class="media dropdown-item">
-                        <span class="success"><i class="ti-image"></i></span>
-                        <div class="media-body">
-                          <a href="#">
-                            <p>
-                              <strong>James.</strong> has added a<strong>customer</strong>
-                              Successfully
-                            </p>
-                          </a>
-                        </div>
-                        <span class="notify-time">3:20 am</span>
-                      </li>
-                    </ul>
-                    <a class="all-notification" href="#">See all notifications <i class="ti-arrow-right"></i></a>
-                  </div>
-                </li>
-                <li class="nav-item dropdown header-profile">
-                  <a class="nav-link" href="#" role="button" data-toggle="dropdown">
-                    <i class="mdi mdi-account"></i>
-                  </a>
-                  <div class="dropdown-menu dropdown-menu-right">
-                    <a href="./app-profile.html" class="dropdown-item">
-                      <i class="icon-user"></i>
-                      <span class="ml-2">Profile</span>
-                    </a>
-                    <a href="./email-inbox.html" class="dropdown-item">
-                      <i class="icon-envelope-open"></i>
-                      <span class="ml-2">Inbox</span>
-                    </a>
-                    <a href="./page-login.html" class="dropdown-item">
-                      <i class="icon-key"></i>
-                      <span class="ml-2">Logout</span>
-                    </a>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </nav>
-        </div>
-      </div>
+     {% include "./Titre.html" %}
       <!--**********************************
             Header end ti-comment-alt
 ***********************************-->
@@ -257,7 +143,8 @@
               <hr>
             </li>
             <li>
-              <a href="{% url 'index' %}" aria-expanded="false"><i class="bi bi-house"></i><span class="nav-text">Acceuil</span></a>
+              <a href="{% url 'index' %}" aria-expanded="false"><i class="mdi mdi-home"></i>
+                <span class="nav-text">Acceuil</span></a>
             </li>
             <li>
               <a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-map-marker"></i><span class="nav-text">Localisation</span></a>
@@ -306,7 +193,7 @@
         <div class="col-sm-6 p-md-0">
           <div class="welcome-text">
             <h4>Centre Formation</h4>
-            <p class="mb-0">Liste de tous les centres de formations</p>
+            <p class="mb-0 text-dark">Liste de tous les centres de formations</p>
           </div>
         </div>
         <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
@@ -340,16 +227,12 @@
           <div class="card">
             <div class="card-body">
               <h4 class="card-intro-title">Filtrer par :</h4>
-              <div class="d-flex flex-column gap-3">
+              <div class="d-flex flex-column gap-3 text-dark">
                 <!-- Région -->
                 <div class="form-group">
                   <label for="filtre-region">Région :</label>
-                  <select multiple
-                          size=""
-                          id="filtre-region"
-                          name="regions"
-                          class="form-control w-100">
-                    {% for r in regions %}<option value="{{ r.id }}">{{ r.nom }}</option>{% endfor %}
+                  <select multiple id="filtre-region" name="regions" class="form-control w-100">
+                    {% for r in regions %}<option value="{{ r.nom }}">{{ r.nom }}</option>{% endfor %}
                   </select>
                 </div>
                 <!-- Préfecture -->
@@ -359,7 +242,7 @@
                           id="filtre-prefecture"
                           name="prefectures"
                           class="form-control w-100">
-                    {% for p in prefectures %}<option value="{{ p.id }}">{{ p.nom }}</option>{% endfor %}
+                    {% for p in prefectures %}<option value="{{ p.nom }}">{{ p.nom }}</option>{% endfor %}
                   </select>
                 </div>
                 <!-- Sous-préfecture -->
@@ -369,7 +252,7 @@
                           id="filtre-sousprefecture"
                           name="sousprefectures"
                           class="form-control w-100">
-                    {% for sp in sousprefectures %}<option value="{{ sp.id }}">{{ sp.nom }}</option>{% endfor %}
+                    {% for sp in sousprefectures %}<option value="{{ sp.nom }}">{{ sp.nom }}</option>{% endfor %}
                   </select>
                 </div>
                 <!-- Commune -->
@@ -379,18 +262,17 @@
                           id="filtre-commune"
                           name="communes"
                           class="form-control w-100">
-                    {% for c in communes %}<option value="{{ c.id }}">{{ c.nom }}</option>{% endfor %}
+                    {% for c in communes %}<option value="{{ c.nom }}">{{ c.nom }}</option>{% endfor %}
                   </select>
                 </div>
                 <!-- Secteur -->
                 <div class="form-group">
                   <label for="filtre-secteur">Secteur :</label>
-                  <select size="1"
-                          multiple
+                  <select multiple
                           id="filtre-secteur"
                           name="secteurs"
                           class="form-control w-100">
-                    {% for s in secteurs %}<option value="{{ s.id }}">{{ s.nom }}</option>{% endfor %}
+                    {% for s in secteurs %}<option value="{{ s.nom }}">{{ s.nom }}</option>{% endfor %}
                   </select>
                 </div>
                 <!-- Capacité -->
@@ -402,6 +284,26 @@
                          class="form-control"
                          placeholder="Ex: 100" />
                 </div>
+                <!-- En règle -->
+                <div class="form-group">
+                  <label for="filtre-regle">En règle :</label>
+                  <select id="filtre-regle" name="regle" class="form-control w-100">
+                    <option value="">Tous</option>
+                    <option value="true">En règle</option>
+                    <option value="false">Non en règle</option>
+                  </select>
+                </div>
+                <!-- Catégorie -->
+                <div class="form-group">
+                  <label for="filtre-categorie">Catégorie :</label>
+                  <select multiple
+                          id="filtre-categorie"
+                          name="categories"
+                          class="form-control w-100"> {% for cat in categories %}
+                          <option value="{{ cat.0 }}">{{ cat.1 }}</option>
+                        {% endfor %}
+                  </select>
+                </div>
               </div>
             </div>
           </div>
@@ -409,51 +311,51 @@
         <div class="col-lg-9">
           <div class="card">
             <div class="card-header">
-              <h4 class="card-title">Liste des Centres de Formation</h4>
+              <h4 class="card-title">LISTE DES CENTRE DE FORMATION</h4>
             </div>
             <div class="card-body">
               <div class="table-responsive">
                 <table id="example" class="display" style="min-width: 845px">
                   <thead>
-                    <tr>
-                      <th>Intitule</th>
-                      <th>Sigle</th>
-                      <th>Adresse</th>
-                      <th>Capacité</th>
-                      <th>telephone</th>
-                      <th>Commune</th>
+                    <tr >
+                      <th class="text-primary" >Intitule</th>
+                      <th class="text-primary">Sigle</th>
+                      <th class="text-primary">Quartier</th>
+                      <th class="text-primary">Capacité</th>
+                      <th class="text-primary" >Categorie </th>
+                      <th class="text-primary">telephone</th>
+                      <th class="text-primary">Secteur d'activité</th>
+                      <th class="text-primary">Domaine d'activité</th>
+                      <th class="text-primary">Public cible</th>
+                      <th class="text-primary">Zone Geographique</th>
                     </tr>
                   </thead>
                   <tbody id="tableau-centres">
                     {% for centre in centres %}
                       <tr class="centre-row"
-                          data-region="{{ centre.commune.sous_prefecture.prefecture.region.id }}"
-                          data-prefecture="{{ centre.commune.sous_prefecture.prefecture.id }}"
-                          data-sousprefecture="{{ centre.commune.sous_prefecture.id }}"
-                          data-commune="{{ centre.commune.id }}"
-                          data-secteurs="{% for s in centre.secteurs.all %}{{ s.id }} {% endfor %}"
-                          data-capacite="{{ centre.capacite_max }}">
+                      data-region="{{ centre.commune.sous_prefecture.prefecture.region.nom }}"
+                      data-prefecture="{{ centre.commune.sous_prefecture.prefecture.nom }}"
+                      data-sousprefecture="{{ centre.commune.sous_prefecture.nom }}"
+                      data-commune="{{ centre.commune.nom }}"
+                      data-secteurs="{% for s in centre.domaine_activite_capacite.secteurs.all %}{{ s.nom }},{% endfor %}"
+                      data-capacite="{{ centre.capacite_max }}"
+                      data-regle="{{ centre.en_regle|yesno:'true,false' }}"
+                      data-categorie="{{ centre.categorie }}">
                         <td>
-                          <a href="{% url 'centre_detail' centre.pk %}">{{ centre.intitule }}</a>
+                          <a class="text-dark" href="{% url 'centre_detail' centre.pk %}">{{ centre.intitule }}</a>
                         </td>
                         <td>{{ centre.sigle }}</td>
                         <td>{{ centre.adresse }}</td>
-                        <td>{{ centre.capacite_max }}</td>
+                        <td>{{ centre.domaine_activite_capacite.capacite_max }}</td>
+                        <td>{{centre.categorie}}</td>
                         <td>{{ centre.telephone }}</td>
+                        <td> {% for s in centre.domaine_activite_capacite.secteurs.all %}{{ s.nom }},{% endfor %} </td>
+                        <td>{{ centre.domaine_activite_capacite.liste_activites }}</td>
+                        <td> {% for p in centre.domaine_activite_capacite.public_cibles.all %}{{ p.nom }},{% endfor %}</td>
                         <td>{{ centre.commune }}</td>
                       </tr>
                     {% endfor %}
                   </tbody>
-                  <tfoot>
-                    <tr>
-                      <th>Intitule</th>
-                      <th>Sigle</th>
-                      <th>Adresse</th>
-                      <th>Capacité</th>
-                      <th>telephone</th>
-                      <th>Commune</th>
-                    </tr>
-                  </tfoot>
                 </table>
               </div>
             </div>
@@ -471,8 +373,8 @@
               <div class="modal-body"></div>
               <div class="modal-footer">
                 <button type="button"
-                        class="btn btn-default waves-effect"
-                        data-dismiss="modal">Close</button>
+                      class="btn btn-danger waves-light waves-effect"
+                      data-dismiss="modal">Close</button>
                 <button type="button"
                         class="btn btn-success save-event waves-effect waves-light">Create event</button>
                 <button type="button"
@@ -559,7 +461,6 @@
                             {% endif %}
                           </div>
                         </div>
-                    
                         <div class="col-lg-12 mb-4">
                           <div class="form-group">
                             <label class="text-label" for="{{ form_centre.telephone.id_for_label }}">Téléphone</label>
@@ -608,14 +509,12 @@
                     <section>
                       <h4>Etat Physique du centre</h4>
                       <div class="row">
-                       
                         <div class="col-lg-6 mb-4">
                           <div class="form-group">
                             <label for="{{ form_domaineActiviteCapacite.annee_experience.id_for_label }}">annee_experience</label>
                             {{ form_domaineActiviteCapacite.annee_experience }}
                           </div>
                         </div>
-
                         <div class="col-lg-12 mb-4">
                           <div class="form-group">
                             <label for="{{ form_domaineActiviteCapacite.secteurs.id_for_label }}">Secteurs</label>
@@ -629,7 +528,6 @@
                             </div>
                           </div>
                         </div>
-                      
                         <div class="col-lg-12 mb-4">
                           <div class="form-group">
                             <label for="{{ form_domaineActiviteCapacite.public_cibles.id_for_label }}">Publics cibles</label>
@@ -643,35 +541,30 @@
                             </div>
                           </div>
                         </div>
-                      
                         <div class="col-lg-12 mb-4">
                           <div class="form-group">
                             <label for="{{ form_domaineActiviteCapacite.liste_activites.id_for_label }}">Liste des activités</label>
                             {{ form_domaineActiviteCapacite.liste_activites }}
                           </div>
                         </div>
-                      
                         <div class="col-lg-12 mb-4">
                           <div class="form-group">
                             <label for="{{ form_domaineActiviteCapacite.activites_populaires.id_for_label }}">Activités populaires</label>
                             {{ form_domaineActiviteCapacite.activites_populaires }}
                           </div>
                         </div>
-                      
                         <div class="col-lg-12 mb-4">
                           <div class="form-group">
                             <label for="{{ form_domaineActiviteCapacite.ListeAtelier.id_for_label }}">Liste des ateliers</label>
                             {{ form_domaineActiviteCapacite.ListeAtelier }}
                           </div>
                         </div>
-                      
                         <div class="col-lg-6 mb-4">
                           <div class="form-group">
                             <label for="{{ form_domaineActiviteCapacite.capacite_max.id_for_label }}">Capacité maximale</label>
                             {{ form_domaineActiviteCapacite.capacite_max }}
                           </div>
                         </div>
-                      
                         <div class="col-lg-6 mb-4">
                           <div class="form-group">
                             <label for="{{ form_domaineActiviteCapacite.nombre_salles.id_for_label }}">Nombre de salles</label>
@@ -679,77 +572,83 @@
                           </div>
                         </div>
                       </div>
-                      
-                      
                     </section>
                     <h4>Formateur</h4>
                     <section>
                       <h4>Formateur</h4>
                       <div class="row">
-                    
                         <!-- Nombre formateurs permanents -->
                         <div class="col-lg-6 mb-4">
                           <div class="form-group">
-                            <label class="text-label" for="{{ form_formateur.nombre_formateur_permanant.id_for_label }}">Nombre de formateurs permanents</label>
+                            <label class="text-label"
+                                   for="{{ form_formateur.nombre_formateur_permanant.id_for_label }}">
+                              Nombre de formateurs permanents
+                            </label>
                             {{ form_formateur.nombre_formateur_permanant }}
                             {% if form_formateur.nombre_formateur_permanant.errors %}
                               <div class="text-danger mt-1">
                                 {% for error in form_formateur.nombre_formateur_permanant.errors %}
-                                  <small>{{ error }}</small><br>
+                                  <small>{{ error }}</small>
+                                  <br>
                                 {% endfor %}
                               </div>
                             {% endif %}
                           </div>
                         </div>
-                    
                         <!-- Nombre formateurs non permanents -->
                         <div class="col-lg-6 mb-4">
                           <div class="form-group">
-                            <label class="text-label" for="{{ form_formateur.nombre_formateur_nonpermanant.id_for_label }}">Nombre de formateurs non permanents</label>
+                            <label class="text-label"
+                                   for="{{ form_formateur.nombre_formateur_nonpermanant.id_for_label }}">
+                              Nombre de formateurs non permanents
+                            </label>
                             {{ form_formateur.nombre_formateur_nonpermanant }}
                             {% if form_formateur.nombre_formateur_nonpermanant.errors %}
                               <div class="text-danger mt-1">
                                 {% for error in form_formateur.nombre_formateur_nonpermanant.errors %}
-                                  <small>{{ error }}</small><br>
+                                  <small>{{ error }}</small>
+                                  <br>
                                 {% endfor %}
                               </div>
                             {% endif %}
                           </div>
                         </div>
-                    
                         <!-- Niveaux du formateur -->
                         <div class="col-lg-6 mb-4">
                           <div class="form-group">
-                            <label class="text-label" for="{{ form_formateur.niveaux_formateur.id_for_label }}">Niveau Formateur</label>
+                            <label class="text-label"
+                                   for="{{ form_formateur.niveaux_formateur.id_for_label }}">Niveau Formateur</label>
                             {{ form_formateur.niveaux_formateur }}
                             {% if form_formateur.niveaux_formateur.errors %}
                               <div class="text-danger mt-1">
                                 {% for error in form_formateur.niveaux_formateur.errors %}
-                                  <small>{{ error }}</small><br>
+                                  <small>{{ error }}</small>
+                                  <br>
                                 {% endfor %}
                               </div>
                             {% endif %}
                           </div>
                         </div>
-                    
                         <!-- Expérience du formateur -->
                         <div class="col-lg-6 mb-4">
                           <div class="form-group">
-                            <label class="text-label" for="{{ form_formateur.experience_formateur.id_for_label }}">Expérience Formateur</label>
+                            <label class="text-label"
+                                   for="{{ form_formateur.experience_formateur.id_for_label }}">
+                              Expérience Formateur
+                            </label>
                             {{ form_formateur.experience_formateur }}
                             {% if form_formateur.experience_formateur.errors %}
                               <div class="text-danger mt-1">
                                 {% for error in form_formateur.experience_formateur.errors %}
-                                  <small>{{ error }}</small><br>
+                                  <small>{{ error }}</small>
+                                  <br>
                                 {% endfor %}
                               </div>
                             {% endif %}
                           </div>
                         </div>
-                    
                       </div>
                     </section>
-                    
                     <h4>Document administratif</h4>
                     <section>
                       <h4>Document administratif</h4>
@@ -834,30 +733,36 @@
         Scripts
     ***********************************-->
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const filters = [
-        '#filtre-region',
-        '#filtre-prefecture',
-        '#filtre-sousprefecture',
-        '#filtre-commune',
-        '#filtre-secteur'
-      ];
-
-      filters.forEach(selector => {
-        new Choices(selector, {
-          removeItemButton: true,
-          searchEnabled: true,
-          placeholder: true,
-          shouldSort: false
+      document.addEventListener('DOMContentLoaded', function () {
+        const selectors = [
+          '#filtre-region',
+          '#filtre-prefecture',
+          '#filtre-sousprefecture',
+          '#filtre-commune',
+          '#filtre-secteur',
+          '#filtre-categorie',
+          '#filtre-regle',
+          
+        ];
+    
+        selectors.forEach(selector => {
+          const element = document.querySelector(selector);
+          if (element) {
+            new Choices(element, {
+              removeItemButton: true,
+              searchEnabled: true,
+              placeholder: true,
+              shouldSort: false,
+              itemSelectText: ''
+            });
+          }
         });
       });
-    });
 </script>
 <script>
   function getSelectedValues(selector) {
     const select = document.querySelector(selector);
-    if (!select) return [];
-    return Array.from(select.selectedOptions).map(o => o.value.toString().trim());
+    return Array.from(select.selectedOptions).map(option => option.value.trim());
   }
 
   function filterCentres() {
@@ -866,6 +771,8 @@
     const selectedSousprefectures = getSelectedValues('#filtre-sousprefecture');
     const selectedCommunes = getSelectedValues('#filtre-commune');
     const selectedSecteurs = getSelectedValues('#filtre-secteur');
+    const selectedCategories = getSelectedValues('#filtre-categorie');
+    const selectedRegle = document.querySelector('#filtre-regle')?.value.trim() || '';
     const capaciteMax = parseInt(document.querySelector('#filtre-capacite')?.value) || Infinity;
 
     document.querySelectorAll('.centre-row').forEach(row => {
@@ -873,8 +780,10 @@
       const p = row.dataset.prefecture?.trim() || '';
       const sp = row.dataset.sousprefecture?.trim() || '';
       const c = row.dataset.commune?.trim() || '';
-      const secteurs = row.dataset.secteurs?.trim().split(/\s+/) || [];
+      const secteurs = row.dataset.secteurs?.trim().split(/\s*,\s*/) || [];
       const cap = parseInt(row.dataset.capacite) || 0;
+      const regle = row.dataset.regle || '';
+      const categorie = row.dataset.categorie?.trim() || '';
 
       const matchRegion = selectedRegions.length === 0 || selectedRegions.includes(r);
       const matchPrefecture = selectedPrefectures.length === 0 || selectedPrefectures.includes(p);
@@ -882,14 +791,22 @@
       const matchCommune = selectedCommunes.length === 0 || selectedCommunes.includes(c);
       const matchSecteur = selectedSecteurs.length === 0 || selectedSecteurs.some(s => secteurs.includes(s));
       const matchCapacite = cap <= capaciteMax;
+      const matchCategorie = selectedCategories.length === 0 || selectedCategories.includes(categorie);
+      const matchRegle = selectedRegle === '' || regle === selectedRegle;
 
-      const visible = matchRegion && matchPrefecture && matchSouspref && matchCommune && matchSecteur && matchCapacite;
+      const visible = matchRegion && matchPrefecture && matchSouspref && matchCommune &&
+                      matchSecteur && matchCapacite && matchCategorie && matchRegle;
+
       row.style.display = visible ? '' : 'none';
     });
   }
 
   document.addEventListener("DOMContentLoaded", function () {
-    const filters = ['#filtre-region', '#filtre-prefecture', '#filtre-sousprefecture', '#filtre-commune', '#filtre-secteur'];
+    const filters = [
+      '#filtre-region', '#filtre-prefecture', '#filtre-sousprefecture',
+      '#filtre-commune', '#filtre-secteur', '#filtre-categorie', '#filtre-regle'
+    ];
+
     filters.forEach(id => {
       const el = document.querySelector(id);
       if (el) el.addEventListener('change', filterCentres);
@@ -898,6 +815,20 @@
     const capaciteInput = document.querySelector('#filtre-capacite');
     if (capaciteInput) capaciteInput.addEventListener('input', filterCentres);
   });
+
+  console.log('Catégories sélectionnées :', selectedCategories);
+  console.log('Catégorie de chaque centre :', categorie);
+
+  console.log('Filtering with:', {
+    selectedRegions,
+    selectedPrefectures,
+    selectedSousprefectures,
+    selectedCommunes,
+    selectedSecteurs,
+    selectedCategories,
+    selectedRegle,
+    capaciteMax
+});
 </script>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -1002,80 +933,168 @@
     });
 </script>
 <script>
-    // 📄 Exporter en PDF avec jsPDF
-    document.getElementById("export-pdf").addEventListener("click", function () {
-      const { jsPDF } = window.jspdf;
-      const doc = new jsPDF();
+  // 📄 Exporter en PDF avec jsPDF
+  document.getElementById("export-pdf").addEventListener("click", function () {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({ orientation: "landscape" });
 
-      // Récupère uniquement les lignes visibles
-      const visibleRows = Array.from(document.querySelectorAll("#example tbody tr"))
-        .filter(row => row.offsetParent !== null);
+    doc.setFontSize(14);
+    doc.setFont("helvetica", "bold");
+    const titre = "LISTE DES CENTRES DE FORMATION PROFESSIONNELLE ET TECHNIQUE DE LA RCA";
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const textWidth = doc.getTextWidth(titre);
+    doc.text(titre, (pageWidth - textWidth) / 2, 15);
 
-      // Créer une table HTML temporaire uniquement avec les lignes visibles
-      const tempTable = document.createElement("table");
-      tempTable.innerHTML = document.querySelector("#example thead").outerHTML;
+    const visibleRows = Array.from(document.querySelectorAll("#example tbody tr"))
+      .filter(row => row.offsetParent !== null);
 
-      const tbody = document.createElement("tbody");
-      visibleRows.forEach(row => tbody.appendChild(row.cloneNode(true)));
-      tempTable.appendChild(tbody);
+    const tempTable = document.createElement("table");
+    tempTable.innerHTML = document.querySelector("#example thead").outerHTML;
 
-      doc.autoTable({
-        html: tempTable,
-        startY: 20,
-        theme: "grid",
-        headStyles: { fillColor: [220, 53, 69] },
-      });
+    const tbody = document.createElement("tbody");
+    visibleRows.forEach(row => tbody.appendChild(row.cloneNode(true)));
+    tempTable.appendChild(tbody);
 
-      doc.save("centres_filtrés.pdf");
+    doc.autoTable({
+      html: tempTable,
+      startY: 25,
+      theme: "grid",
+      headStyles: {
+        fontStyle: "bold",
+        fillColor: [230, 230, 230],
+        textColor: 20,
+        halign: "center",
+        valign: "middle",
+        lineWidth: 0.1,
+        lineColor: [0, 0, 0],
+      },
+      bodyStyles: {
+        textColor: 0,
+        lineWidth: 0.1,
+        lineColor: [0, 0, 0],
+      },
+      styles: {
+        fontSize: 8,
+        cellPadding: 2,
+        overflow: "linebreak",
+        lineWidth: 0.1,
+        lineColor: [0, 0, 0],
+      },
     });
 
-    // 📄 Exporter en Word avec docx
-    document.getElementById("export-word").addEventListener("click", function () {
-      const {
-        Document, Packer, Paragraph, Table, TableCell, TableRow, TextRun
-      } = window.docx;
+    doc.output("dataurlnewwindow");
+    doc.save("centres_filtrés.pdf");
+  });
 
-      const table = document.getElementById("example");
-      const headerCells = Array.from(table.querySelectorAll("thead th")).map(th =>
+  // 📄 Exporter en Word avec docx
+  document.getElementById("export-word").addEventListener("click", function () {
+    const {
+      Document, Packer, Paragraph, Table, TableCell, TableRow, TextRun, AlignmentType, WidthType, PageOrientation
+    } = window.docx;
+
+    const table = document.getElementById("example");
+
+    const headerCells = Array.from(table.querySelectorAll("thead th")).map(th =>
+      new TableCell({
+        children: [
+          new Paragraph({
+            children: [new TextRun({ text: th.innerText, bold: true })],
+            alignment: AlignmentType.CENTER
+          })
+        ],
+        verticalAlign: "center",
+        shading: { fill: "E6E6E6" },
+        borders: {
+          top: { style: "single", size: 1, color: "000000" },
+          bottom: { style: "single", size: 1, color: "000000" },
+          left: { style: "single", size: 1, color: "000000" },
+          right: { style: "single", size: 1, color: "000000" },
+        }
+      })
+    );
+
+    const visibleRows = Array.from(table.querySelectorAll("tbody tr"))
+      .filter(row => row.offsetParent !== null);
+
+    const dataRows = visibleRows.map(row => {
+      const cells = Array.from(row.querySelectorAll("td")).map(td =>
         new TableCell({
-          children: [new Paragraph({ children: [new TextRun(th.innerText)] })],
+          children: [
+            new Paragraph({
+              children: [new TextRun(td.innerText)],
+              alignment: AlignmentType.LEFT
+            })
+          ],
+          verticalAlign: "center",
+          borders: {
+            top: { style: "single", size: 1, color: "000000" },
+            bottom: { style: "single", size: 1, color: "000000" },
+            left: { style: "single", size: 1, color: "000000" },
+            right: { style: "single", size: 1, color: "000000" },
+          }
         })
       );
-
-      const visibleRows = Array.from(table.querySelectorAll("tbody tr"))
-        .filter(row => row.offsetParent !== null);
-
-      const dataRows = visibleRows.map(row => {
-        const cells = Array.from(row.querySelectorAll("td")).map(td =>
-          new TableCell({
-            children: [new Paragraph({ children: [new TextRun(td.innerText)] })],
-          })
-        );
-        return new TableRow({ children: cells });
-      });
-
-      const doc = new Document({
-        sections: [
-          {
-            properties: {},
-            children: [
-              new Paragraph({ text: "Liste des centres filtrés", heading: "Heading1" }),
-              new Table({
-                rows: [
-                  new TableRow({ children: headerCells }),
-                  ...dataRows
-                ]
-              })
-            ]
-          }
-        ]
-      });
-
-      Packer.toBlob(doc).then(blob => {
-        saveAs(blob, "centres_filtrés.docx");
-      });
+      return new TableRow({ children: cells });
     });
+
+    const doc = new Document({
+      sections: [
+        {
+          properties: {
+            page: {
+              size: {
+                orientation: PageOrientation.LANDSCAPE,
+              }
+            }
+          },
+          children: [
+            new Paragraph({
+              children: [
+                new TextRun({
+                  text: "LISTE DES CENTRES DE FORMATION PROFESSIONNELLE ET TECHNIQUE DE LA RCA",
+                  bold: true,
+                  size: 28,
+                })
+              ],
+              alignment: AlignmentType.CENTER,
+              spacing: { after: 300 },
+            }),
+            new Table({
+              width: {
+                size: 100,
+                type: WidthType.PERCENTAGE
+              },
+              rows: [
+                new TableRow({ children: headerCells }),
+                ...dataRows
+              ]
+            })
+          ]
+        }
+      ]
+    });
+
+    Packer.toBlob(doc).then(blob => {
+      saveAs(blob, "centres_filtrés.docx");
+    });
+  });
 </script>
+{% if messages %}
+  <script>
+    {% for message in messages %}
+      Swal.fire({
+        icon: "{% if message.tags == 'success' %}success{% elif message.tags == 'error' %}error{% else %}info{% endif %}",
+        title: "{% if message.tags == 'success' %}Succès{% elif message.tags == 'error' %}Erreur{% else %}Info{% endif %}",
+        text: "{{ message|escapejs }}",
+        confirmButtonText: "OK",
+        timer: 4000,
+        timerProgressBar: true,
+      });
+    {% endfor %}
+  </script>
+{% endif %}
+
+
 <!-- Required Choices -->
 <script src="{% static 'dependances/choices.min.js' %}"></script>
 <!-- Required vendors -->

@@ -18,6 +18,12 @@
     />
     <!--  <link href="{% static 'vendor/fullcalendar/css/fullcalendar.min.css'%}" rel="stylesheet">-->
     <link href="{% static 'css/style.css'%}" rel="stylesheet" />
+    <style>
+      body {
+  background-color: #edf1f5;
+}
+
+    </style>
   </head>
 
   <body>
@@ -43,10 +49,10 @@
             Nav header start
         ***********************************-->
       <div class="nav-header">
-         <a href="{% url 'index' %}" class="brand-logo">
+         <!--<a href="{% url 'index' %}" class="brand-logo">
                 <img class="img-fluid w-40 rounded center" src="{% static 'images/acfpe.png' %}" alt="">
                
-            </a>
+            </a>-->
 
         <div class="nav-control">
           <div class="hamburger">
@@ -62,143 +68,7 @@
       <!--**********************************
             Header start
         ***********************************-->
-      <div class="header">
-        <div class="header-content">
-          <nav class="navbar navbar-expand">
-            <div class="collapse navbar-collapse justify-content-between">
-              <div class="header-left">
-                <div class="search_bar dropdown">
-                  <span
-                    class="search_icon p-3 c-pointer"
-                    data-toggle="dropdown"
-                  >
-                    <i class="mdi mdi-magnify"></i>
-                  </span>
-                  <div class="dropdown-menu p-0 m-0">
-                    <form>
-                      <input
-                        class="form-control"
-                        type="search"
-                        placeholder="Search"
-                        aria-label="Search"
-                      />
-                    </form>
-                  </div>
-                </div>
-              </div>
-
-              <ul class="navbar-nav header-right">
-                <li class="nav-item dropdown notification_dropdown">
-                  <a
-                    class="nav-link"
-                    href="#"
-                    role="button"
-                    data-toggle="dropdown"
-                  >
-                    <i class="mdi mdi-bell"></i>
-                    <div class="pulse-css"></div>
-                  </a>
-                  <div class="dropdown-menu dropdown-menu-right">
-                    <ul class="list-unstyled">
-                      <li class="media dropdown-item">
-                        <span class="success"><i class="ti-user"></i></span>
-                        <div class="media-body">
-                          <a href="#">
-                            <p>
-                              <strong>Martin</strong> has added a
-                              <strong>customer</strong> Successfully
-                            </p>
-                          </a>
-                        </div>
-                        <span class="notify-time">3:20 am</span>
-                      </li>
-                      <li class="media dropdown-item">
-                        <span class="primary"
-                          ><i class="ti-shopping-cart"></i
-                        ></span>
-                        <div class="media-body">
-                          <a href="#">
-                            <p>
-                              <strong>Jennifer</strong> purchased Light
-                              Dashboard 2.0.
-                            </p>
-                          </a>
-                        </div>
-                        <span class="notify-time">3:20 am</span>
-                      </li>
-                      <li class="media dropdown-item">
-                        <span class="danger"><i class="ti-bookmark"></i></span>
-                        <div class="media-body">
-                          <a href="#">
-                            <p>
-                              <strong>Robin</strong> marked a
-                              <strong>ticket</strong> as unsolved.
-                            </p>
-                          </a>
-                        </div>
-                        <span class="notify-time">3:20 am</span>
-                      </li>
-                      <li class="media dropdown-item">
-                        <span class="primary"><i class="ti-heart"></i></span>
-                        <div class="media-body">
-                          <a href="#">
-                            <p>
-                              <strong>David</strong> purchased Light Dashboard
-                              1.0.
-                            </p>
-                          </a>
-                        </div>
-                        <span class="notify-time">3:20 am</span>
-                      </li>
-                      <li class="media dropdown-item">
-                        <span class="success"><i class="ti-image"></i></span>
-                        <div class="media-body">
-                          <a href="#">
-                            <p>
-                              <strong> James.</strong> has added a<strong
-                                >customer</strong
-                              >
-                              Successfully
-                            </p>
-                          </a>
-                        </div>
-                        <span class="notify-time">3:20 am</span>
-                      </li>
-                    </ul>
-                    <a class="all-notification" href="#"
-                      >See all notifications <i class="ti-arrow-right"></i
-                    ></a>
-                  </div>
-                </li>
-                <li class="nav-item dropdown header-profile">
-                  <a
-                    class="nav-link"
-                    href="#"
-                    role="button"
-                    data-toggle="dropdown"
-                  >
-                    <i class="mdi mdi-account"></i>
-                  </a>
-                  <div class="dropdown-menu dropdown-menu-right">
-                    <a href="./app-profile.html" class="dropdown-item">
-                      <i class="icon-user"></i>
-                      <span class="ml-2">Profile </span>
-                    </a>
-                    <a href="./email-inbox.html" class="dropdown-item">
-                      <i class="icon-envelope-open"></i>
-                      <span class="ml-2">Inbox </span>
-                    </a>
-                    <a href="./page-login.html" class="dropdown-item">
-                      <i class="icon-key"></i>
-                      <span class="ml-2">Logout </span>
-                    </a>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </nav>
-        </div>
-      </div>
+        {% include "./Titre.html" %}
       <!--**********************************
             Header end ti-comment-alt
         ***********************************-->
@@ -206,55 +76,57 @@
       <!--**********************************
             Sidebar start
         ***********************************-->
-      <div class="quixnav">
-        <div class="quixnav-scroll">
-        <ul class="metismenu" id="menu">
-            <li class="nav-label first">Main Menu</li>
-            <li>
-              <a href="{% url 'index' %}" aria-expanded="false"
-                ><i class="bi bi-house "></i
-                ><span class="nav-text">Acceuil</span></a
-              >
-            </li>
-
-            <li>
-              <a
-                class="has-arrow"
-                href="javascript:void()"
-                aria-expanded="false"
-                ><i class="mdi mdi-map-marker"></i><span class="nav-text">Localisation</span></a>
-              <ul aria-expanded="false">
-                <li><a href="{% url 'region' %}">Region</a></li>
-                <li><a href="{% url 'prefecture' %}">Prefecture</a></li>
-                <li>
-                  <a href="{% url 'sous_prefecture' %}">Sous Prefecture</a>
-                </li>
-                <li>
-                  <a href="{% url 'commune' %}">Commune / Arondissement</a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a
-                class="has-arrow"
-                href="javascript:void()"
-                aria-expanded="false"
-                ><i class="fa fa-wrench"></i
-                ><span class="nav-text">Activité</span></a>
-              <ul aria-expanded="false">
-                <li><a href="{% url 'secteur' %}">Secteur</a></li>
-                <li><a href="{% url 'publiccible' %}">Publics Cible</a></li>
-              </ul>
-            </li>
-
-            <li>
-              <a href="{% url 'centre_formation' %}" aria-expanded="false">
-                <i class="fa fa-graduation-cap"></i>
-                  <span class="nav-text">Centre Formation</span></a>
-            </li>
-          </ul>
+        <div class="quixnav">
+          <div class="quixnav-scroll">
+                   <ul class="metismenu" id="menu">
+              <li class="nav-label first">Main Menu</li>
+              <li>
+                <a href="{% url 'index' %}" aria-expanded="false"
+                  ><i class="mdi mdi-home"></i
+                  ><span class="nav-text">Acceuil</span></a
+                >
+              </li>
+  
+              <li>
+                <a
+                  class="has-arrow"
+                  href="javascript:void()"
+                  aria-expanded="false"
+                  ><i class="mdi mdi-map-marker"></i
+                  ><span class="nav-text">Localisation</span></a
+                >
+                <ul aria-expanded="false">
+                  <li><a href="{% url 'region' %}">Region</a></li>
+                  <li><a href="{% url 'prefecture' %}">Prefecture</a></li>
+                  <li>
+                    <a href="{% url 'sous_prefecture' %}">Sous Prefecture</a>
+                  </li>
+                  <li>
+                    <a href="{% url 'commune' %}">Commune / Arondissement</a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a
+                  class="has-arrow"
+                  href="javascript:void()"
+                  aria-expanded="false"
+                  ><i class="fa fa-wrench"></i
+                  ><span class="nav-text">Activité</span></a>
+                <ul aria-expanded="false">
+                  <li><a href="{% url 'secteur' %}">Secteur</a></li>
+                  <li><a href="{% url 'publiccible' %}">Publics Cible</a></li>
+                </ul>
+              </li>
+  
+              <li>
+                <a href="{% url 'centre_formation' %}" aria-expanded="false"
+                  ><i class="fa fa-graduation-cap"></i>
+                    <span class="nav-text">Centre Formation</span></a>
+              </li>
+            </ul>
+          </div>
         </div>
-      </div>
       <!--**********************************
             Sidebar end
         ***********************************-->
@@ -306,16 +178,16 @@
                               class="display"
                               style="min-width: 845px"
                             >
-                              <thead>
+                              <thead >
                                 <tr>
-                                  <th>Name</th>
-                                  <th>Region</th>
-                                  <th>Action</th>
+                                  <th class="text-primary">NOM</th>
+                                  <th class="text-primary">REGION</th>
+                                  <th class="text-primary"> ACTION</th>
                                 </tr>
                               </thead>
-                              <tbody>
+                              <tbody class="text-dark">
                                 {%for prefecture in prefectures %}
-                                <tr>
+                                <tr >
                                   <td>{{prefecture.nom}}</td>
                                   <td>{{ prefecture.region }}</td>
                                   <td>

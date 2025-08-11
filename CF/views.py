@@ -20,6 +20,9 @@ from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
+from django.db.models import Exists, OuterRef
+from django.db.models import Case, When, Value, BooleanField, Exists, OuterRef
+
 
 
 
@@ -801,14 +804,165 @@ def publiccible_view(request, pk=None):
         },
     )
 
+"""
+
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.db.models import Exists, OuterRef
+from django.http import HttpResponse
+from django.shortcuts import render, redirect
+from django.template.loader import render_to_string
+from docx import Document
+import pdfkit
+
+
 @login_required
 def centre_formation_view(request):
     print("🔍 Méthode requête :", request.method)
     print("📦 POST data :", request.POST)
+
+    # Chargement des centres avec relations
+    centres = CentreFormation.objects.prefetch_related(
+        "secteurs", "domaineactivitecapacite_set"
+    ).select_related("commune__sousprefecture__prefecture__region")
+
+    # ✅ Annotation : un centre est "en règle" s’il a un fichier immatriculation_acfpe ET agrement_valide
+    centres = centres.annotate(
+        en_regle=Exists(
+            DocumentAdministratif.objects.filter(
+                centre=OuterRef('pk'),
+                immatriculation_acfpe__isnull=False,
+                agrement_valide__isnull=False
+            )
+        )
+    )
+
+    # Export PDF
+    if request.GET.get("export") == "pdf":
+        html = render_to_string("pages/centre_formation_pdf.html", {"centres": centres})
+        pdf = pdfkit.from_string(html, False)
+        response = HttpResponse(pdf, content_type="application/pdf")
+        response["Content-Disposition"] = 'attachment; filename="centres_formation.pdf"'
+        return response
+
+    # Export Word
+    if request.GET.get("export") == "word":
+        doc = Document()
+        doc.add_heading("Liste des Centres de Formation", 0)
+        for centre in centres:
+            doc.add_heading(centre.intitule, level=1)
+            doc.add_paragraph(f"Commune : {centre.commune.nom}")
+            secteurs_text = ", ".join(s.nom for s in centre.secteurs.all())
+            doc.add_paragraph(f"Secteurs : {secteurs_text}")
+            doc.add_paragraph(f"Adresse : {centre.adresse}")
+            doc.add_paragraph(f"Téléphone : {centre.telephone}")
+            doc.add_paragraph("")
+
+        response = HttpResponse(
+            content_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+        )
+        response["Content-Disposition"] = (
+            'attachment; filename="centres_formation.docx"'
+        )
+        doc.save(response)
+        return response
+
+    # Formulaires
+    form_centre = CentreFormationForm(request.POST or None)
+    form_domaine = DomaineActiviteCapaciteForm(request.POST or None)
+    form_formateur = FormateurForm(request.POST or None)
+    form_docs = DocumentAdministratifForm(request.POST or None, request.FILES or None)
+    form_ref = PersonneReferenceForm(request.POST or None)
+
+    if request.method == "POST":
+        if (
+            form_centre.is_valid()
+            and form_domaine.is_valid()
+            and form_formateur.is_valid()
+            and form_docs.is_valid()
+            and form_ref.is_valid()
+        ):
+            centre = form_centre.save()
+
+            domaine = form_domaine.save(commit=False)
+            domaine.centre = centre
+            domaine.save()
+            form_domaine.save_m2m()
+
+            formateur = form_formateur.save(commit=False)
+            formateur.centre = centre
+            formateur.save()
+
+            doc = form_docs.save(commit=False)
+            doc.centre = centre
+            doc.save()
+
+            ref = form_ref.save(commit=False)
+            ref.centre = centre
+            ref.save()
+
+            messages.success(request, "Les informations ont été enregistrées avec succès !")
+            return redirect("centre_formation")
+        else:
+            messages.error(request, "Erreur dans les formulaires. Veuillez corriger les champs.")
+            print("Erreurs validation centre :", form_centre.errors)
+            print("Erreurs validation domaine :", form_domaine.errors)
+            print("Erreurs validation formateur :", form_formateur.errors)
+            print("Erreurs validation docs :", form_docs.errors)
+            print("Erreurs validation ref :", form_ref.errors)
+
+    # 🔽 Préparation des données pour les filtres JS
+    regions = Region.objects.all()
+    prefectures = Prefecture.objects.all()
+    sousprefectures = SousPrefecture.objects.all()
+    communes = Commune.objects.all()
+    secteurs = Secteur.objects.all()
+    categories = CentreFormation.CATEGORIE_CHOICES  # ✅ labels des catégories
+
+    return render(
+        request,
+        "pages/cf.html",
+        {
+            "form_centre": form_centre,
+            "form_domaineActiviteCapacite": form_domaine,
+            "form_formateur": form_formateur,
+            "form_docs": form_docs,
+            "form_ref": form_ref,
+            "centres": centres,
+            "document": DocumentAdministratif.objects.all(),
+            "regions": regions,
+            "prefectures": prefectures,
+            "sousprefectures": sousprefectures,
+            "communes": communes,
+            "secteurs": secteurs,
+            "categories": categories,  # ✅ transmis avec labels
+        },
+    )
+
+
+
+
+
+"""
+@login_required
+def centre_formation_view(request):
     print("🔍 Méthode requête :", request.method)
     print("📦 POST data :", request.POST)
-    centres = CentreFormation.objects.all()
 
+    centres = list(CentreFormation.objects.all())
+    categories = CentreFormation.CATEGORIE_CHOICES
+
+    # ✅ Ajouter l'attribut dynamique `en_regle` à chaque centre
+    for centre in centres:
+        centre.en_regle = DocumentAdministratif.objects.filter(
+            centre=centre,
+            immatriculation_acfpe__isnull=False,
+            agrement_valide__isnull=False
+        ).exclude(
+            immatriculation_acfpe="",
+            agrement_valide=""
+        ).exists()
+        print(f"[DEBUG] {centre.intitule} - En règle : {centre.en_regle}")
     # Export PDF
     if request.GET.get("export") == "pdf":
         html = render_to_string("pages/centre_formation_pdf.html", {"centres": centres})
@@ -902,8 +1056,10 @@ def centre_formation_view(request):
             "sousprefectures": SousPrefecture.objects.all(),
             "communes": Commune.objects.all(),
             "secteurs": Secteur.objects.all(),
+            "categories": categories,
         },
     )
+
 
 @login_required
 def centre_detail(request, pk):
@@ -1076,7 +1232,7 @@ def centre_detail(request, pk):
 
 @login_required
 def index(request):
-    # Données pour les graphiques
+    # 📊 Données géographiques
     region_data = list(
         Region.objects.annotate(
             total=Count("prefectures__sousprefectures__communes__centres")
@@ -1088,15 +1244,17 @@ def index(request):
         ).values("nom", "total")
     )
     souspref_data = list(
-        SousPrefecture.objects.annotate(total=Count("communes__centres")).values(
-            "nom", "total"
-        )
+        SousPrefecture.objects.annotate(
+            total=Count("communes__centres")
+        ).values("nom", "total")
     )
     commune_data = list(
-        Commune.objects.annotate(total=Count("centres")).values("nom", "total")
+        Commune.objects.annotate(
+            total=Count("centres")
+        ).values("nom", "total")
     )
 
-    # Statistiques globales
+    # 📋 Statistiques globales
     total_regions = Region.objects.count()
     total_prefectures = Prefecture.objects.count()
     total_sousprefectures = SousPrefecture.objects.count()
@@ -1104,36 +1262,50 @@ def index(request):
     total_secteurs = Secteur.objects.count()
     total_centre = CentreFormation.objects.count()
 
-    # ➕ Centres unisectoriels et multisectoriels
-    # Centres unisectoriels
+    # 🔄 Centres unisectoriels et multisectoriels
     total_centres_uni = DomaineActiviteCapacite.objects.annotate(
         nb_secteurs=Count("secteurs")
     ).filter(nb_secteurs=1).count()
 
-    # Compter les centres multisectoriels
     total_centres_multi = DomaineActiviteCapacite.objects.annotate(
         nb_secteurs=Count("secteurs")
     ).filter(nb_secteurs__gt=1).count()
-    
+
+    # ✅ Centres en règle
     centres_en_regle = CentreFormation.objects.filter(
-    document_administratif__immatriculation_acfpe__isnull=False
-).exclude(
-    document_administratif__immatriculation_acfpe=''
-).filter(
-    document_administratif__agrement_valide__isnull=False
-).exclude(
-    document_administratif__agrement_valide=''
-)
+        document_administratif__isnull=False,
+        document_administratif__immatriculation_acfpe__isnull=False,
+    ).exclude(
+        document_administratif__immatriculation_acfpe=""
+    ).filter(
+        document_administratif__agrement_valide__isnull=False,
+    ).exclude(
+        document_administratif__agrement_valide=""
+    )
 
-    total_centre_en_regle=centres_en_regle.count()
+    total_centre_en_regle = centres_en_regle.count()
+    total_centre_non_regle = total_centre - total_centre_en_regle
 
+    # 📊 Centres par catégorie
+    categorie_data = list(
+        CentreFormation.objects.values("categorie")
+        .annotate(total=Count("id"))
+    )
+
+    # Mapping des catégories (1e, 2e, 3e) vers labels lisibles
+    categorie_mapping = dict(CentreFormation.CATEGORIE_CHOICES)
+    for c in categorie_data:
+        c["categorie"] = categorie_mapping.get(c["categorie"], "Non spécifiée")
+
+    # 🔄 Contexte à passer au template
     context = {
+        # 📊 Données pour les graphiques géographiques
         "region_data": json.dumps(region_data),
         "prefecture_data": json.dumps(pref_data),
         "sousprefecture_data": json.dumps(souspref_data),
         "commune_data": json.dumps(commune_data),
-        # Statistiques globales
-        "total_centre_en_regle":total_centre_en_regle,
+
+        # 🧮 Statistiques générales
         "total_regions": total_regions,
         "total_prefectures": total_prefectures,
         "total_sousprefectures": total_sousprefectures,
@@ -1142,9 +1314,18 @@ def index(request):
         "total_centres_uni": total_centres_uni,
         "total_centres_multi": total_centres_multi,
         "total_centre": total_centre,
+        "total_centre_en_regle": total_centre_en_regle,
+
+        # 📊 Données pour graphiques par catégorie et régularité
+        "categorie_data": json.dumps(categorie_data),
+        "centre_regle_data": json.dumps({
+            "en_regle": total_centre_en_regle,
+            "non_regle": total_centre_non_regle,
+        }),
     }
 
     return render(request, "pages/index.html", context)
+
 
 
 # def calendar(request):
