@@ -7,6 +7,12 @@
       dir="ltr"
       data-pc-theme="light">
   <!-- [Head] start -->
+
+  <style>
+    body {
+  background-color: #61e608ff;
+}
+  </style>
   <head>
     <title>Login</title>
     <!-- [Meta] -->
@@ -41,6 +47,12 @@
           href="{% static 'assets1/css/style.css' %}"
           id="main-style-link" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+      .auth-main {
+    background-color: #ffe4e6; /* Rose clair */
+}
+
+    </script>
   </head>
   <!-- [Head] end -->
   <!-- [Body] Start -->
@@ -53,7 +65,8 @@
       </div>
     </div>
     <!-- [ Pre-loader ] End -->
-    <div class="auth-main relative">
+    <div class="auth-main relative " style="background: linear-gradient(135deg, #3b82f6, #a0522d);
+">
       <div class="auth-wrapper v1 flex items-center w-full h-full min-h-screen">
         <div class="auth-form flex items-center justify-center grow flex-col min-h-screen relative p-6 ">
           <div class="w-full max-w-[350px] relative">
@@ -106,7 +119,7 @@
                       <!-- Nom d'utilisateur -->
                       <div class="col-lg-12 mb-4">
                         <div class="form-group mb-2">
-                          <label class="text-label" for="{{ form.username.id_for_label }}">Nom d'utilisateur</label>
+                          <!--<label class="text-label" for="{{ form.username.id_for_label }}">Nom d'utilisateur</label>-->
                           {{ form.username }}
                           {% if form.username.errors %}
                             <div class="text-danger mt-1">
@@ -121,7 +134,7 @@
                       <!-- Mot de passe -->
                       <div class="col-lg-12 ">
                         <div class="form-group">
-                          <label class="text-label" for="{{ form.password.id_for_label }}">Mot de passe</label>
+                          <!--<label class="text-label" for="{{ form.password.id_for_label }}">Mot de passe</label>-->
                           {{ form.password }}
                           {% if form.password.errors %}
                             <div class="text-danger mt-1">
@@ -139,7 +152,7 @@
                         {% endfor %}
                       {% endif %}
                       <!-- Bouton Connexion -->
-                      <div class="col-lg-12 text-center mb-2">
+                      <div class="col-lg-12 text-center mb-2 mt-2">
                         <button type="submit" class="btn btn-primary mx-auto shadow-2xl">Connexion</button>
                       </div>
                     </div>
@@ -166,6 +179,8 @@
         </div>
       </div>
     </div>
+
+    
     <!-- [ Main Content ] end -->
     <script>
       document.addEventListener('DOMContentLoaded', () => {
@@ -185,6 +200,35 @@
         }
       });
     </script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("login-form");
+    const submitBtn = form.querySelector('button[type="submit"]');
+
+    form.addEventListener("submit", function () {
+        // Désactiver le bouton
+        submitBtn.disabled = true;
+
+        // Sauvegarder le texte original
+        const originalText = submitBtn.innerHTML;
+
+        // Mettre un spinner
+        submitBtn.innerHTML = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Traitement...`;
+
+        // Reset le formulaire après un petit délai (utile si pas de redirection)
+        setTimeout(() => {
+            form.reset();
+            submitBtn.disabled = false; // Réactiver si tu veux refaire un essai
+            submitBtn.innerHTML = originalText; // Remettre le texte original
+        }, 1500);
+    });
+});
+</script>
+
+
+
     <!-- Required Js -->
     <script src="{% static 'assets1/js/plugins/simplebar.min.js'%}"></script>
     <script src="{% static 'assets1/js/plugins/popper.min.js'%}"></script>

@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Focus - Bootstrap Admin Dashboard</title>
+    <title>Sousprefecture de : {{sous_prefecture.nom}} </title>
     <!-- Favicon icon -->
     <link rel="icon"
           type="image/png"
@@ -26,9 +26,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/docx/7.7.0/docx.umd.min.js"></script>
      <style>
-      body {
-  background-color: #edf1f5;
-}
+       body{
+background-image: url("{% static 'photo/img2.jpg' %}");
+
+      }
 
     </style>
   </head>
@@ -257,7 +258,7 @@
                             </tr>
                           {% empty %}
                             <tr>
-                              <td class="text-center" colspan="7">Aucun centre trouvé dans cette région.</td>
+                              <td class="text-center" colspan="7">Aucun centre trouvé dans cette sous prefecture.</td>
                             </tr>
                           {% endfor %}
                         </tbody>

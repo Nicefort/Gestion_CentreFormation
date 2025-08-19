@@ -18,12 +18,16 @@ from docx import Document
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required, user_passes_test
 from django.contrib.auth import logout
-from django.db.models import Exists, OuterRef
 from django.db.models import Case, When, Value, BooleanField, Exists, OuterRef
 
 
+def is_gestionnaire(user):
+    return user.groups.filter(name='gestionnaire').exists()
+
+def is_admin(user):
+    return user.is_superuser or user.groups.filter(name='admin').exists()
 
 
 @login_required
@@ -944,11 +948,13 @@ def centre_formation_view(request):
 
 
 """
+
+
 @login_required
 def centre_formation_view(request):
     print("🔍 Méthode requête :", request.method)
     print("📦 POST data :", request.POST)
-
+    is_gestionnaire = request.user.groups.filter(name='gestionnaire').exists()
     centres = list(CentreFormation.objects.all())
     categories = CentreFormation.CATEGORIE_CHOICES
 
@@ -1057,12 +1063,16 @@ def centre_formation_view(request):
             "communes": Commune.objects.all(),
             "secteurs": Secteur.objects.all(),
             "categories": categories,
+            "is_gestionnaire": is_gestionnaire,
+    "can_add_centre": True,  # Les gestionnaires peuvent ajouter
         },
     )
 
 
 @login_required
 def centre_detail(request, pk):
+
+    is_gestionnaire = request.user.groups.filter(name='gestionnaire').exists()
     centre = get_object_or_404(
         CentreFormation.objects.select_related(
             "commune__sous_prefecture__prefecture__region",
@@ -1140,6 +1150,9 @@ def centre_detail(request, pk):
 
     # 🔹 Traitement des formulaires
     if request.method == "POST":
+        if is_gestionnaire:
+            messages.error(request, "Vous n'avez pas les permissions pour modifier un centre.")
+            return redirect("centre_detail", pk=centre.pk)
         if "delete" in request.POST:
             centre.delete()
             messages.success(request, "Centre supprimé avec succès.")
@@ -1227,6 +1240,9 @@ def centre_detail(request, pk):
             ),
             "documents": doc,
             "personne_reference": ref,
+             "is_gestionnaire": is_gestionnaire,  # AJOUTÉ AU CONTEXTE
+            "can_edit": not is_gestionnaire,     # AJOUTÉ AU CONTEXTE
+            "can_delete": not is_gestionnaire,   # AJO
         },
     )
 

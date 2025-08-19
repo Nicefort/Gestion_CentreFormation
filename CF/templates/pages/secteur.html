@@ -18,6 +18,12 @@
     />
     <!--  <link href="{% static 'vendor/fullcalendar/css/fullcalendar.min.css'%}" rel="stylesheet">-->
     <link href="{% static 'css/style.css'%}" rel="stylesheet" />
+    <style>
+       body{
+background-image: url("{% static 'photo/img2.jpg' %}");
+
+      }
+    </style>
   </head>
 
   <body>
@@ -43,10 +49,10 @@
             Nav header start
         ***********************************-->
       <div class="nav-header">
-         <a href="{% url 'index' %}" class="brand-logo">
+        <!--<a href="{% url 'index' %}" class="brand-logo">
                 <img class="img-fluid w-40 rounded center" src="{% static 'images/acfpe.png' %}" alt="">
                
-            </a>
+            </a>-->
 
         <div class="nav-control">
           <div class="hamburger">
@@ -158,45 +164,10 @@
           <!-- row -->
 
           <div class="row">
-            <div class="col-lg-3">
-              <div class="card">
-                <div class="card-body">
-                  <h4 class="card-intro-title">Filtre</h4>
-
-                  <div class="">
-                    <div id="external-events" class="my-3">
-                      <p>Drag and drop your event or click in the calendar</p>
-                      <div class="external-event" data-class="bg-primary">
-                        <i class="fa fa-move"></i>New Theme Release
-                      </div>
-                      <div class="external-event" data-class="bg-success">
-                        <i class="fa fa-move"></i>My Event
-                      </div>
-                      <div class="external-event" data-class="bg-warning">
-                        <i class="fa fa-move"></i>Meet manager
-                      </div>
-                      <div class="external-event" data-class="bg-dark">
-                        <i class="fa fa-move"></i>Create New theme
-                      </div>
-                    </div>
-                    <!-- checkbox -->
-                    <div class="checkbox checkbox-event pt-3 pb-5">
-                      <input
-                        id="drop-remove"
-                        class="styled-checkbox"
-                        type="checkbox"
-                      />
-                      <label class="ml-2 mb-0" for="drop-remove"
-                        >Remove After Drop</label
-                      >
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div class="col-lg-1">
             </div>
             <div class="col-lg-9">
-              <div class="card">
-                <div class="card-body">
+             
                   <div class="row">
                     <div class="col-12">
                       <div class="card">
@@ -212,7 +183,7 @@
                             >
                               <thead>
                                 <tr>
-                                  <th>Name</th>
+                                  <th>Nom</th>
                                 </tr>
                               </thead>
                               <tbody>
@@ -233,8 +204,7 @@
                       </div>
                     </div>
                   </div>
-                </div>
-              </div>
+               
             </div>
             <!-- BEGIN MODAL -->
             <div class="modal fade none-border" id="event-modal">

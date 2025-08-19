@@ -17,17 +17,51 @@
           rel="stylesheet" />
     <link href="{% static 'css/style.css ' %}" rel="stylesheet" />
     <style>
-      .wizard > .content > .body {
-        max-height: 500px;
-        overflow-y: auto;
-        overflow-x: hidden;
-        padding: 20px;
+    .wizard>.content>.body {
+      max-height: 500px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: 20px;
+    }
+    </style>
+    <style>
+      /* Si tu utilises jQuery Steps ou un plugin similaire */
+      .wizard > .steps {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        justify-content: space-between !important;
+        overflow-x: auto;
       }
-
+      
+      .wizard > .steps > ul {
+        display: flex !important;
+        width: 100% !important;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+      }
+      
+      .wizard > .steps > ul > li {
+        flex: 1 1 auto;
+        text-align: center;
+        white-space: nowrap;
+      }
+      
+      .wizard > .steps > ul > li a {
+        display: inline-block;
+        width: 100%;
+        padding: 10px;
+        background-color: #f2f2f2;
+        border-radius: 5px;
+        font-weight: bold;
+        color: #333;
+      }
+      
+     
       body{
-background-color: #edf1f5;
+background-image: url("{% static 'photo/img2.jpg' %}");
+
       }
- 
 
     </style>
   </head>
@@ -804,6 +838,7 @@ background-color: #edf1f5;
 <!--**********************************
         Scripts
 ***********************************-->
+
 <script src="{% static 'vendor/global/global.min.js'%}"></script>
 <script src="{% static 'js/quixnav-init.js'%}"></script>
 <script src="{% static 'js/custom.min.js'%}"></script>
@@ -822,5 +857,19 @@ background-color: #edf1f5;
 <script src="{% static 'js/plugins-init/jquery-steps-init.js'%}"></script>
 <script src="{% static 'vendor/datatables/js/jquery.dataTables.min.js'%}"></script>
 <script src="{% static 'js/plugins-init/datatables.init.js'%}"></script>
+{% if messages %}
+      <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      {% for message in messages %}
+        Swal.fire({
+          icon: '{% if message.tags == "success" %}success{% elif message.tags == "error" %}error{% else %}info{% endif %}',
+          title: "{{ message|escapejs }}",
+          showConfirmButton: false,
+          timer: 3000
+        });
+      {% endfor %}
+    });
+      </script>
+    {% endif %}
 </body>
 </html>

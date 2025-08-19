@@ -19,7 +19,6 @@
           rel="stylesheet" />
     <link href="{% static 'css/style.css' %}" rel="stylesheet" />
     <!-- CSS Bootstrap -->
-
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
     .chart-container {
@@ -70,9 +69,10 @@
       80%  { color: cyan; }
       100% { color: fuchsia; }
     }
- body {
-  background-color: #edf1f5;
-}
+  body{
+background-image: url("{% static 'photo/img2.jpg' %}");
+
+      }
 
 
 
@@ -248,122 +248,166 @@
                          <h4 class="card-intro-title">With Captions</h4>
                         </div>-->
         <!-- Bootstrap Carousel complet -->
-<div class="card">
-    <div class="card-body p-4">
-        <div class="bootstrap-carousel">
-            <div class="carousel slide" id="carouselExample" data-bs-ride="carousel" data-bs-interval="5000">
+        <div class="card">
+          <div class="card-body p-4">
+            <div class="bootstrap-carousel">
+              <div class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
-
-                    <div class="carousel-item active">
-                        <img class="d-block w-100" src="{% static 'photo/15.JPG' %}" alt="First slide">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>First slide label</h5>
-                            <p>Agence Centrafricaine pour la formation professionnelle et l'emploi</p>
-                        </div>
+                  <div class="carousel-item active">
+                    <img class="d-block w-100"
+                         src="{% static 'rca/3.jpg' %}"
+                         alt="First slide">
+                    <div class="carousel-caption d-none d-md-block">
+                      <h5>First slide label</h5>
+                      <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
                     </div>
-
-                    <div class="carousel-item">
-                        <img class="d-block w-100" src="{% static 'rca/3.jpg' %}" alt="Second slide" style="height:auto; object-fit:cover;">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>Second slide label</h5>
-                            <p>Ce site est dédié à la promotion des <strong>formation professionnelle</strong></p>
-                        </div>
+                  </div>
+                  <div class="carousel-item">
+                    <img class="d-block w-100"
+                         src="{% static 'photo/15.JPG' %}"
+                         alt="Second slide"
+                         style="height:auto;
+                                object-fit:cover">
+                    <div class="carousel-caption d-none d-md-block">
+                      <h5>Second slide label</h5>
+                      <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
                     </div>
-
-                    <div class="carousel-item">
-                        <img class="d-block w-100" src="{% static 'photo/4.JPG' %}" alt="Third slide" style="width:1416px; height:750px; object-fit:cover; object-position:center 60%;">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>Third slide label</h5>
-                            <p>Tout savoir sur les formation professionnelle</p>
-                        </div>
+                  </div>
+                  <div class="carousel-item">
+                    <img class="d-block w-100"
+                         src="{% static 'photo/18.JPG' %}"
+                         alt="Third slide"
+                         style="width:1416px;
+                                height:750px;
+                                object-fit:cover;
+                                object-position:center 60%">
+                    <div class="carousel-caption d-none d-md-block">
+                      <h5>Third slide label</h5>
+                      <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
                     </div>
-
-                    <div class="carousel-item">
-                        <img class="d-block w-100" src="{% static 'photo/6.JPG' %}" alt="Fourth slide" style="width:1416px; height:750px; object-fit:cover; object-position:center 60%;">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>Fourth slide label</h5>
-                            <p>Tout savoir sur les formation professionnelle</p>
-                        </div>
+                  </div>
+                  <div class="carousel-item">
+                    <img class="d-block w-100" src="{% static 'photo/32.JPG' %}">
+                    <div class="carousel-caption d-none d-md-block">
+                      <h5>Third slide label</h5>
+                      <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
                     </div>
-
-                    <div class="carousel-item">
-                        <img class="d-block w-100" src="{% static 'photo/7.JPG' %}" alt="Fifth slide" style="height:auto; object-fit:cover;">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>Fifth slide label</h5>
-                            <p>Tout savoir sur les formation professionnelle</p>
-                        </div>
+                  </div>
+                  <div class="carousel-item">
+                    <img class="d-block w-100"
+                         src="{% static 'photo/21.JPG' %}"
+                         alt="Third slide">
+                    <div class="carousel-caption d-none d-md-block">
+                      <h5>Third slide label</h5>
+                      <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
                     </div>
-
-                    <div class="carousel-item">
-                        <img class="d-block w-100" src="{% static 'photo/24.JPG' %}" alt="Sixth slide" style="height:auto; object-fit:cover;">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>Sixth slide label</h5>
-                            <p>Tout savoir sur les formation professionnelle</p>
-                        </div>
+                  </div>
+                  <div class="carousel-item">
+                    <img class="d-block w-100"
+                         src="{% static 'photo/16.JPG' %}"
+                         alt="Third slide">
+                    <div class="carousel-caption d-none d-md-block">
+                      <h5>Third slide label</h5>
+                      <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
                     </div>
-
-                    <div class="carousel-item">
-                        <img class="d-block w-100" src="{% static 'photo/25.JPG' %}" alt="Seventh slide" style="height:auto; object-fit:cover;">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>Seventh slide label</h5>
-                            <p>Tout savoir sur les formation professionnelle</p>
-                        </div>
+                  </div>
+                  <div class="carousel-item">
+                    <img class="d-block w-100"
+                         src="{% static 'photo/9.JPG' %}"
+                         alt="Third slide">
+                    <div class="carousel-caption d-none d-md-block">
+                      <h5>Third slide label</h5>
+                      <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
                     </div>
-
-                    <div class="carousel-item">
-                        <img class="d-block w-100" src="{% static 'photo/26.JPG' %}" alt="Eighth slide" style="height:auto; object-fit:cover;">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>Eighth slide label</h5>
-                            <p>Tout savoir sur les formation professionnelle</p>
-                        </div>
+                  </div>
+                  <div class="carousel-item">
+                    <img class="d-block w-100"
+                         src="{% static 'photo/7.JPG' %}"
+                         alt="Fifth slide"
+                         style="height:auto;
+                                object-fit:cover">
+                    <div class="carousel-caption d-none d-md-block">
+                      <h5>Third slide label</h5>
+                      <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
                     </div>
-
-                    <div class="carousel-item">
-                        <img class="d-block w-100" src="{% static 'photo/27.JPG' %}" alt="Ninth slide" style="height:auto; object-fit:cover;">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>Ninth slide label</h5>
-                            <p>Tout savoir sur les formation professionnelle</p>
-                        </div>
+                  </div>
+                  <div class="carousel-item">
+                    <img class="d-block w-100"
+                         src="{% static 'photo/25.JPG' %}"
+                         alt="Third slide">
+                    <div class="carousel-caption d-none d-md-block">
+                      <h5>Third slide label</h5>
+                      <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
                     </div>
-
-                    <div class="carousel-item">
-                        <img class="d-block w-100" src="{% static 'photo/28.JPG' %}" alt="Tenth slide" style="height:auto; object-fit:cover;">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>Tenth slide label</h5>
-                            <p>Tout savoir sur les formation professionnelle</p>
-                        </div>
+                  </div>
+                  <div class="carousel-item">
+                    <img class="d-block w-100"
+                         src="{% static 'photo/26.JPG' %}"
+                         alt="Third slide">
+                    <div class="carousel-caption d-none d-md-block">
+                      <h5>Third slide label</h5>
+                      <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
                     </div>
-
-                    <div class="carousel-item">
-                        <img class="d-block w-100" src="{% static 'photo/29.JPG' %}" alt="Eleventh slide" style="height:auto; object-fit:cover;">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>Eleventh slide label</h5>
-                            <p>Tout savoir sur les formation professionnelle</p>
-                        </div>
+                  </div>
+                  <div class="carousel-item">
+                    <img class="d-block w-100"
+                         src="{% static 'photo/27.JPG' %}"
+                         alt="Third slide">
+                    <div class="carousel-caption d-none d-md-block">
+                      <h5>Third slide label</h5>
+                      <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
                     </div>
-
-                    <div class="carousel-item">
-                        <img class="d-block w-100" src="{% static 'photo/30.JPG' %}" alt="Twelfth slide" style="height:auto; object-fit:cover;">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>Twelfth slide label</h5>
-                            <p>Tout savoir sur les formation professionnelle</p>
-                        </div>
+                  </div>
+                  <div class="carousel-item">
+                    <img class="d-block w-100"
+                         src="{% static 'photo/28.JPG' %}"
+                         alt="Third slide">
+                    <div class="carousel-caption d-none d-md-block">
+                      <h5>Third slide label</h5>
+                      <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
                     </div>
-
-                    <div class="carousel-item">
-                        <img class="d-block w-100" src="{% static 'photo/31.JPG' %}" alt="Thirteenth slide" style="height:auto; object-fit:cover;">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>Thirteenth slide label</h5>
-                            <p>Tout savoir sur les formation professionnelle</p>
-                        </div>
+                  </div>
+                  <div class="carousel-item">
+                    <img class="d-block w-100"
+                         src="{% static 'photo/29.JPG' %}"
+                         alt="Third slide">
+                    <div class="carousel-caption d-none d-md-block">
+                      <h5>Third slide label</h5>
+                      <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
                     </div>
-
+                  </div>
+                  <div class="carousel-item">
+                    <img class="d-block w-100"
+                         src="{% static 'photo/30.JPG' %}"
+                         alt="Third slide">
+                    <div class="carousel-caption d-none d-md-block">
+                      <h5>Third slide label</h5>
+                      <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <img class="d-block w-100"
+                         src="{% static 'photo/31.JPG' %}"
+                         alt="Third slide">
+                    <div class="carousel-caption d-none d-md-block">
+                      <h5>Third slide label</h5>
+                      <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <img class="d-block w-100"
+                         src="{% static 'photo/4.JPG' %}"
+                         alt="Third slide">
+                    <div class="carousel-caption d-none d-md-block">
+                      <h5>Third slide label</h5>
+                      <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                    </div>
+                  </div>
                 </div>
+              </div>
             </div>
+          </div>
         </div>
-    </div>
-</div>
-
       </div>
       <div class="col-xl-2"></div>
     </div>
@@ -816,8 +860,8 @@
       <script src="{% static 'js/dashboard/dashboard-1.js' %}"></script>
       <script src="{% static 'chart.js' %}"></script>
     <!--<script src="https://cdn.amcharts.com/lib/version/5/index.js"></script>
-                      <script src="https://cdn.amcharts.com/lib/version/5/map.js"></script>
-                      <script src="https://cdn.amcharts.com/lib/version/5/geodata/centralAfricanRepublicHigh.js"></script>-->
+                          <script src="https://cdn.amcharts.com/lib/version/5/map.js"></script>
+                          <script src="https://cdn.amcharts.com/lib/version/5/geodata/centralAfricanRepublicHigh.js"></script>-->
     {% if messages %}
       <script>
     document.addEventListener("DOMContentLoaded", function () {

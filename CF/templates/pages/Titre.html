@@ -1,0 +1,89 @@
+<style>
+    .chart-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      margin-bottom: 50px;
+    }
+    .chart-box {
+      flex: 1 1 45%;
+      min-width: 300px;
+    }
+    canvas {
+      max-width: 100%;
+    }
+    </style>
+    <style>
+    .marquee {
+      white-space: nowrap;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .marquee .search_icon h3 {
+      display: inline-block;
+      padding-left: 100%;
+      margin: 0;
+      font-weight: bold;
+      animation: defilement 25s linear infinite, lumiere 2s linear infinite;
+    }
+    
+    /* Défilement lent */
+    @keyframes defilement {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+    
+    /* Lumière en changement de couleurs */
+    @keyframes lumiere {
+      0%   { color: red; }
+      20%  { color: orange; }
+      40%  { color: yellow; }
+      60%  { color: limegreen; }
+      80%  { color: cyan; }
+      100% { color: fuchsia; }
+    }
+    </style>
+{% load static %}
+<div class="header">
+    <div class="header-content">
+      <nav class="navbar navbar-expand">
+        <div class="collapse navbar-collapse justify-content-between">
+          <img class="d-block "
+               src="{% static 'rca/5.png' %}"
+               alt="First slide"
+               width="40%" />
+        </div>
+        <div class="header-center">
+          <div class="dropdown marquee">
+            <span class="search_icon p-3 c-pointer" data-toggle="dropdown">
+              <h3>GESTION DES CENTRES DE FORMATION PROFESSIONNELLE ET TECHNIQUE</h3>
+            </span>
+          </div>
+        </div>
+        <ul class="navbar-nav header-right">
+          <li class="nav-item dropdown notification_dropdown">
+            <img class="d-block"
+                 src="{% static 'images/acfpe.png' %}"
+                 alt="First slide"
+                 width="120%" />
+          </li>
+          <li class="nav-item dropdown header-profile">
+            <a class="nav-link" href="#" role="button" data-toggle="dropdown">
+              <i class="mdi mdi-account"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right">
+              <a href="{% url 'logout' %}" class="dropdown-item">
+                <i class="icon-key"></i>
+                <span class="ml-2">Deconnexion</span>
+              </a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
