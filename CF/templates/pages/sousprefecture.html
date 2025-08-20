@@ -18,7 +18,7 @@
     <!--  <link href="{% static 'vendor/fullcalendar/css/fullcalendar.min.css'%}"
         rel="stylesheet">-->
     <link href="{% static 'css/style.css' %}" rel="stylesheet" />
-     <style>
+    <style>
       body{
 background-image: url("{% static 'photo/img2.jpg' %}");
 
@@ -65,81 +65,72 @@ background-image: url("{% static 'photo/img2.jpg' %}");
       <!--**********************************
             Header start
         ***********************************-->
-        {% include "./Titre.html" %}
+      {% include "./Titre.html" %}
       <!--**********************************
             Header end ti-comment-alt
 ***********************************-->
       <!--**********************************
             Sidebar start
         ***********************************-->
-        <div class="quixnav">
-          <div class="quixnav-scroll">
-                   <ul class="metismenu" id="menu">
-              <li class="nav-label first">Main Menu</li>
-              <li>
-                <a href="{% url 'index' %}" aria-expanded="false"
-                  ><i class="mdi mdi-home"></i
-                  ><span class="nav-text">Acceuil</span></a
-                >
-              </li>
-  
-              <li>
-                <a
-                  class="has-arrow"
-                  href="javascript:void()"
-                  aria-expanded="false"
-                  ><i class="mdi mdi-map-marker"></i
-                  ><span class="nav-text">Localisation</span></a
-                >
-                <ul aria-expanded="false">
-                  <li><a href="{% url 'region' %}">Region</a></li>
-                  <li><a href="{% url 'prefecture' %}">Prefecture</a></li>
-                  <li>
-                    <a href="{% url 'sous_prefecture' %}">Sous Prefecture</a>
-                  </li>
-                  <li>
-                    <a href="{% url 'commune' %}">Commune / Arondissement</a>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <a
-                  class="has-arrow"
-                  href="javascript:void()"
-                  aria-expanded="false"
-                  ><i class="fa fa-wrench"></i
-                  ><span class="nav-text">Activité</span></a>
-                <ul aria-expanded="false">
-                  <li><a href="{% url 'secteur' %}">Secteur</a></li>
-                  <li><a href="{% url 'publiccible' %}">Publics Cible</a></li>
-                </ul>
-              </li>
-  
-              <li>
-                <a href="{% url 'centre_formation' %}" aria-expanded="false"
-                  ><i class="fa fa-graduation-cap"></i>
-                    <span class="nav-text">Centre Formation</span></a>
-              </li>
-            </ul>
-          </div>
-        </div>
+      <div class="quixnav">
+        <div class="quixnav-scroll">
+          <ul class="metismenu" id="menu">
+            <li class="nav-label first">Main Menu</li>
+            <li>
+              <a href="{% url 'index' %}" aria-expanded="false"><i class="mdi mdi-home"></i><span class="nav-text">Acceuil</span></a>
+            </li>
+            <li>
+              <a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-map-marker"></i><span class="nav-text">Localisation</span></a>
+              <ul aria-expanded="false">
+                <li>
+                  <a href="{% url 'region' %}">Region</a>
+                </li>
+                <li>
+                  <a href="{% url 'prefecture' %}">Prefecture</a>
+                </li>
+                <li>
+                  <a href="{% url 'sous_prefecture' %}">Sous Prefecture</a>
+                </li>
+                <li>
+                  <a href="{% url 'commune' %}">Commune / Arondissement</a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="fa fa-wrench"></i><span class="nav-text">Activité</span></a>
+              <ul aria-expanded="false">
+                <li>
+                  <a href="{% url 'secteur' %}">Secteur</a>
+                </li>
+                <li>
+                  <a href="{% url 'publiccible' %}">Publics Cible</a>
+                </li>
+              </ul>
+            </li>
+            <li>
+            <a href="{% url 'centre_formation' %}" aria-expanded="false"><i class="fa fa-graduation-cap"></i>
+            <span class="nav-text">Centre Formation</span></a>
+        </li>
+      </ul>
     </div>
   </div>
-  <!--**********************************
+
+<!--**********************************
             Sidebar end
 ***********************************-->
-  <!--**********************************
+<!--**********************************
             Content body start
         ***********************************-->
-  <div class="content-body">
-    <div class="container-fluid">
-      <div class="row page-titles mx-0">
-        <div class="col-sm-6 p-md-0">
-          <div class="welcome-text">
-            <h4>SOUS PREFECTURE</h4>
-            <p class="mb-0"></p>
-          </div>
+<div class="content-body">
+  <div class="container-fluid">
+    <div class="row page-titles mx-0">
+      <div class="col-sm-6 p-md-0">
+        <div class="welcome-text">
+          <h4>SOUS PREFECTURE</h4>
+          <p class="mb-0"></p>
         </div>
+      </div>
+      {% if user.is_superuser or user.groups.all.0.name == "admin" %}
         <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
           <ol class="">
             <li class="">
@@ -153,10 +144,11 @@ background-image: url("{% static 'photo/img2.jpg' %}");
             </li>
           </ol>
         </div>
-      </div>
-      <!-- row -->
-      <div class="row">
-        <!--<div class="col-lg-3">
+      {% endif %}
+    </div>
+    <!-- row -->
+    <div class="row">
+      <!--<div class="col-lg-3">
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-intro-title">Filtre</h4>
@@ -186,61 +178,62 @@ background-image: url("{% static 'photo/img2.jpg' %}");
                 </div>
               </div>
             </div>-->
-        <div class="col-lg">
-          <div class="card">
-            <div class="card-header">
-              <h4 class="card-title">Liste des Sous Prefectures</h4>
-            </div>
-            <div class="card-body">
-              <div class="table-responsive">
-                <table id="example" class="display" style="min-width: 845px">
-                  <thead>
+      <div class="col-lg">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="card-title">Liste des Sous Prefectures</h4>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table id="example" class="display" style="min-width: 845px">
+                <thead>
+                  <tr>
+                    <th>Sous Prefecture</th>
+                    <th>Prefecture Prefecture(Region)</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody class="text-dark">
+                  {% for sousprefecture in sousprefectures %}
                     <tr>
-                      <th>Sous Prefecture</th>
-                      <th>Prefecture Prefecture(Region)</th>
-                      <th>Action</th>
+                      <td>{{ sousprefecture.nom }}</td>
+                      <td>{{ sousprefecture.prefecture }}</td>
+                      <td>
+                        <a href="{% url 'sousprefecture_detail' sousprefecture.pk %}">detail</a>
+                      </td>
                     </tr>
-                  </thead>
-                  <tbody class="text-dark">
-                    {% for sousprefecture in sousprefectures %}
-                      <tr>
-                        <td>{{ sousprefecture.nom }}</td>
-                        <td>{{ sousprefecture.prefecture }}</td>
-                        <td>
-                          <a href="{% url 'sousprefecture_detail' sousprefecture.pk %}">detail</a>
-                        </td>
-                      </tr>
-                    {% endfor %}
-                  </tbody>
-                </table>
-              </div>
+                  {% endfor %}
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
-        <!-- BEGIN MODAL -->
-        <div class="modal fade none-border" id="event-modal">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h4 class="modal-title">
-                  <strong>Add New Event</strong>
-                </h4>
-              </div>
-              <div class="modal-body"></div>
-              <div class="modal-footer">
-                <button type="button"
-                        class="btn btn-default waves-effect"
-                        data-dismiss="modal">Close</button>
-                <button type="button"
-                        class="btn btn-success save-event waves-effect waves-light">Create event</button>
-                <button type="button"
-                        class="btn btn-danger delete-event waves-effect waves-light"
-                        data-dismiss="modal">Delete</button>
-              </div>
+      </div>
+      <!-- BEGIN MODAL -->
+      <div class="modal fade none-border" id="event-modal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">
+                <strong>Add New Event</strong>
+              </h4>
+            </div>
+            <div class="modal-body"></div>
+            <div class="modal-footer">
+              <button type="button"
+                      class="btn btn-default waves-effect"
+                      data-dismiss="modal">Close</button>
+              <button type="button"
+                      class="btn btn-success save-event waves-effect waves-light">Create event</button>
+              <button type="button"
+                      class="btn btn-danger delete-event waves-effect waves-light"
+                      data-dismiss="modal">Delete</button>
             </div>
           </div>
         </div>
-        <!-- Modal Add Category -->
+      </div>
+      <!-- Modal Add Category -->
+      {% if user.is_superuser or user.groups.all.0.name == "admin" %}
         <div class="modal fade none-border" id="add-category">
           <div class="modal-dialog">
             <div class="modal-content">
@@ -301,7 +294,7 @@ background-image: url("{% static 'photo/img2.jpg' %}");
                                 </div>-->
           </div>
         </div>
-      </div>
+      {% endif %}
     </div>
   </div>
 </div>

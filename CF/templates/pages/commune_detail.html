@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Commune de : {{ commune.nom }} </title>
+    <title>Commune de : {{ commune.nom }}</title>
     <!-- Favicon icon -->
     <link rel="icon"
           type="image/png"
@@ -126,7 +126,7 @@ background-image: url("{% static 'photo/img2.jpg' %}");
       </ul>
     </div>
   </div>
-</div>
+
 <!--**********************************
             Sidebar end
 ***********************************-->
@@ -149,15 +149,17 @@ background-image: url("{% static 'photo/img2.jpg' %}");
           <li class="breadcrumb-item m-0">
             <button id="export-word" class="btn btn-success btn-sm">Exporter en Word</button>
           </li>
-          <li class="breadcrumb-item m-0">
-            <a href="javascript:void(0)"
-               data-toggle="modal"
-               data-target="#add-category"
-               class="btn btn-primary btn-sm">
-              <span class="align-middle"><i class="ti-plus"></i></span>
-              Ajouter
-            </a>
-          </li>
+          {% if user.is_superuser or user.groups.all.0.name == "admin" %}
+            <li class="breadcrumb-item m-0">
+              <a href="javascript:void(0)"
+                 data-toggle="modal"
+                 data-target="#add-category"
+                 class="btn btn-primary btn-sm">
+                <span class="align-middle"><i class="ti-plus"></i></span>
+                Ajouter
+              </a>
+            </li>
+          {% endif %}
         </ol>
       </div>
     </div>
@@ -455,12 +457,9 @@ background-image: url("{% static 'photo/img2.jpg' %}");
                           </form>
                         </div>
                         <div class="modal-footer">
-                          <!--<button type="button"
-        class="btn btn-default waves-effect"
-        data-dismiss="modal">Close</button>-->
                           <button type="button"
-                                  class="btn btn-danger waves-effect waves-light save-category"
-                                  data-bs-dismiss="modal">Close</button>
+                                  class="btn btn-danger waves-effect"
+                                  data-dismiss="modal">Close</button>
                         </div>
                       </div>
                     </div>

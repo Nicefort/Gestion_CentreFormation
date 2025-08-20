@@ -667,6 +667,7 @@ def commune_detail(request, pk):
 # Vue qui gere les Secteurs
 @login_required
 def secteur_view(request, pk=None):
+    is_gestionnaire = request.user.groups.filter(name='gestionnaire').exists()
     if pk:
         obj = get_object_or_404(Secteur, pk=pk)
         form = SecteurForm(request.POST or None, instance=obj)
@@ -675,6 +676,9 @@ def secteur_view(request, pk=None):
         form = SecteurForm(request.POST or None)
 
     if request.method == "POST":
+        if is_gestionnaire:
+                messages.error(request, "Vous n'avez pas les permissions de faire cette action.")
+                return redirect("secteur")
         # Enregistrement manuel
         if "save" in request.POST and form.is_valid():
             form.save()
@@ -741,6 +745,8 @@ def secteur_view(request, pk=None):
 
 @login_required
 def publiccible_view(request, pk=None):
+
+    is_gestionnaire = request.user.groups.filter(name='gestionnaire').exists()
     if pk:
         obj = get_object_or_404(PublicCible, pk=pk)
         form = PublicCibleForm(request.POST or None, instance=obj)
@@ -751,6 +757,9 @@ def publiccible_view(request, pk=None):
     # Prévisualisation
     preview_data = None
     if request.method == "POST":
+        if is_gestionnaire:
+                messages.error(request, "Vous n'avez pas les permissions de faire cette action.")
+                return redirect("publiccible")
         # Enregistrement manuel
         if "save" in request.POST and form.is_valid():
             form.save()
@@ -1150,14 +1159,17 @@ def centre_detail(request, pk):
 
     # 🔹 Traitement des formulaires
     if request.method == "POST":
-        if is_gestionnaire:
-            messages.error(request, "Vous n'avez pas les permissions pour modifier un centre.")
-            return redirect("centre_detail", pk=centre.pk)
+        
         if "delete" in request.POST:
+            if is_gestionnaire:
+                messages.error(request, "Vous n'avez pas les permissions pour supprimer un centre.")
+                return redirect("centre_detail", pk=centre.pk)
             centre.delete()
             messages.success(request, "Centre supprimé avec succès.")
             return redirect("centre_formation")
-
+        if is_gestionnaire:
+            messages.error(request, "Vous n'avez pas les permissions pour modifier un centre.")
+            return redirect("centre_detail", pk=centre.pk)
         form_centre = CentreFormationForm(request.POST, instance=centre)
         form_domaineActiviteCapacite = DomaineActiviteCapaciteForm(
             request.POST,

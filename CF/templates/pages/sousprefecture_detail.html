@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Sousprefecture de : {{sous_prefecture.nom}} </title>
+    <title>Sousprefecture de : {{ sous_prefecture.nom }}</title>
     <!-- Favicon icon -->
     <link rel="icon"
           type="image/png"
@@ -25,9 +25,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/docx/7.7.0/docx.umd.min.js"></script>
-     <style>
+    <style>
        body{
-background-image: url("{% static 'photo/img2.jpg' %}");
+        background-image: url("{% static 'photo/img2.jpg' %}");
 
       }
 
@@ -72,7 +72,7 @@ background-image: url("{% static 'photo/img2.jpg' %}");
       <!--**********************************
             Header start
         ***********************************-->
-        {% include "./Titre.html" %}
+      {% include "./Titre.html" %}
       <!--**********************************
             Header end ti-comment-alt
 ***********************************-->
@@ -121,7 +121,6 @@ background-image: url("{% static 'photo/img2.jpg' %}");
       </ul>
     </div>
   </div>
-</div>
 <!--**********************************
             Sidebar end
 ***********************************-->
@@ -160,7 +159,7 @@ background-image: url("{% static 'photo/img2.jpg' %}");
                     <h3 class="m-b-0">{{ nombre_centres }}</h3>
                   </div>
                   <div class="col">
-                    <span class="text-dark" >Nombre commune</span>
+                    <span class="text-dark">Nombre commune</span>
                     <h3 class="m-b-0">{{ nombre_communes }}</h3>
                   </div>
                 </div>
@@ -224,46 +223,48 @@ background-image: url("{% static 'photo/img2.jpg' %}");
                             <th>Sigle</th>
                             <th>Adresse</th>
                             <th>Capacité</th>
-                            <th>categorie<th>
-                            <th>telephone</th>
-                            <th>Commune</th>
-                            <th>Secteur</th>
-                            <th>Domaine d'activité</th>
-                          </tr>
-                        </thead>
-                        <tbody id="tableau-centres">
-                          {% for centre in centres %}
-                            <tr class="centre-row"
-                                data-sousprefecture="{{ centre.commune.sous_prefecture.id }}"
-                                data-commune="{{ centre.commune.id }}"
-                                data-secteurs="{% for s in centre.domaine_activite_capacite.secteurs.all %}{{ s.id }} {% endfor %}"
-                                data-capacite="{{ centre.domaine_activite_capacite.capacite_max }}">
-                              <td>
-                                <a href="{% url 'centre_detail' centre.pk %}">{{ centre.intitule }}</a>
-                              </td>
-                              <td>{{ centre.sigle }}</td>
-                              <td>{{ centre.adresse }}</td>
-                              <td>{{ centre.domaine_activite_capacite.capacite_max }}</td>
-                              <td> {{centre.categorie}} </td>
-                              <td>{{ centre.telephone }}</td>
-                              <td>{{ centre.commune.nom }}</td>
-                              <td>
-                                {% for secteur in centre.domaine_activite_capacite.secteurs.all %}
-                                  {{ secteur.nom }}{% if not forloop.last %}, {% endif %}
-                                {% endfor %}
-                              </td>
-                              
-                              <td>{{ centre.domaine_activite_capacite.liste_activites }}</td>
-                          
-                            </tr>
-                          {% empty %}
-                            <tr>
-                              <td class="text-center" colspan="7">Aucun centre trouvé dans cette sous prefecture.</td>
-                            </tr>
-                          {% endfor %}
-                        </tbody>
-                        
-                      </table>
+                            <th>
+                              categorie
+                              <th>
+                                <th>telephone</th>
+                                <th>Commune</th>
+                                <th>Secteur</th>
+                                <th>Domaine d'activité</th>
+                              </tr>
+                            </thead>
+                            <tbody id="tableau-centres">
+                              {% for centre in centres %}
+                                <tr class="centre-row"
+                                    data-sousprefecture="{{ centre.commune.sous_prefecture.id }}"
+                                    data-commune="{{ centre.commune.id }}"
+                                    data-secteurs="{% for s in centre.domaine_activite_capacite.secteurs.all %}{{ s.id }} {% endfor %}"
+                                    data-capacite="{{ centre.domaine_activite_capacite.capacite_max }}">
+                                  <td>
+                                    <a href="{% url 'centre_detail' centre.pk %}">{{ centre.intitule }}</a>
+                                  </td>
+                                  <td>{{ centre.sigle }}</td>
+                                  <td>{{ centre.adresse }}</td>
+                                  <td>{{ centre.domaine_activite_capacite.capacite_max }}</td>
+                                  <td>{{ centre.categorie }}</td>
+                                  <td>{{ centre.telephone }}</td>
+                                  <td>{{ centre.commune.nom }}</td>
+                                  <td>
+                                    {% for secteur in centre.domaine_activite_capacite.secteurs.all %}
+                                      {{ secteur.nom }}
+                                      {% if not forloop.last %},{% endif %}
+                                    {% endfor %}
+                                  </td>
+                                  <td>{{ centre.domaine_activite_capacite.liste_activites }}</td>
+                                </tr>
+                              {% empty %}
+                                <tr>
+                                  <td class="text-center" colspan="7">Aucun centre trouvé dans cette sous prefecture.</td>
+                                </tr>
+                              {% endfor %}
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -273,50 +274,49 @@ background-image: url("{% static 'photo/img2.jpg' %}");
         </div>
       </div>
     </div>
-  </div>
-</div>
-<!--**********************************
+    <!--**********************************
             Content body end
 ***********************************-->
-<!--**********************************
+    <!--**********************************
             Footer start
         ***********************************-->
-<div class="footer">
-  <div class="copyright">
-    <p>
-      Copyright © Designed &amp; Developed by
-      <a href="#" target="_blank">Gilchrist KETTEGUIA</a> 2025
-    </p>
-  </div>
-</div>
-<!--**********************************
+    <div class="footer">
+      <div class="copyright">
+        <p>
+          Copyright © Designed &amp; Developed by
+          <a href="#" target="_blank">Gilchrist KETTEGUIA</a> 2025
+        </p>
+      </div>
+    </div>
+    <!--**********************************
             Footer end
 ***********************************-->
-<!--**********************************
+    <!--**********************************
            Support ticket button start
 ***********************************-->
-<!--**********************************
+    <!--**********************************
            Support ticket button end
 ***********************************-->
-<!--**********************************
+    <!--**********************************
         Main wrapper end
 ***********************************-->
-<!--**********************************
+    <!--**********************************
         Scripts
     ***********************************-->
-<!-- Required vendors -->
-<!-- Bibliothèques nécessaires -->
-<!-- Dépendances -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/docx/8.0.1/docx.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/docx/7.7.0/docx.umd.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/docx@9.5.0/dist/index.iife.js"></script>
-<!-- Élément caché pour récupérer le nom de la sous-préfecture -->
-<span id="sousprefecture-name" data-sousprefecture="{{ sous_prefecture.nom }}" hidden></span>
-
-<script>
+    <!-- Required vendors -->
+    <!-- Bibliothèques nécessaires -->
+    <!-- Dépendances -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/docx/8.0.1/docx.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/docx/7.7.0/docx.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/docx@9.5.0/dist/index.iife.js"></script>
+    <!-- Élément caché pour récupérer le nom de la sous-préfecture -->
+    <span id="sousprefecture-name"
+          data-sousprefecture="{{ sous_prefecture.nom }}"
+          hidden></span>
+    <script>
 // 📄 Export PDF
 document.getElementById("export-pdf").addEventListener("click", async function () {
   const { jsPDF } = window.jspdf;
@@ -428,9 +428,8 @@ document.getElementById("export-word").addEventListener("click", async function 
   link.click();
   document.body.removeChild(link);
 });
-</script>
-
-<script>
+    </script>
+    <script>
       // Initialisation de Choices.js
       const selects = document.querySelectorAll(".filtre-select");
       selects.forEach(
@@ -487,10 +486,8 @@ document.getElementById("export-word").addEventListener("click", async function 
       document
         .getElementById("filtre-capacite")
         .addEventListener("input", filtrerTableau);
-</script>
-
-
-<script>
+    </script>
+    <script>
     document.addEventListener('DOMContentLoaded', function () {
       const filters = [
        
@@ -507,8 +504,8 @@ document.getElementById("export-word").addEventListener("click", async function 
         });
       });
     });
-</script>
-<script>
+    </script>
+    <script>
   function getSelectedValues(selector) {
     const select = document.querySelector(selector);
     if (!select) return [];
@@ -551,18 +548,18 @@ document.getElementById("export-word").addEventListener("click", async function 
     const capaciteInput = document.querySelector('#filtre-capacite');
     if (capaciteInput) capaciteInput.addEventListener('input', filterCentres);
   });
-</script>
-<script>
+    </script>
+    <script>
       function toggleCheckboxes(prefix) {
         const checkboxes = document.querySelectorAll(`input[id^="${prefix}"]`);
         const allChecked = Array.from(checkboxes).every((cb) => cb.checked);
         checkboxes.forEach((cb) => (cb.checked = !allChecked));
       }
-</script>
-<script src="{% static 'vendor/global/global.min.js'%}"></script>
-<script src="{% static 'js/quixnav-init.js'%}"></script>
-<script src="{% static 'js/custom.min.js'%}"></script>
-<script src="{% static 'vendor/datatables/js/jquery.dataTables.min.js'%}"></script>
-<script src="{% static 'js/plugins-init/datatables.init.js'%}"></script>
-</body>
+    </script>
+    <script src="{% static 'vendor/global/global.min.js'%}"></script>
+    <script src="{% static 'js/quixnav-init.js'%}"></script>
+    <script src="{% static 'js/custom.min.js'%}"></script>
+    <script src="{% static 'vendor/datatables/js/jquery.dataTables.min.js'%}"></script>
+    <script src="{% static 'js/plugins-init/datatables.init.js'%}"></script>
+  </body>
 </html>

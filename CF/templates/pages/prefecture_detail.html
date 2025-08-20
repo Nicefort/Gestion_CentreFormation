@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Focus - Bootstrap Admin Dashboard</title>
+    <title>Prefecture de :{{ prefecture.nom }}</title>
     <!-- Favicon icon -->
     <link rel="icon"
           type="image/png"
@@ -55,9 +55,7 @@ background-image: url("{% static 'photo/img2.jpg' %}");
         ***********************************-->
       <div class="nav-header">
         <!--<a href="{% url 'index' %}" class="brand-logo">
-          <img class="img-fluid w-40 rounded center"
-               src="{% static 'images/acfpe.png' %}"
-               alt="" />
+          <img class="img-fluid w-40 rounded center" src="{% static 'images/acfpe.png' %}" alt="" />
         </a>-->
         <div class="nav-control">
           <div class="hamburger">
@@ -71,7 +69,7 @@ background-image: url("{% static 'photo/img2.jpg' %}");
       <!--**********************************
             Header start
         ***********************************-->
-        {% include "./Titre.html" %}
+      {% include "./Titre.html" %}
       <!--**********************************
             Header end ti-comment-alt
 ***********************************-->
@@ -120,7 +118,7 @@ background-image: url("{% static 'photo/img2.jpg' %}");
       </ul>
     </div>
   </div>
-</div>
+
 <!--**********************************
             Sidebar end
 ***********************************-->
@@ -156,7 +154,7 @@ background-image: url("{% static 'photo/img2.jpg' %}");
                 <div class="row">
                   <div class="col">
                     <h3 class="m-b-0">{{ nombre_centres }}</h3>
-                    <span class="text-dark" >Nombre de Centre de Formations</span>
+                    <span class="text-dark">Nombre de Centre de Formations</span>
                   </div>
                   <div class="col">
                     <h3 class="m-b-0">{{ nombre_sousprefecture }}</h3>
@@ -174,7 +172,7 @@ background-image: url("{% static 'photo/img2.jpg' %}");
         <div class="card">
           <div class="card-body">
             <h4 class="card-intro-title">Filtrer</h4>
-            <div class="d-flex flex-column gap-3 text-dark" >
+            <div class="d-flex flex-column gap-3 text-dark">
               <!-- Sous-préfecture -->
               <div class="form-group">
                 <label for="filtre-sousprefecture">Sous-préfecture :</label>
@@ -255,16 +253,15 @@ background-image: url("{% static 'photo/img2.jpg' %}");
                               <td>{{ centre.commune.nom }}</td>
                               <td>
                                 {% for secteur in centre.domaine_activite_capacite.secteurs.all %}
-                                  {{ secteur.nom }}{% if not forloop.last %}, {% endif %}
+                                  {{ secteur.nom }}
+                                  {% if not forloop.last %},{% endif %}
                                 {% endfor %}
                               </td>
-                              
                               <td>{{ centre.domaine_activite_capacite.liste_activites }}</td>
-
                             </tr>
                           {% empty %}
                             <tr>
-                              <td colspan="7">Aucun centre trouvé dans.</td>
+                              <td colspan="7" class="text-center text-dark">Aucun centre trouvé dans.</td>
                             </tr>
                           {% endfor %}
                         </tbody>
@@ -321,18 +318,14 @@ background-image: url("{% static 'photo/img2.jpg' %}");
         Scripts
     ***********************************-->
 <!-- Required vendors -->
- <!-- Librairies -->
+<!-- Librairies -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/docx/7.7.0/docx.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/docx/7.7.0/docx.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/docx@9.5.0/dist/index.iife.js"></script>
-
-
-
 <span id="prefecture-name" data-prefecture="{{ prefecture.nom }}" hidden></span>
-
 <script>
 // 📄 Export PDF
 document.getElementById("export-pdf").addEventListener("click", async function () {
@@ -445,7 +438,6 @@ document.getElementById("export-word").addEventListener("click", async function 
   document.body.removeChild(link);
 });
 </script>
-
 <script>
     document.addEventListener('DOMContentLoaded', function () {
       const filters = [

@@ -1,4 +1,4 @@
-{%load static%}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -7,17 +7,18 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>SECTEUR</title>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/acfpe.png' %}">
-    <link
-      href="{% static 'vendor/datatables/css/jquery.dataTables.min.css'%}"
-      rel="stylesheet"
-    />
-    <link
-      href="{% static 'vendor/jquery-steps/css/jquery.steps.css'%}"
-      rel="stylesheet"
-    />
-    <!--  <link href="{% static 'vendor/fullcalendar/css/fullcalendar.min.css'%}" rel="stylesheet">-->
-    <link href="{% static 'css/style.css'%}" rel="stylesheet" />
+    <link rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="{% static 'images/acfpe.png' %}">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href="{% static 'vendor/datatables/css/jquery.dataTables.min.css' %}"
+          rel="stylesheet" />
+    <link href="{% static 'vendor/jquery-steps/css/jquery.steps.css' %}"
+          rel="stylesheet" />
+    <!--  <link href="{% static 'vendor/fullcalendar/css/fullcalendar.min.css'%}"
+        rel="stylesheet">-->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" />
     <style>
        body{
 background-image: url("{% static 'photo/img2.jpg' %}");
@@ -25,7 +26,6 @@ background-image: url("{% static 'photo/img2.jpg' %}");
       }
     </style>
   </head>
-
   <body>
     <!--*******************
         Preloader start
@@ -39,8 +39,7 @@ background-image: url("{% static 'photo/img2.jpg' %}");
     </div>
     <!--*******************
         Preloader end
-    ********************-->
-
+********************-->
     <!--**********************************
         Main wrapper start
     ***********************************-->
@@ -52,310 +51,277 @@ background-image: url("{% static 'photo/img2.jpg' %}");
         <!--<a href="{% url 'index' %}" class="brand-logo">
                 <img class="img-fluid w-40 rounded center" src="{% static 'images/acfpe.png' %}" alt="">
                
-            </a>-->
-
+</a>-->
         <div class="nav-control">
           <div class="hamburger">
-            <span class="line"></span><span class="line"></span
-            ><span class="line"></span>
+            <span class="line"></span><span class="line"></span><span class="line"></span>
           </div>
         </div>
       </div>
       <!--**********************************
             Nav header end
-        ***********************************-->
-
+***********************************-->
       <!--**********************************
             Header start
         ***********************************-->
-        {% include "./Titre.html" %}
+      {% include "./Titre.html" %}
       <!--**********************************
             Header end ti-comment-alt
-        ***********************************-->
-
+***********************************-->
       <!--**********************************
             Sidebar start
         ***********************************-->
-        <div class="quixnav">
-          <div class="quixnav-scroll">
-                   <ul class="metismenu" id="menu">
-              <li class="nav-label first">Main Menu</li>
-              <li>
-                <a href="{% url 'index' %}" aria-expanded="false"
-                  ><i class="mdi mdi-home"></i
-                  ><span class="nav-text">Acceuil</span></a
-                >
-              </li>
-  
-              <li>
-                <a
-                  class="has-arrow"
-                  href="javascript:void()"
-                  aria-expanded="false"
-                  ><i class="mdi mdi-map-marker"></i
-                  ><span class="nav-text">Localisation</span></a
-                >
-                <ul aria-expanded="false">
-                  <li><a href="{% url 'region' %}">Region</a></li>
-                  <li><a href="{% url 'prefecture' %}">Prefecture</a></li>
-                  <li>
-                    <a href="{% url 'sous_prefecture' %}">Sous Prefecture</a>
-                  </li>
-                  <li>
-                    <a href="{% url 'commune' %}">Commune / Arondissement</a>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <a
-                  class="has-arrow"
-                  href="javascript:void()"
-                  aria-expanded="false"
-                  ><i class="fa fa-wrench"></i
-                  ><span class="nav-text">Activité</span></a>
-                <ul aria-expanded="false">
-                  <li><a href="{% url 'secteur' %}">Secteur</a></li>
-                  <li><a href="{% url 'publiccible' %}">Publics Cible</a></li>
-                </ul>
-              </li>
-  
-              <li>
-                <a href="{% url 'centre_formation' %}" aria-expanded="false"
-                  ><i class="fa fa-graduation-cap"></i>
-                    <span class="nav-text">Centre Formation</span></a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      <!--**********************************
+      <div class="quixnav">
+        <div class="quixnav-scroll">
+          <ul class="metismenu" id="menu">
+            <li class="nav-label first">Main Menu</li>
+            <li>
+              <a href="{% url 'index' %}" aria-expanded="false"><i class="mdi mdi-home"></i><span class="nav-text">Acceuil</span></a>
+            </li>
+            <li>
+              <a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-map-marker"></i><span class="nav-text">Localisation</span></a>
+              <ul aria-expanded="false">
+                <li>
+                  <a href="{% url 'region' %}">Region</a>
+                </li>
+                <li>
+                  <a href="{% url 'prefecture' %}">Prefecture</a>
+                </li>
+                <li>
+                  <a href="{% url 'sous_prefecture' %}">Sous Prefecture</a>
+                </li>
+                <li>
+                  <a href="{% url 'commune' %}">Commune / Arondissement</a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="fa fa-wrench"></i><span class="nav-text">Activité</span></a>
+              <ul aria-expanded="false">
+                <li>
+                  <a href="{% url 'secteur' %}">Secteur</a>
+                </li>
+                <li>
+                  <a href="{% url 'publiccible' %}">Publics Cible</a>
+                </li>
+              </ul>
+            </li>
+            <li>
+            <a href="{% url 'centre_formation' %}" aria-expanded="false"><i class="fa fa-graduation-cap"></i>
+            <span class="nav-text">Centre Formation</span></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!--**********************************
             Sidebar end
-        ***********************************-->
-
-      <!--**********************************
+***********************************-->
+  <!--**********************************
             Content body start
         ***********************************-->
-      <div class="content-body">
-        <div class="container-fluid">
-          <div class="row page-titles mx-0">
-            <div class="col-sm-6 p-md-0">
-              <div class="welcome-text">
-                <h4>Secteur</h4>
-                <p class="mb-0"></p>
-              </div>
-            </div>
-            <div
-              class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex"
-            >
-              <ol class="">
-                <li class="">
-                  <a
-                    href="javascript:void()"
-                    data-toggle="modal"
-                    data-target="#add-category"
-                    class="btn btn-primary btn-event w-100"
-                  >
-                    <span class="align-middle"><i class="ti-plus"></i></span>
-                    Ajouter
-                  </a>
-                </li>
-              </ol>
-            </div>
+  <div class="content-body">
+    <div class="container-fluid">
+      <div class="row page-titles mx-0">
+        <div class="col-sm-6 p-md-0">
+          <div class="welcome-text">
+            <h4>Secteur</h4>
+            <p class="mb-0"></p>
           </div>
-          <!-- row -->
-
+        </div>
+        <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+          <ol class="">
+            <li class="">
+              {% if user.is_superuser or user.groups.all.0.name == "admin" %}
+                <a href="javascript:void()"
+                   data-toggle="modal"
+                   data-target="#add-category"
+                   class="btn btn-primary btn-event w-100">
+                  <span class="align-middle"><i class="ti-plus"></i></span>
+                  Ajouter
+                </a>
+              {% endif %}
+            </li>
+          </ol>
+        </div>
+      </div>
+      <!-- row -->
+      <div class="row">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-9">
           <div class="row">
-            <div class="col-lg-1">
-            </div>
-            <div class="col-lg-9">
-             
-                  <div class="row">
-                    <div class="col-12">
-                      <div class="card">
-                        <div class="card-header">
-                          <h4 class="card-title">Liste des Secteurs</h4>
-                        </div>
-                        <div class="card-body">
-                          <div class="table-responsive">
-                            <table
-                              id="example"
-                              class="display"
-                              style="min-width: 845px"
-                            >
-                              <thead>
-                                <tr>
-                                  <th>Nom</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                {% for secteur in secteurs %}
-                                <tr>
-                                  <td>{{secteur.nom}}</td>
-                                </tr>
-                                {% endfor %}
-                              </tbody>
-                              <tfoot>
-                                <tr>
-                                  <th>Name</th>
-                                </tr>
-                              </tfoot>
-                            </table>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-               
-            </div>
-            <!-- BEGIN MODAL -->
-            <div class="modal fade none-border" id="event-modal">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h4 class="modal-title"><strong>Add New Event</strong></h4>
-                  </div>
-                  <div class="modal-body"></div>
-                  <div class="modal-footer">
-                    <button
-                      type="button"
-                      class="btn btn-default waves-effect"
-                      data-dismiss="modal"
-                    >
-                      Close
-                    </button>
-                    <button
-                      type="button"
-                      class="btn btn-success save-event waves-effect waves-light"
-                    >
-                      Create event
-                    </button>
-
-                    <button
-                      type="button"
-                      class="btn btn-danger delete-event waves-effect waves-light"
-                      data-dismiss="modal"
-                    >
-                      Delete
-                    </button>
+            <div class="col-12">
+              <div class="card">
+                <div class="card-header">
+                  <h4 class="card-title">Liste des Secteurs</h4>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table id="example" class="display" style="min-width: 845px">
+                      <thead>
+                        <tr>
+                          <th>Nom</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for secteur in secteurs %}
+                          <tr>
+                            <td>{{ secteur.nom }}</td>
+                          </tr>
+                        {% endfor %}
+                      </tbody>
+                      
+                    </table>
                   </div>
                 </div>
               </div>
             </div>
-            <!-- Modal Add Category -->
-            <div class="modal fade none-border" id="add-category">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h4 class="modal-title"><strong>Add a category</strong></h4>
-                  </div>
-                  <div class="modal-body">
- <h2>Ajouter un Secteur</h2>
-<form method="POST">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit" name="save">Enregistrer</button>
-  {% if obj %}
-    <button type="submit" name="delete" onclick="return confirm('Supprimer ce secteur ?')">Supprimer</button>
-  {% endif %}
-</form>
-
-<hr>
-
-<h2>Importation de secteurs depuis CSV</h2>
-<form method="POST" enctype="multipart/form-data">
-  {% csrf_token %}
-  <p>
-    <label for="fichier">Choisir un fichier CSV :</label>
-    <input type="file" name="fichier" required>
-  </p>
-  <button type="submit" name="preview">Prévisualiser</button>
-  {% if df_preview %}
-    <button type="submit" name="import" onclick="return confirm('Confirmer l’importation de ces données ?')">Importer</button>
-  {% endif %}
-</form>
-
-{% if df_preview %}
-  <h3>Prévisualisation du fichier :</h3>
-  <table border="1">
-    <thead>
-      <tr>
-        {% for key in df_preview.0.keys %}
-          <th>{{ key }}</th>
-        {% endfor %}
-      </tr>
-    </thead>
-    <tbody>
-      {% for row in df_preview %}
-        <tr>
-          {% for value in row.values %}
-            <td>{{ value }}</td>
-          {% endfor %}
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-{% endif %}
-
-
-                  </div>
-                  <!--<div class="modal-footer">
+          </div>
+        </div>
+        <!-- BEGIN MODAL -->
+        <div class="modal fade none-border" id="event-modal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">
+                  <strong>Add New Event</strong>
+                </h4>
+              </div>
+              <div class="modal-body"></div>
+              <div class="modal-footer">
+                <button type="button"
+                        class="btn btn-default waves-effect"
+                        data-dismiss="modal">Close</button>
+                <button type="button"
+                        class="btn btn-success save-event waves-effect waves-light">Create event</button>
+                <button type="button"
+                        class="btn btn-danger delete-event waves-effect waves-light"
+                        data-dismiss="modal">Delete</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Modal Add Category -->
+        {% if user.is_superuser or user.groups.all.0.name == "admin" %}
+        <div class="modal fade none-border" id="add-category">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">
+                  <strong>Add a category</strong>
+                </h4>
+              </div>
+              <div class="modal-body">
+                <h2>Ajouter un Secteur</h2>
+                <form method="POST">
+                  {% csrf_token %}
+                  {{ form.as_p }}
+                  <button type="submit" name="save">Enregistrer</button>
+                  {% if obj %}
+                    <button type="submit"
+                            name="delete"
+                            onclick="return confirm('Supprimer ce secteur ?')">Supprimer</button>
+                  {% endif %}
+                </form>
+                <hr>
+                <h2>Importation de secteurs depuis CSV</h2>
+                <form method="POST" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  <p>
+                    <label for="fichier">Choisir un fichier CSV :</label>
+                    <input type="file" name="fichier" required>
+                  </p>
+                  <button type="submit" name="preview">Prévisualiser</button>
+                  {% if df_preview %}
+                    <button type="submit"
+                            name="import"
+                            onclick="return confirm('Confirmer l’importation de ces données ?')">Importer</button>
+                  {% endif %}
+                </form>
+                {% if df_preview %}
+                  <h3>Prévisualisation du fichier :</h3>
+                  <table border="1">
+                    <thead>
+                      <tr>
+                        {% for key in df_preview.0.keys %}<th>{{ key }}</th>{% endfor %}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for row in df_preview %}
+                        <tr>
+                          {% for value in row.values %}<td>{{ value }}</td>{% endfor %}
+                        </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                {% endif %}
+              </div>
+              <!--<div class="modal-footer">
                                     <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
                                     <button type="button" class="btn btn-danger waves-effect waves-light save-category" data-dismiss="modal">Save</button>
                                 </div>-->
-                </div>
-              </div>
             </div>
           </div>
         </div>
+        {% endif %}
       </div>
-      <!--**********************************
+    </div>
+  </div>
+  <!--**********************************
             Content body end
-        ***********************************-->
-
-      <!--**********************************
+***********************************-->
+  <!--**********************************
             Footer start
         ***********************************-->
-      <div class="footer">
-        <div class="copyright">
-          <p>
-            Copyright © Designed &amp; Developed by
-            <a href="#" target="_blank">Gilchrist KETTEGUIA</a> 2025
-          </p>
-        </div>
-      </div>
-      <!--**********************************
+  <div class="footer">
+    <div class="copyright">
+      <p>
+        Copyright © Designed &amp; Developed by
+        <a href="#" target="_blank">Gilchrist KETTEGUIA</a> 2025
+      </p>
+    </div>
+  </div>
+  <!--**********************************
             Footer end
         ***********************************-->
-    </div>
-    <!--**********************************
+</div>
+<!--**********************************
         Main wrapper end
-    ***********************************-->
-
-    <!--**********************************
+***********************************-->
+<!--**********************************
         Scripts
     ***********************************-->
-    <!-- Required vendors -->
-    <script src="{% static 'vendor/global/global.min.js'%}"></script>
-    <script src="{% static 'js/quixnav-init.js'%}"></script>
-    <script src="{% static 'js/custom.min.js'%}"></script>
-    <!--removeIf(production)-->
-    <!-- Demo scripts -->
-    <script src="{% static 'js/styleSwitcher.js'%}"></script>
-
-    <script src="{% static 'vendor/jqueryui/js/jquery-ui.min.js'%}"></script>
-    <script src="{% static 'vendor/moment/moment.min.js'%}"></script>
-
-    <script src="{% static 'vendor/fullcalendar/js/fullcalendar.min.js'%}"></script>
-    <script src="{% static 'js/plugins-init/fullcalendar-init.js'%}"></script>
-
-    <script src="{% static 'vendor/jquery-steps/build/jquery.steps.min.js'%}"></script>
-    <script src="{% static 'vendor/jquery-validation/jquery.validate.min.js'%}"></script>
-    <!-- Form validate init -->
-    <script src="{% static 'js/plugins-init/jquery.validate-init.js'%}"></script>
-
-    <!-- Form step init -->
-    <script src="{% static 'js/plugins-init/jquery-steps-init.js'%}"></script>
-
-    <script src="{% static 'vendor/datatables/js/jquery.dataTables.min.js'%}"></script>
-    <script src="{% static 'js/plugins-init/datatables.init.js'%}"></script>
-  </body>
+<!-- Required vendors -->
+<script src="{% static 'vendor/global/global.min.js'%}"></script>
+<script src="{% static 'js/quixnav-init.js'%}"></script>
+<script src="{% static 'js/custom.min.js'%}"></script>
+<!--removeIf(production)-->
+<!-- Demo scripts -->
+<script src="{% static 'js/styleSwitcher.js'%}"></script>
+<script src="{% static 'vendor/jqueryui/js/jquery-ui.min.js'%}"></script>
+<script src="{% static 'vendor/moment/moment.min.js'%}"></script>
+<script src="{% static 'vendor/fullcalendar/js/fullcalendar.min.js'%}"></script>
+<script src="{% static 'js/plugins-init/fullcalendar-init.js'%}"></script>
+<script src="{% static 'vendor/jquery-steps/build/jquery.steps.min.js'%}"></script>
+<script src="{% static 'vendor/jquery-validation/jquery.validate.min.js'%}"></script>
+<!-- Form validate init -->
+<script src="{% static 'js/plugins-init/jquery.validate-init.js'%}"></script>
+<!-- Form step init -->
+<script src="{% static 'js/plugins-init/jquery-steps-init.js'%}"></script>
+<script src="{% static 'vendor/datatables/js/jquery.dataTables.min.js'%}"></script>
+<script src="{% static 'js/plugins-init/datatables.init.js'%}"></script>
+{% if messages %}
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      {% for message in messages %}
+        Swal.fire({
+          icon: '{% if message.tags == "success" %}success{% elif message.tags == "error" %}error{% else %}info{% endif %}',
+          title: "{{ message|escapejs }}",
+          showConfirmButton: false,
+          timer: 3000
+        });
+      {% endfor %}
+    });
+  </script>
+{% endif %}
+</body>
 </html>

@@ -74,6 +74,30 @@ background-image: url("{% static 'photo/img2.jpg' %}");
 
       }
 
+/* Preloader : plein écran avec fond blanc */
+#preloader {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999; /* au-dessus de tout */
+  background: #fff url("/static/images/loader.gif") no-repeat center center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Par défaut on cache le main-wrapper */
+#main-wrapper {
+  opacity: 0;
+  transition: opacity 0.6s ease-in-out; /* effet fondu */
+}
+
+/* Quand la classe show est ajoutée par JS */
+#main-wrapper.show {
+  opacity: 1;
+}
 
 
 
@@ -102,11 +126,11 @@ background-image: url("{% static 'photo/img2.jpg' %}");
             Nav header start
         ***********************************-->
       <div class="nav-header">
-        <a href="{% url 'index' %}" class="brand-logo">
-          <!--<img class="img-fluid w-40 rounded center"
+        <!--<a href="{% url 'index' %}" class="brand-logo">
+          <img class="img-fluid w-40 rounded center"
      src="{% static 'images/acfpe.png' %}"
-     alt="" />-->
-        </a>
+     alt="" />
+        </a>-->
         <div class="nav-control">
           <div class="hamburger">
             <span class="line"></span><span class="line"></span><span class="line"></span>
@@ -160,7 +184,7 @@ background-image: url("{% static 'photo/img2.jpg' %}");
     </div>
     <!--**********************************
             Header end ti-comment-alt
-***********************************-->
+  ***********************************-->
     <!--**********************************
             Sidebar start
         ***********************************-->
@@ -207,7 +231,8 @@ background-image: url("{% static 'photo/img2.jpg' %}");
       </li>
     </ul>
   </div>
-</div>
+  </div>
+
 <!--**********************************
             Sidebar end
 ***********************************-->
@@ -218,36 +243,9 @@ background-image: url("{% static 'photo/img2.jpg' %}");
   <!-- row -->
   <div class="container-fluid">
     <div class="row">
-      <!--<div class="col-xl-2">
-              <div class="my-4">
-                           <h4 class="card-intro-title">Slides only</h4>
-                        </div>
-              <div class="card">
-                <div class="card-body p-4">
-                  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                    <ol class="carousel-indicators">
-                      <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                      <li data-target="#carouselExampleIndicators" data-slide-to="1" class=""></li>
-                      <li data-target="#carouselExampleIndicators" data-slide-to="2" class=""></li>
-                    </ol>
-                    <div class="carousel-inner">
-                      <div class="carousel-item active">
-                        <img class="d-block w-100" src="{% static 'rca/5.png' %}" alt="First slide" />
-                      </div>
-                     
-                    </div>
-                    <a class="carousel-control-prev" href="#carouselExampleIndicators" data-slide="prev"><span class="carousel-control-prev-icon"></span>
-                      <span class="sr-only">Previous</span> </a><a class="carousel-control-next" href="#carouselExampleIndicators" data-slide="next"><span class="carousel-control-next-icon"></span>
-                      <span class="sr-only">Next</span></a>
-                  </div>
-                </div>
-              </div>
-            </div>-->
+      
       <div class="col-xl-12">
-        <!-- <div class="my-4">
-                         <h4 class="card-intro-title">With Captions</h4>
-                        </div>-->
-        <!-- Bootstrap Carousel complet -->
+        
         <div class="card">
           <div class="card-body p-4">
             <div class="bootstrap-carousel">
@@ -594,23 +592,7 @@ background-image: url("{% static 'photo/img2.jpg' %}");
           </div>
         </div>
       </div>
-      <!--<div class="col-xl-4 col-lg-4 col-md-4">
-                      <div class="card">
-                          <div class="card-body text-center">
-                              <div class="m-t-10">
-                                  <h4 class="card-title">Customer Feedback</h4>
-                                  <h2 class="mt-3">385749</h2>
-                              </div>
-                              <div class="widget-card-circle mt-5 mb-5" id="info-circle-card">
-                                  <i class="ti-control-shuffle pa"></i>
-                              </div>
-                              <ul class="widget-line-list m-b-15">
-                                  <li class="border-right">92% <br><span class="text-success"><i class="ti-hand-point-up"></i> Positive</span></li>
-                                  <li>8% <br><span class="text-danger"><i class="ti-hand-point-down"></i>Negative</span></li>
-                              </ul>
-                          </div>
-                      </div>
-                  </div>-->
+     
       <div class="col-xl-12 col-lg-8 col-md-8">
         <div class="card">
           <div class="card-header">
@@ -860,8 +842,8 @@ background-image: url("{% static 'photo/img2.jpg' %}");
       <script src="{% static 'js/dashboard/dashboard-1.js' %}"></script>
       <script src="{% static 'chart.js' %}"></script>
     <!--<script src="https://cdn.amcharts.com/lib/version/5/index.js"></script>
-                          <script src="https://cdn.amcharts.com/lib/version/5/map.js"></script>
-                          <script src="https://cdn.amcharts.com/lib/version/5/geodata/centralAfricanRepublicHigh.js"></script>-->
+                                  <script src="https://cdn.amcharts.com/lib/version/5/map.js"></script>
+                                  <script src="https://cdn.amcharts.com/lib/version/5/geodata/centralAfricanRepublicHigh.js"></script>-->
     {% if messages %}
       <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -876,5 +858,6 @@ background-image: url("{% static 'photo/img2.jpg' %}");
     });
       </script>
     {% endif %}
+    <script src="{% static 'js/custom.min.js'%}"></script>
   </body>
 </html>

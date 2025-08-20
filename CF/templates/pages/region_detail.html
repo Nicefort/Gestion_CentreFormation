@@ -38,7 +38,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/docx/7.7.0/docx.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/docx@9.5.0/dist/index.iife.js"></script>
-   <style>
+    <style>
        body{
 background-image: url("{% static 'photo/img2.jpg' %}");
 
@@ -85,7 +85,7 @@ background-image: url("{% static 'photo/img2.jpg' %}");
       <!--**********************************
             Header start
         ***********************************-->
-        {% include "./Titre.html" %}
+      {% include "./Titre.html" %}
       <!--**********************************
             Header end ti-comment-alt
 ***********************************-->
@@ -134,177 +134,166 @@ background-image: url("{% static 'photo/img2.jpg' %}");
       </ul>
     </div>
   </div>
-</div>
-<!--**********************************
+  <!--**********************************
             Sidebar end
 ***********************************-->
-<!--**********************************
+  <!--**********************************
             Content body start
         ***********************************-->
-<div class="content-body">
-  <div class="container-fluid">
-    <div class="row page-titles mx-0">
-      <div class="col-sm-6 p-md-0">
-        <div class="welcome-text">
-          <h4>Region n° {{region.numero}} : {{ region.nom }}</h4>
+  <div class="content-body">
+    <div class="container-fluid">
+      <div class="row page-titles mx-0">
+        <div class="col-sm-6 p-md-0">
+          <div class="welcome-text">
+            <h4>Region n° {{ region.numero }} : {{ region.nom }}</h4>
+          </div>
+        </div>
+        <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+          <ol class="breadcrumb d-flex align-items-center gap-3">
+            <li class="breadcrumb-item m-0">
+              <button id="export-pdf" class="btn btn-danger btn-sm">Exporter en PDF</button>
+            </li>
+            <li class="breadcrumb-item m-0">
+              <button id="export-word" class="btn btn-success btn-sm">Exporter en Word</button>
+            </li>
+          </ol>
         </div>
       </div>
-      <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
-        <ol class="breadcrumb d-flex align-items-center gap-3">
-          <li class="breadcrumb-item m-0">
-            <button id="export-pdf" class="btn btn-danger btn-sm">Exporter en PDF</button>
-          </li>
-          <li class="breadcrumb-item m-0">
-            <button id="export-word" class="btn btn-success btn-sm">Exporter en Word</button>
-          </li>
-        </ol>
-      </div>
-    </div>
-    <!-- row -->
-    <div class="row">
-      <div class="col-lg-3">
-        <div class="card">
-          <div class="card-body">
-            <div class="profile-statistics">
-              <div class="text-center mt-4 border-bottom-1 pb-2">
-                <div class="row">
-                  <div class="col">
-                    <h3 class="m-b-0">{{ nombre_centres }}</h3>
-                    <span class="text-dark">Nombre de Centre de Formations</span>
-                  </div>
-                  <div class="col">
-                    <h3 class="m-b-0">{{ nombre_prefectures }}</h3>
-                    <span class="text-dark">Nombre de Prefecture</span>
-                  </div>
-                  <div class="col">
-                    <h3 class="m-b-0">{{ nombre_sous_prefectures }}</h3>
-                    <span class="text-dark">Nombre de Sous Prefecture</span>
-                  </div>
-                  <div class="col">
-                    <h3 class="m-b-0">{{ nombre_communes }}</h3>
-                    <span class="text-dark">Nombre de Commune</span>
+      <!-- row -->
+      <div class="row">
+        <div class="col-lg-3">
+          <div class="card">
+            <div class="card-body">
+              <div class="profile-statistics">
+                <div class="text-center mt-4 border-bottom-1 pb-2">
+                  <div class="row">
+                    <div class="col">
+                      <h3 class="m-b-0">{{ nombre_centres }}</h3>
+                      <span class="text-dark">Nombre de Centre de Formations</span>
+                    </div>
+                    <div class="col">
+                      <h3 class="m-b-0">{{ nombre_prefectures }}</h3>
+                      <span class="text-dark">Nombre de Prefecture</span>
+                    </div>
+                    <div class="col">
+                      <h3 class="m-b-0">{{ nombre_sous_prefectures }}</h3>
+                      <span class="text-dark">Nombre de Sous Prefecture</span>
+                    </div>
+                    <div class="col">
+                      <h3 class="m-b-0">{{ nombre_communes }}</h3>
+                      <span class="text-dark">Nombre de Commune</span>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="card">
-          <div class="card-body">
-            <h4 class="card-intro-title">Filtrer par :</h4>
-            <div class="d-flex flex-column gap-3 text-dark">
-              <!-- Préfecture -->
-              <div class="form-group">
-                <label for="filtre-prefecture">Préfecture :</label>
-                <select multiple id="filtre-prefecture" class="form-control select-filtre">
-                  {% for p in prefectures %}<option value="{{ p.id }}">{{ p.nom }}</option>{% endfor %}
-                </select>
-              </div>
-              <!-- Sous-préfecture -->
-              <div class="form-group">
-                <label for="filtre-sousprefecture">Sous-préfecture :</label>
-                <select multiple
-                        id="filtre-sousprefecture"
-                        class="form-control select-filtre">
-                  {% for sp in sous_prefectures %}<option value="{{ sp.id }}">{{ sp.nom }}</option>{% endfor %}
-                </select>
-              </div>
-              <!-- Commune -->
-              <div class="form-group">
-                <label for="filtre-commune">Commune :</label>
-                <select multiple id="filtre-commune" class="form-control select-filtre">
-                  {% for c in communes %}<option value="{{ c.id }}">{{ c.nom }}</option>{% endfor %}
-                </select>
-              </div>
-              <!-- Secteur -->
-              <div class="form-group">
-                <label for="filtre-secteur">Secteur :</label>
-                <select multiple id="filtre-secteur" class="form-control select-filtre">
-                  {% for s in secteurs %}<option value="{{ s.id }}">{{ s.nom }}</option>{% endfor %}
-                </select>
-              </div>
-              <!-- Capacité -->
-              <div class="form-group">
-                <label for="filtre-capacite">Capacité max :</label>
-                <input type="number"
-                       id="filtre-capacite"
-                       class="form-control"
-                       placeholder="Ex: 100" />
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-intro-title">Filtrer par :</h4>
+              <div class="d-flex flex-column gap-3 text-dark">
+                <!-- Préfecture -->
+                <div class="form-group">
+                  <label for="filtre-prefecture">Préfecture :</label>
+                  <select multiple id="filtre-prefecture" class="form-control select-filtre">
+                    {% for p in prefectures %}<option value="{{ p.id }}">{{ p.nom }}</option>{% endfor %}
+                  </select>
+                </div>
+                <!-- Sous-préfecture -->
+                <div class="form-group">
+                  <label for="filtre-sousprefecture">Sous-préfecture :</label>
+                  <select multiple
+                          id="filtre-sousprefecture"
+                          class="form-control select-filtre">
+                    {% for sp in sous_prefectures %}<option value="{{ sp.id }}">{{ sp.nom }}</option>{% endfor %}
+                  </select>
+                </div>
+                <!-- Commune -->
+                <div class="form-group">
+                  <label for="filtre-commune">Commune :</label>
+                  <select multiple id="filtre-commune" class="form-control select-filtre">
+                    {% for c in communes %}<option value="{{ c.id }}">{{ c.nom }}</option>{% endfor %}
+                  </select>
+                </div>
+                <!-- Secteur -->
+                <div class="form-group">
+                  <label for="filtre-secteur">Secteur :</label>
+                  <select multiple id="filtre-secteur" class="form-control select-filtre">
+                    {% for s in secteurs %}<option value="{{ s.id }}">{{ s.nom }}</option>{% endfor %}
+                  </select>
+                </div>
+                <!-- Capacité -->
+                <div class="form-group">
+                  <label for="filtre-capacite">Capacité max :</label>
+                  <input type="number"
+                         id="filtre-capacite"
+                         class="form-control"
+                         placeholder="Ex: 100" />
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="col-lg-9">
-        <div class="card">
-          <div class="card-body">
-            <div class="profile-tab">
-              <div class="custom-tab-1">
-                <ul class="nav nav-tabs">
-                  <li class="nav-item">
-                    <a href="#my-posts" data-toggle="tab" class="nav-link active show">Liste des centres</a>
-                  </li>
-                </ul>
-                <div class="tab-content">
-                  <div class="card-body">
-                    <div class="table-responsive">
-                      <table id="example" class="display" style="min-width: 845px">
-                        <thead>
-                          <tr>
-                            <th class="text-dark">Intitule</th>
-                            <th class="text-dark" >Sigle</th>
-                            <th class="text-dark" >Adresse</th>
-                            <th class="text-dark" >Capacité</th>
-                            <th class="text-dark" >Categorie</th>
-                            <th class="text-dark" >telephone</th>
-                            <th class="text-dark" >Commune</th>
-                            <th class="text-dark" >Secteur</th>
-                            <th class="text-dark" >Domaine d'activité</th>
-                          </tr>
-                        </thead>
-                        
-                        <tbody id="tableau-centres">
-                          {% for centre in centres %}
-                            <tr class="centre-row text-dark"
-                                data-prefecture="{{ centre.commune.sous_prefecture.prefecture.id }}"
-                                data-sousprefecture="{{ centre.commune.sous_prefecture.id }}"
-                                data-commune="{{ centre.commune.id }}"
-                                data-secteurs="{% for s in centre.domaine_activite_capacite.secteurs.all %}{{ s.id }} {% endfor %}"
-                                data-capacite="{{ centre.domaine_activite_capacite.capacite_max }}">
-                              <td>
-                                <a class="text-dark" href="{% url 'centre_detail' centre.pk %}">{{ centre.intitule }}</a>
-                              </td>
-                              <td>{{ centre.sigle }}</td>
-                              <td>{{ centre.adresse }}</td>
-                              <td>{{ centre.domaine_activite_capacite.capacite_max }}</td>
-                              <td>{{ centre.categorie }}</td>
-                              <td>{{ centre.telephone }}</td>
-                              <td>{{ centre.commune.nom }}</td>
-                              <td>
-                                {% for secteur in centre.domaine_activite_capacite.secteurs.all %}
-                                  {{ secteur.nom }}{% if not forloop.last %}, {% endif %}
-                                {% endfor %}
-                              </td>
-                              
-                              <td>{{ centre.domaine_activite_capacite.liste_activites }}</td>
-                            </tr>
-                          {% empty %}
+        <div class="col-lg-9">
+          <div class="card">
+            <div class="card-body">
+              <div class="profile-tab">
+                <div class="custom-tab-1">
+                  <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                      <a href="#my-posts" data-toggle="tab" class="nav-link active show">Liste des centres</a>
+                    </li>
+                  </ul>
+                  <div class="tab-content">
+                    <div class="card-body">
+                      <div class="table-responsive">
+                        <table id="example" class="display" style="min-width: 845px">
+                          <thead>
                             <tr>
-                              <td colspan="7" class=" text-center text-dark">Aucun centre trouvé dans cette région.</td>
+                              <th class="text-dark">Intitule</th>
+                              <th class="text-dark">Sigle</th>
+                              <th class="text-dark">Adresse</th>
+                              <th class="text-dark">Capacité</th>
+                              <th class="text-dark">Categorie</th>
+                              <th class="text-dark">telephone</th>
+                              <th class="text-dark">Commune</th>
+                              <th class="text-dark">Secteur</th>
+                              <th class="text-dark">Domaine d'activité</th>
                             </tr>
-                          {% endfor %}
-                        </tbody>
-                        <!--<tfoot>
-                          <tr>
-                            <th>Intitule</th>
-                            <th>Sigle</th>
-                            <th>Adresse</th>
-                            <th>Capacité</th>
-                            <th>telephone</th>
-                            <th>Commune</th>
-                          </tr>
-                        </tfoot>-->
-                      </table>
+                          </thead>
+                          <tbody id="tableau-centres">
+                            {% for centre in centres %}
+                              <tr class="centre-row text-dark"
+                                  data-prefecture="{{ centre.commune.sous_prefecture.prefecture.id }}"
+                                  data-sousprefecture="{{ centre.commune.sous_prefecture.id }}"
+                                  data-commune="{{ centre.commune.id }}"
+                                  data-secteurs="{% for s in centre.domaine_activite_capacite.secteurs.all %}{{ s.id }} {% endfor %}"
+                                  data-capacite="{{ centre.domaine_activite_capacite.capacite_max }}">
+                                <td>
+                                  <a class="text-dark" href="{% url 'centre_detail' centre.pk %}">{{ centre.intitule }}</a>
+                                </td>
+                                <td>{{ centre.sigle }}</td>
+                                <td>{{ centre.adresse }}</td>
+                                <td>{{ centre.domaine_activite_capacite.capacite_max }}</td>
+                                <td>{{ centre.categorie }}</td>
+                                <td>{{ centre.telephone }}</td>
+                                <td>{{ centre.commune.nom }}</td>
+                                <td>
+                                  {% for secteur in centre.domaine_activite_capacite.secteurs.all %}
+                                    {{ secteur.nom }}
+                                    {% if not forloop.last %},{% endif %}
+                                  {% endfor %}
+                                </td>
+                                <td>{{ centre.domaine_activite_capacite.liste_activites }}</td>
+                              </tr>
+                            {% empty %}
+                              <tr>
+                                <td colspan="7" class=" text-center text-dark">Aucun centre trouvé dans cette région.</td>
+                              </tr>
+                            {% endfor %}
+                          </tbody>
+                        </table>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -315,43 +304,41 @@ background-image: url("{% static 'photo/img2.jpg' %}");
       </div>
     </div>
   </div>
-</div>
-<!--**********************************
+  <!--**********************************
             Content body end
 ***********************************-->
-<!--**********************************
+  <!--**********************************
             Footer start
         ***********************************-->
-<div class="footer">
-  <div class="copyright">
-    <p>
-      Copyright © Designed &amp; Developed by
-      <a href="#" target="_blank">Gilchrist KETTEGUIA</a> 2025
-    </p>
+  <div class="footer">
+    <div class="copyright">
+      <p>
+        Copyright © Designed &amp; Developed by
+        <a href="#" target="_blank">Gilchrist KETTEGUIA</a> 2025
+      </p>
+    </div>
   </div>
-</div>
-<!--**********************************
+  <!--**********************************
             Footer end
 ***********************************-->
-<!--**********************************
+  <!--**********************************
            Support ticket button start
 ***********************************-->
-<!--**********************************
+  <!--**********************************
            Support ticket button end
 ***********************************-->
-<!--**********************************
+  <!--**********************************
         Main wrapper end
 ***********************************-->
-<!--**********************************
+  <!--**********************************
         Scripts
-    ***********************************-->
-<!-- Required vendors -->
-<script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
-<!-- ⚠️ Ajoute cet élément caché dans ton HTML pour que le script JS récupère la région -->
-<span id="region-name" data-region="{{ region.nom }}" hidden></span>
-<span id="region-num" data-region="{{ region.numero }}" hidden></span>
-
-<script>
+***********************************-->
+  <!-- Required vendors -->
+  <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+  <!-- ⚠️ Ajoute cet élément caché dans ton HTML pour que le script JS récupère la région -->
+  <span id="region-name" data-region="{{ region.nom }}" hidden></span>
+  <span id="region-num" data-region="{{ region.numero }}" hidden></span>
+  <script>
 // 📄 Export PDF
 document.getElementById("export-pdf").addEventListener("click", async function () {
   const { jsPDF } = window.jspdf;
@@ -466,9 +453,8 @@ document.getElementById("export-word").addEventListener("click", async function 
 });
 
 
-</script>
-
-<script>
+  </script>
+  <script>
     document.addEventListener('DOMContentLoaded', function () {
       const filters = [
         '#filtre-prefecture',
@@ -486,8 +472,8 @@ document.getElementById("export-word").addEventListener("click", async function 
         });
       });
     });
-</script>
-<script>
+  </script>
+  <script>
   function getSelectedValues(selector) {
     const select = document.querySelector(selector);
     if (!select) return [];
@@ -532,11 +518,27 @@ document.getElementById("export-word").addEventListener("click", async function 
     const capaciteInput = document.querySelector('#filtre-capacite');
     if (capaciteInput) capaciteInput.addEventListener('input', filterCentres);
   });
-</script>
-<script src="{% static 'vendor/global/global.min.js'%}"></script>
-<script src="{% static 'js/quixnav-init.js'%}"></script>
-<script src="{% static 'js/custom.min.js'%}"></script>
-<script src="{% static 'vendor/datatables/js/jquery.dataTables.min.js'%}"></script>
-<script src="{% static 'js/plugins-init/datatables.init.js'%}"></script>
+  </script>
+  <script src="{% static 'vendor/global/global.min.js'%}"></script>
+  <script src="{% static 'js/quixnav-init.js'%}"></script>
+  <script src="{% static 'js/custom.min.js'%}"></script>
+  <script src="{% static 'vendor/datatables/js/jquery.dataTables.min.js'%}"></script>
+  <script src="{% static 'js/plugins-init/datatables.init.js'%}"></script>
+  <script>
+  // Quand tout est chargé (images, scripts, css...)
+  window.addEventListener("load", function () {
+    // On supprime le préloader
+    var preloader = document.getElementById("preloader");
+    if (preloader) {
+      preloader.style.display = "none";
+    }
+
+    // On affiche le contenu principal
+    var mainWrapper = document.getElementById("main-wrapper");
+    if (mainWrapper) {
+      mainWrapper.classList.add("show");
+    }
+  });
+  </script>
 </body>
 </html>
